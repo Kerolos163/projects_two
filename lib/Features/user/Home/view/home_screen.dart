@@ -19,7 +19,6 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      lazy: false,
       create: (_) => getIt<HomeProvider>()..loadHomeData(),
       builder: (context, child) => Scaffold(
         body: ListView(
@@ -82,7 +81,7 @@ class HomeScreen extends StatelessWidget {
                 textt: "Trending Products",
               ),
             ),
-            const SizedBox(height: 5),
+            const SizedBox(height: 20),
             Consumer<HomeProvider>(
               builder: (context, provider, child) {
                 return ProductsList(
@@ -90,6 +89,7 @@ class HomeScreen extends StatelessWidget {
                 );
               },
             ),
+            const SizedBox(height: 20),
           ],
         ),
       ),

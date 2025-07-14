@@ -173,6 +173,7 @@ class AppStrings {
   static const String selectCategory = 'selectCategory';
   static const String selectSubcategory = 'selectSubcategory';
   static const String allFeatured = 'All Featured';
+  static const String showingResults = 'Showing results for:';
 
   static var coverImage = 'coverImage';
 
