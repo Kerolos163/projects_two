@@ -1,5 +1,6 @@
 import 'package:get_it/get_it.dart';
 import 'package:projects_two/Features/Auth/viewmodel/auth_provider.dart';
+import 'package:projects_two/Features/Profile/viewmodel/profile_provider.dart';
 
 import '../../Features/user/Home/viewmodel/home_provider.dart';
 import '../../Features/user/Product/viewmodel/product_provider.dart';
@@ -14,5 +15,6 @@ class ServiceLocator {
     getIt.registerFactory<AuthProvider>(() => AuthProvider());
     getIt.registerFactory<HomeProvider>(() => HomeProvider());
     getIt.registerFactory<ProductProvider>(() => ProductProvider());
+    getIt.registerFactory<ProfileProvider>(() => ProfileProvider());
   }
 }

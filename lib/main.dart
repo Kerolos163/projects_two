@@ -19,7 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.init();
   await PreferencesManager.init();
-  //PreferencesManager.clear(); //! for testing ☠️
+  // PreferencesManager.clear(); //! for testing ☠️
   await ScreenUtil.ensureScreenSize();
   await EasyLocalization.ensureInitialized();
   runApp(

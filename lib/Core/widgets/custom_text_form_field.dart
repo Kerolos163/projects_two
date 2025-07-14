@@ -6,18 +6,18 @@ import '../constant/app_colors.dart';
 
 class CustomTextFormField extends StatelessWidget {
   final String label;
-  final String hintText;
   final bool obscureText;
   final String placeholder;
   final TextEditingController? controller;
+  final void Function(String)? onChanged;
   // {bool obscureText = false}
   const CustomTextFormField({
     super.key,
     this.controller,
     required this.label,
-    required this.hintText,
     this.obscureText = false,
     required this.placeholder,
+    this.onChanged,
   });
 
   @override
@@ -30,12 +30,13 @@ class CustomTextFormField extends StatelessWidget {
         Padding(
           padding: EdgeInsets.only(bottom: 12.h),
           child: TextFormField(
+            onChanged: onChanged,
             controller: controller,
             onTapUpOutside: (_) {
               FocusManager.instance.primaryFocus?.unfocus();
             },
             obscureText: obscureText,
-            initialValue: hintText,
+
             decoration: InputDecoration(
               filled: true,
               fillColor: AppColors.textfieldBackground,

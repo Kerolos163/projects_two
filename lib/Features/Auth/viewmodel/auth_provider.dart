@@ -38,7 +38,7 @@ class AuthProvider extends ChangeNotifier {
       userModel = UserModel.fromJson(response.data["data"]);
       await PreferencesManager.setString(
         AppConstants.userTokenKey,
-        userModel.token,
+        userModel.token!,
       );
       await PreferencesManager.setString(
         AppConstants.userInfo,
@@ -65,7 +65,7 @@ class AuthProvider extends ChangeNotifier {
       userModel = UserModel.fromJson(response.data["data"]);
       await PreferencesManager.setString(
         AppConstants.userTokenKey,
-        userModel.token,
+        userModel.token!,
       );
       state = ApiState.success;
     } catch (e) {
