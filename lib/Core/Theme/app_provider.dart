@@ -3,7 +3,7 @@ import 'package:projects_two/Features/user/Product/view/product_screen.dart';
 import '../../Features/Profile/view/profile_screen.dart';
 import '../../Features/user/Favorite/view/favorite_screen.dart';
 import '../../Features/user/Home/view/home_screen.dart';
-import '../../Features/user/cart/view/cart_screen.dart';
+import '../../Features/payment/cart/view/cart_screen.dart';
 import '../utils/app_constants.dart';
 
 import '../Services/preferences_manager.dart';
