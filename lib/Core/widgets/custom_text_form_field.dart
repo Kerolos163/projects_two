@@ -10,6 +10,7 @@ class CustomTextFormField extends StatelessWidget {
   final String placeholder;
   final TextEditingController? controller;
   final void Function(String)? onChanged;
+  final String? Function(String?)? validator;
   // {bool obscureText = false}
   const CustomTextFormField({
     super.key,
@@ -18,6 +19,7 @@ class CustomTextFormField extends StatelessWidget {
     this.obscureText = false,
     required this.placeholder,
     this.onChanged,
+    this.validator,
   });
 
   @override
@@ -36,7 +38,7 @@ class CustomTextFormField extends StatelessWidget {
               FocusManager.instance.primaryFocus?.unfocus();
             },
             obscureText: obscureText,
-
+            validator: validator,
             decoration: InputDecoration(
               filled: true,
               fillColor: AppColors.textfieldBackground,

@@ -24,6 +24,7 @@ class ProfileProvider extends ChangeNotifier {
   late TextEditingController addressController;
   late TextEditingController passwordController;
   late TextEditingController confirmPasswordController;
+  final formKey = GlobalKey<FormState>();
 
   Future<void> getUserInfo() async {
     String userInfo = PreferencesManager.getString(AppConstants.userInfo)!;
@@ -60,7 +61,7 @@ class ProfileProvider extends ChangeNotifier {
   }
 
   Future<void> updateUser() async {
-    state = ApiState.loading;
+    state = ApiState.update;
     notifyListeners();
     try {
       UpdateModel updateModel = UpdateModel(
