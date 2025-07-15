@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import '../../Features/user/Product/view/product_screen.dart';
 import '../../Features/Profile/view/profile_screen.dart';
@@ -12,12 +14,15 @@ class AppProvider extends ChangeNotifier {
   // Theme Management
   bool isDark = PreferencesManager.getBool(AppConstants.isDarkMood) ?? false;
 
+  //!Navigate With Filter
+  String filter = "";
+
   // Navigation Management
   int currentIndex = 0;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-  final List<Widget> screens = const [
+  List<Widget> get screens => [
     HomeScreen(),
-    ProductScreen(),
+    ProductScreen(categoryName: filter),
     CartScreen(),
     FavoriteScreen(),
     ProfileScreen(),
@@ -30,8 +35,16 @@ class AppProvider extends ChangeNotifier {
   }
 
   void changeIndex({required int index}) {
+    filter = "";
     if (index == currentIndex) return;
     currentIndex = index;
+    notifyListeners();
+  }
+
+  void changeIndexToProductWithFilter({required String filter}) {
+    this.filter = filter;
+    log('this.filter: ${this.filter}');
+    currentIndex = 1;
     notifyListeners();
   }
 }

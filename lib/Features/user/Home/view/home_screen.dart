@@ -55,10 +55,15 @@ class HomeScreen extends StatelessWidget {
                   height: 100,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: CategoryListView(
-                      items: provider.state == ApiState.loading
-                          ? []
-                          : provider.categories,
+                    child: Consumer<AppProvider>(
+                      builder: (context, appProvider, child) {
+                        return CategoryListView(
+                          appProvider: appProvider,
+                          items: provider.state == ApiState.loading
+                              ? []
+                              : provider.categories,
+                        );
+                      },
                     ),
                   ),
                 );

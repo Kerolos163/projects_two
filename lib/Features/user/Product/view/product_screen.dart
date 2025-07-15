@@ -14,12 +14,14 @@ import '../viewmodel/product_provider.dart';
 import 'widget/product_item.dart';
 
 class ProductScreen extends StatelessWidget {
-  const ProductScreen({super.key});
+  const ProductScreen({super.key, this.categoryName = "Mugs"});
+  final String categoryName;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => getIt<ProductProvider>()..getProducts(),
+      create: (_) =>
+          getIt<ProductProvider>()..getProducts(keyword: categoryName),
       builder: (context, child) => Consumer<ProductProvider>(
         builder: (context, provider, child) {
           return provider.state == ApiState.loading
