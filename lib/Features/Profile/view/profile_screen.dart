@@ -4,8 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:projects_two/Core/Services/service_locator.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
+import '../../../Core/Services/service_locator.dart';
+import '../../../Core/api/api_end_points.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Core/Services/preferences_manager.dart';

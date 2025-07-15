@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/Services/service_locator.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
+import '../../../../Core/Services/service_locator.dart';
+import '../../../../Core/constant/app_strings.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/user/Product/view/product_screen.dart';
+import '../../Features/user/Product/view/product_screen.dart';
 import '../../Features/Profile/view/profile_screen.dart';
 import '../../Features/user/Favorite/view/favorite_screen.dart';
 import '../../Features/user/Home/view/home_screen.dart';

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/Theme/app_provider.dart';
+import '../../../../Core/Theme/app_provider.dart';
 import 'package:provider/provider.dart';
 
 import 'widget/custom_bottom_navigation_bar.dart';

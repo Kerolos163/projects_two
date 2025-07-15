@@ -7,10 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Core/api/api_state.dart';
-import 'package:projects_two/Core/models/user_model.dart';
+import '../../../Core/api/api_end_points.dart';
+import '../../../Core/api/api_service.dart';
+import '../../../Core/api/api_state.dart';
+import '../../../Core/models/user_model.dart';
 
 import '../../../Core/Services/preferences_manager.dart';
 import '../../../Core/utils/app_constants.dart';

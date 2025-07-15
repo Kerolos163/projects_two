@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/user/Home/view/widget/category_item.dart';
+import 'category_item.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../../../../Core/models/category_model.dart';

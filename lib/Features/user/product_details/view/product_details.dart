@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/user/product_details/view/user_review_card.dart';
-import 'package:projects_two/Core/widgets/rating_bar_widget.dart';
+import 'user_review_card.dart';
+import '../../../../Core/widgets/rating_bar_widget.dart';
 
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 

@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/Services/service_locator.dart';
-import 'package:projects_two/Features/Auth/views/sign_up_screen.dart';
+import '../../../Core/Services/service_locator.dart';
+import 'sign_up_screen.dart';
 import '../../../Core/api/api_state.dart';
 import '../../../Core/constant/app_strings.dart';
 import '../../../Core/utils/custom_snak_bar.dart';

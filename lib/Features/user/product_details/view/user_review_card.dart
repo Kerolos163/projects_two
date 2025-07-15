@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/widgets/rating_bar_widget.dart';
+import '../../../../Core/widgets/rating_bar_widget.dart';
 import '../../../../../../../Core/constant/app_colors.dart';
 import '../../../../../../../Core/constant/image.dart';
 import 'package:readmore/readmore.dart';
