@@ -177,6 +177,8 @@ class AppStrings {
   static const String chooseImage = 'Choose Image Source';
   static const String gallery = 'Gallery';
   static const String camera = 'Camera';
+  static const String quant = 'quantity :';
+  static const String price2 = 'price :';
 
   static var coverImage = 'coverImage';
 
