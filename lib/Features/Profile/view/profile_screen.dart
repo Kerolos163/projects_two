@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:projects_two/Core/Services/service_locator.dart';
+import 'package:projects_two/Core/api/api_end_points.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Core/api/api_state.dart';
@@ -43,25 +47,27 @@ class ProfileScreen extends StatelessWidget {
                             children: [
                               CircleAvatar(
                                 radius: 48.r,
-                                child: Image.asset(
-                                  "assets/image/profile.png",
-                                  width: 96.w,
-                                  height: 96.h,
-                                ),
+                                backgroundImage: showImage(profileProvider),
                               ),
                               Positioned(
                                 bottom: 0,
                                 right: 0,
-                                child: CircleAvatar(
-                                  radius: 16.r,
-                                  backgroundColor: Colors.white,
+                                child: GestureDetector(
+                                  onTap: () => _pickImage(
+                                    context: context,
+                                    provider: profileProvider,
+                                  ),
                                   child: CircleAvatar(
-                                    radius: 14.r,
-                                    backgroundColor: AppColors.primary,
-                                    child: Icon(
-                                      Icons.edit,
-                                      size: 16.sp,
-                                      color: AppColors.white,
+                                    radius: 16.r,
+                                    backgroundColor: Colors.white,
+                                    child: CircleAvatar(
+                                      radius: 14.r,
+                                      backgroundColor: AppColors.primary,
+                                      child: Icon(
+                                        Icons.edit,
+                                        size: 16.sp,
+                                        color: AppColors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -176,7 +182,16 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                                 onPressed: profileProvider.update
                                     ? () async {
-                                        await profileProvider.updateUser();
+                                        if (profileProvider
+                                            .formKey
+                                            .currentState!
+                                            .validate()) {
+                                          if (profileProvider.showImage ==
+                                              ShowImage.local) {
+                                            await profileProvider.uploadImage();
+                                          }
+                                          await profileProvider.updateUser();
+                                        }
                                       }
                                     : null,
                                 child: Text(
@@ -193,6 +208,63 @@ class ProfileScreen extends StatelessWidget {
                   );
           },
         ),
+      ),
+    );
+  }
+
+  ImageProvider<Object>? showImage(ProfileProvider profileProvider) {
+    log(profileProvider.showImage.toString());
+    if (profileProvider.showImage == ShowImage.local) {
+      return FileImage(profileProvider.image!);
+    } else if (profileProvider.showImage == ShowImage.remote) {
+      return NetworkImage(
+        "${ApiEndPoints.baseUrl}uploads/${profileProvider.userModel.avatar}",
+      );
+    }
+    return AssetImage("assets/image/profile.png");
+  }
+
+  _pickImage({
+    required BuildContext context,
+    required ProfileProvider provider,
+  }) {
+    return showDialog(
+      context: context,
+      builder: (context) => SimpleDialog(
+        title: Text(
+          AppStrings.chooseImage.tr(),
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        children: [
+          SimpleDialogOption(
+            padding: EdgeInsets.all(16),
+            onPressed: () {
+              provider.pickImage(ImageSource.camera);
+              Navigator.pop(context);
+            },
+            child: Row(
+              children: [
+                Icon(Icons.camera_alt),
+                SizedBox(width: 8),
+                Text(AppStrings.camera.tr()),
+              ],
+            ),
+          ),
+          SimpleDialogOption(
+            padding: EdgeInsets.all(16),
+            onPressed: () {
+              provider.pickImage(ImageSource.gallery);
+              Navigator.pop(context);
+            },
+            child: Row(
+              children: [
+                Icon(Icons.photo_library),
+                SizedBox(width: 8),
+                Text(AppStrings.gallery.tr()),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }

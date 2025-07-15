@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -25,7 +27,8 @@ class ApiService {
     final token = PreferencesManager.getString(AppConstants.userTokenKey);
 
     _dio.options.headers = {
-      "Content-Type": "application/json",
+      // "Content-Type": "multipart/form-data",
+      // "Content-Type": "application/json",
       "Accept": "application/json, text/plain, */*",
       'Authorization': 'Bearer $token',
     };
@@ -77,6 +80,8 @@ class ApiService {
     Map<String, dynamic>? body,
     bool isFormData = false,
   }) async {
+    log("🫵");
+    log(body.toString());
     try {
       final response = await _dio.patch(
         path,
