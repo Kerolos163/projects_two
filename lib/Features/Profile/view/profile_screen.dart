@@ -196,6 +196,14 @@ class ProfileScreen extends StatelessWidget {
                           placeholder: AppStrings.enterYourEmail.tr(),
                         ),
                         CustomTextFormField(
+                          validator: (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.length < 6) {
+                              return AppStrings.passwordError.tr();
+                            }
+                            return null;
+                          },
                           label: AppStrings.password.tr(),
                           onChanged: (value) {
                             if (profileProvider
