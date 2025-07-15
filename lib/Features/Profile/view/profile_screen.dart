@@ -8,10 +8,13 @@ import 'package:projects_two/Core/Services/service_locator.dart';
 import 'package:projects_two/Core/api/api_end_points.dart';
 import 'package:provider/provider.dart';
 
+import '../../../Core/Services/preferences_manager.dart';
 import '../../../Core/api/api_state.dart';
 import '../../../Core/constant/app_colors.dart';
 import '../../../Core/constant/app_strings.dart';
+import '../../../Core/utils/app_constants.dart';
 import '../../../Core/widgets/custom_text_form_field.dart';
+import '../../Auth/views/login_screen.dart';
 import '../viewmodel/profile_provider.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -25,10 +28,40 @@ class ProfileScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColors.white,
           centerTitle: true,
+          leading: TextButton(
+            onPressed: () {
+              final currentLocale = context.locale;
+              final newLocale = currentLocale == const Locale("en")
+                  ? const Locale("ar")
+                  : const Locale("en");
+              context.setLocale(newLocale);
+            },
+            child: Text(
+              context.locale.languageCode.toUpperCase(),
+              style: TextStyle(
+                color: AppColors.primary,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
           title: Text(
             AppStrings.profile.tr(),
             style: Theme.of(context).textTheme.headlineLarge,
           ),
+          actions: [
+            IconButton(
+              onPressed: () {
+                PreferencesManager.remove(AppConstants.userTokenKey);
+                PreferencesManager.remove(AppConstants.userInfo);
+                Navigator.pushAndRemoveUntil(
+                  context,
+                  MaterialPageRoute(builder: (context) => const LoginScreen()),
+                  (route) => false,
+                );
+              },
+              icon: const Icon(Icons.logout, color: AppColors.red),
+            ),
+          ],
         ),
         body: Consumer<ProfileProvider>(
           builder: (context, profileProvider, child) {
