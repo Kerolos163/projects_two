@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:projects_two/Core/Theme/app_provider.dart';
 import '../../../Core/Services/service_locator.dart';
 import '../../../Core/api/api_end_points.dart';
 import 'package:provider/provider.dart';
@@ -49,17 +50,24 @@ class ProfileScreen extends StatelessWidget {
             style: Theme.of(context).textTheme.headlineLarge,
           ),
           actions: [
-            IconButton(
-              onPressed: () {
-                PreferencesManager.remove(AppConstants.userTokenKey);
-                PreferencesManager.remove(AppConstants.userInfo);
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const LoginScreen()),
-                  (route) => false,
+            Consumer<AppProvider>(
+              builder: (context, appProvider, child) {
+                return IconButton(
+                  onPressed: () {
+                    PreferencesManager.remove(AppConstants.userTokenKey);
+                    PreferencesManager.remove(AppConstants.userInfo);
+                    appProvider.currentIndex = 0;
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const LoginScreen(),
+                      ),
+                      (route) => false,
+                    );
+                  },
+                  icon: const Icon(Icons.logout, color: AppColors.red),
                 );
               },
-              icon: const Icon(Icons.logout, color: AppColors.red),
             ),
           ],
         ),
