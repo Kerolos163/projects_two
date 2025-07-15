@@ -177,5 +177,7 @@
   "Showing results for:": "Showing results for:",
   "Choose Image Source": "Choose Image Source",
   "Gallery": "Gallery",
-  "Camera": "Camera"
+  "Camera": "Camera",
+  "firstName": "First Name",
+  "lastName": "Last Name"
 }

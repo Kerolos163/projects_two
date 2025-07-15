@@ -162,5 +162,7 @@
   "Showing results for:": "عرض النتائج لـ:",
   "Choose Image Source": "اختر مصدر الصورة",
   "Gallery": "المعرض",
-  "Camera": "الكاميرا"
+  "Camera": "الكاميرا",
+  "firstName": "الاسم الاول",
+  "lastName": "الاسم الاخير"
 }
