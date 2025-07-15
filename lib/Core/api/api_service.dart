@@ -115,11 +115,13 @@ class ApiService {
   Future<Response> delete(
     String path, {
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? body,
   }) async {
     try {
       final response = await _dio.delete(
         path,
         queryParameters: queryParameters,
+        data: body,
       );
 
       return _handleResponseJson(response);
