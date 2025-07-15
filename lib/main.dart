@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:projects_two/Features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +19,7 @@ import 'Features/user/layout/view/layout_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.init();
+  Stripe.publishableKey = "stripePublishableKey";
   await PreferencesManager.init();
   // PreferencesManager.clear(); //! for testing ☠️
   await ScreenUtil.ensureScreenSize();
