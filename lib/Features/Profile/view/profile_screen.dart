@@ -79,185 +79,190 @@ class ProfileScreen extends StatelessWidget {
               case ApiState.loading:
                 return const Center(child: CircularProgressIndicator());
               case ApiState.success:
-                return Form(
-                  key: profileProvider.formKey,
-                  child: ListView(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 20,
-                      vertical: 10,
-                    ),
-                    children: [
-                      Center(
-                        child: Stack(
-                          children: [
-                            CircleAvatar(
-                              radius: 48.r,
-                              backgroundImage: showImage(profileProvider),
-                            ),
-                            Positioned(
-                              bottom: 0,
-                              right: 0,
-                              child: GestureDetector(
-                                onTap: () => _pickImage(
-                                  context: context,
-                                  provider: profileProvider,
-                                ),
-                                child: CircleAvatar(
-                                  radius: 16.r,
-                                  backgroundColor: Colors.white,
+                return RefreshIndicator(
+                  onRefresh: () => profileProvider.getUserInfo(),
+                  child: Form(
+                    key: profileProvider.formKey,
+                    child: ListView(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      children: [
+                        Center(
+                          child: Stack(
+                            children: [
+                              CircleAvatar(
+                                radius: 48.r,
+                                backgroundImage: showImage(profileProvider),
+                              ),
+                              Positioned(
+                                bottom: 0,
+                                right: 0,
+                                child: GestureDetector(
+                                  onTap: () => _pickImage(
+                                    context: context,
+                                    provider: profileProvider,
+                                  ),
                                   child: CircleAvatar(
-                                    radius: 14.r,
-                                    backgroundColor: AppColors.primary,
-                                    child: Icon(
-                                      Icons.edit,
-                                      size: 16.sp,
-                                      color: AppColors.white,
+                                    radius: 16.r,
+                                    backgroundColor: Colors.white,
+                                    child: CircleAvatar(
+                                      radius: 14.r,
+                                      backgroundColor: AppColors.primary,
+                                      child: Icon(
+                                        Icons.edit,
+                                        size: 16.sp,
+                                        color: AppColors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
-                      ),
-                      SizedBox(height: 28),
-                      Text(
-                        AppStrings.peronalDetails.tr(),
-                        style: Theme.of(context).textTheme.headlineLarge,
-                      ),
-                      SizedBox(height: 20),
+                        SizedBox(height: 28),
+                        Text(
+                          AppStrings.peronalDetails.tr(),
+                          style: Theme.of(context).textTheme.headlineLarge,
+                        ),
+                        SizedBox(height: 20),
 
-                      CustomTextFormField(
-                        label: AppStrings.firstName.tr(),
-                        onChanged: (value) {
-                          if (profileProvider.userModel.fName != value) {
-                            profileProvider.setUpdateValue(true);
-                          } else {
-                            profileProvider.setUpdateValue(false);
-                          }
-                        },
-                        placeholder: AppStrings.enterYourFirstName.tr(),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return AppStrings.firstNameError.tr();
-                          }
-                          return null;
-                        },
-                        controller: profileProvider.firstNameController,
-                      ),
-                      CustomTextFormField(
-                        label: AppStrings.lastName.tr(),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return AppStrings.lastNameError.tr();
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          if (profileProvider.userModel.lName != value) {
-                            profileProvider.setUpdateValue(true);
-                          } else {
-                            profileProvider.setUpdateValue(false);
-                          }
-                        },
-                        placeholder: AppStrings.enterYourLastName.tr(),
-                        controller: profileProvider.lastNameController,
-                      ),
-                      CustomTextFormField(
-                        label: AppStrings.address.tr(),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return AppStrings.addressError.tr();
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          if (profileProvider.userModel.address != value) {
-                            profileProvider.setUpdateValue(true);
-                          } else {
-                            profileProvider.setUpdateValue(false);
-                          }
-                        },
-                        placeholder: AppStrings.enterYourAddress.tr(),
-                        controller: profileProvider.addressController,
-                      ),
-                      CustomTextFormField(
-                        label: AppStrings.emailAddress.tr(),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return AppStrings.emailEmpty.tr();
-                          }
-                          return null;
-                        },
-                        onChanged: (value) {
-                          if (profileProvider.userModel.email != value) {
-                            profileProvider.setUpdateValue(true);
-                          } else {
-                            profileProvider.setUpdateValue(false);
-                          }
-                        },
-                        controller: profileProvider.emailController,
-                        placeholder: AppStrings.enterYourEmail.tr(),
-                      ),
-                      CustomTextFormField(
-                        validator:
-                            profileProvider.passwordController.text.isEmpty
-                            ? null
-                            : (value) {
-                                if (value == null ||
-                                    value.isEmpty ||
-                                    value.length < 6) {
-                                  return AppStrings.passwordError.tr();
-                                }
-                                return null;
-                              },
-                        label: AppStrings.password.tr(),
-                        onChanged: (value) {
-                          if (profileProvider
-                              .passwordController
-                              .text
-                              .isNotEmpty) {
-                            profileProvider.setUpdateValue(true);
-                          } else {
-                            profileProvider.setUpdateValue(false);
-                          }
-                        },
-                        placeholder: AppStrings.enterYourPassword.tr(),
-                        obscureText: true,
-                        controller: profileProvider.passwordController,
-                      ),
-                      SizedBox(height: 24.h),
-                      profileProvider.state == ApiState.update
-                          ? const Center(child: CircularProgressIndicator())
-                          : ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.primary,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
+                        CustomTextFormField(
+                          label: AppStrings.firstName.tr(),
+                          onChanged: (value) {
+                            if (profileProvider.userModel.fName != value) {
+                              profileProvider.setUpdateValue(true);
+                            } else {
+                              profileProvider.setUpdateValue(false);
+                            }
+                          },
+                          placeholder: AppStrings.enterYourFirstName.tr(),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppStrings.firstNameError.tr();
+                            }
+                            return null;
+                          },
+                          controller: profileProvider.firstNameController,
+                        ),
+                        CustomTextFormField(
+                          label: AppStrings.lastName.tr(),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppStrings.lastNameError.tr();
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            if (profileProvider.userModel.lName != value) {
+                              profileProvider.setUpdateValue(true);
+                            } else {
+                              profileProvider.setUpdateValue(false);
+                            }
+                          },
+                          placeholder: AppStrings.enterYourLastName.tr(),
+                          controller: profileProvider.lastNameController,
+                        ),
+                        CustomTextFormField(
+                          label: AppStrings.address.tr(),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppStrings.addressError.tr();
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            if (profileProvider.userModel.address != value) {
+                              profileProvider.setUpdateValue(true);
+                            } else {
+                              profileProvider.setUpdateValue(false);
+                            }
+                          },
+                          placeholder: AppStrings.enterYourAddress.tr(),
+                          controller: profileProvider.addressController,
+                        ),
+                        CustomTextFormField(
+                          label: AppStrings.emailAddress.tr(),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppStrings.emailEmpty.tr();
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            if (profileProvider.userModel.email != value) {
+                              profileProvider.setUpdateValue(true);
+                            } else {
+                              profileProvider.setUpdateValue(false);
+                            }
+                          },
+                          controller: profileProvider.emailController,
+                          placeholder: AppStrings.enterYourEmail.tr(),
+                        ),
+                        CustomTextFormField(
+                          validator:
+                              profileProvider.passwordController.text.isEmpty
+                              ? null
+                              : (value) {
+                                  if (value == null ||
+                                      value.isEmpty ||
+                                      value.length < 6) {
+                                    return AppStrings.passwordError.tr();
+                                  }
+                                  return null;
+                                },
+                          label: AppStrings.password.tr(),
+                          onChanged: (value) {
+                            if (profileProvider
+                                .passwordController
+                                .text
+                                .isNotEmpty) {
+                              profileProvider.setUpdateValue(true);
+                            } else {
+                              profileProvider.setUpdateValue(false);
+                            }
+                          },
+                          placeholder: AppStrings.enterYourPassword.tr(),
+                          obscureText: true,
+                          controller: profileProvider.passwordController,
+                        ),
+                        SizedBox(height: 24.h),
+                        profileProvider.state == ApiState.update
+                            ? const Center(child: CircularProgressIndicator())
+                            : ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: AppColors.primary,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
                                 ),
-                              ),
-                              onPressed: profileProvider.update
-                                  ? () async {
-                                      if (profileProvider.formKey.currentState!
-                                          .validate()) {
-                                        if (profileProvider.showImage ==
-                                            ShowImage.local) {
-                                          await profileProvider.uploadImage();
+                                onPressed: profileProvider.update
+                                    ? () async {
+                                        if (profileProvider
+                                            .formKey
+                                            .currentState!
+                                            .validate()) {
+                                          if (profileProvider.showImage ==
+                                              ShowImage.local) {
+                                            await profileProvider.uploadImage();
+                                          }
+                                          await profileProvider.updateUser();
                                         }
-                                        await profileProvider.updateUser();
                                       }
-                                    }
-                                  : null,
-                              child: Text(
-                                AppStrings.save.tr(),
-                                style: TextStyle(
-                                  color: AppColors.white,
-                                  fontSize: 16.sp,
+                                    : null,
+                                child: Text(
+                                  AppStrings.save.tr(),
+                                  style: TextStyle(
+                                    color: AppColors.white,
+                                    fontSize: 16.sp,
+                                  ),
                                 ),
                               ),
-                            ),
-                      SizedBox(height: 14),
-                    ],
+                        SizedBox(height: 14),
+                      ],
+                    ),
                   ),
                 );
               case ApiState.update:

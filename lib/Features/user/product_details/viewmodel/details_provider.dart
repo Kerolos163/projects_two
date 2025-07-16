@@ -9,12 +9,14 @@ import '../../../../Core/Services/preferences_manager.dart';
 import '../../../../Core/api/api_end_points.dart';
 import '../../../../Core/models/user_model.dart';
 import '../../../../Core/utils/app_constants.dart';
+import '../model/review_model.dart';
 
 class DetailsProvider extends ChangeNotifier {
   ApiService apiService = ApiService();
   ApiState state = ApiState.initial;
   bool isFavorite = false;
   late UserModel localData;
+  late List<ReviewModel> reviews;
   String message = '';
 
   void changeFavorite({required String productId}) {
@@ -85,6 +87,23 @@ class DetailsProvider extends ChangeNotifier {
     } catch (err) {
       log('error: $err');
       message = err.toString();
+      state = ApiState.error;
+    }
+    notifyListeners();
+  }
+
+  Future<void> getProductReviews({required String productId}) async {
+    state = ApiState.loading;
+    notifyListeners();
+    try {
+      final response = await apiService.get(
+        ApiEndPoints.productReview(productId: productId),
+      );
+      final jsonData = response.data["data"] as List;
+      reviews = jsonData.map((e) => ReviewModel.fromJson(e)).toList();
+      state = ApiState.success;
+    } catch (err) {
+      log('error: $err');
       state = ApiState.error;
     }
     notifyListeners();

@@ -13,4 +13,6 @@ final class ApiEndPoints {
   static String uploadImage({required String id}) =>
       "/api/users/updateImage/$id";
   static String userFavorites({required String id}) => "/api/favorites/$id";
+  static String productReview({required String productId}) =>
+      "/api/products/$productId/reviews";
 }

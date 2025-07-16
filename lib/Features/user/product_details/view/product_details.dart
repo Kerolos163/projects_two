@@ -30,8 +30,9 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) =>
-          getIt<DetailsProvider>()..isFavorited(productId: widget.product.id),
+      create: (_) => getIt<DetailsProvider>()
+        ..isFavorited(productId: widget.product.id)
+        ..getProductReviews(productId: widget.product.id),
       builder: (context, child) => Consumer<DetailsProvider>(
         builder: (context, detailsProvider, child) {
           return detailsProvider.state == ApiState.loading
