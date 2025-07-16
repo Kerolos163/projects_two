@@ -1,23 +1,24 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:projects_two/Core/api/api_service.dart';
 import 'package:projects_two/Core/api/api_state.dart';
-
 import '../../../../Core/Services/preferences_manager.dart';
 import '../../../../Core/api/api_end_points.dart';
 import '../../../../Core/models/user_model.dart';
 import '../../../../Core/utils/app_constants.dart';
+import '../model/add_review_param_model.dart';
 import '../model/review_model.dart';
+
+enum ReviewState { initial, loading, success, error }
 
 class DetailsProvider extends ChangeNotifier {
   ApiService apiService = ApiService();
   ApiState state = ApiState.initial;
   bool isFavorite = false;
   late UserModel localData;
-  late List<ReviewModel> reviews;
+  List<ReviewModel> reviews = [];
   String message = '';
 
   void changeFavorite({required String productId}) {
@@ -86,13 +87,15 @@ class DetailsProvider extends ChangeNotifier {
       log('message: $message');
       state = ApiState.success;
     } catch (err) {
-      log('error: $err');
       message = err.toString();
+      log('message: $message');
       state = ApiState.error;
     }
     notifyListeners();
   }
 
+  //!     ========>  Review 🤙 <=========
+  ReviewState reviewState = ReviewState.initial;
   Future<void> getProductReviews({required String productId}) async {
     state = ApiState.loading;
     notifyListeners();
@@ -105,11 +108,39 @@ class DetailsProvider extends ChangeNotifier {
       state = ApiState.success;
     } catch (err) {
       log('error: $err');
+      message = err.toString();
       state = ApiState.error;
     }
     notifyListeners();
   }
 
-  int myCurrentIndex = 0;
-  final CarouselSliderController controller = CarouselSliderController();
+  Future<void> addReview({required AddReviewParamModel model}) async {
+    reviewState = ReviewState.loading;
+    notifyListeners();
+    try {
+      await apiService.post(ApiEndPoints.addReview, body: model.toJson());
+      reviewState = ReviewState.success;
+    } catch (err) {
+      log('error: $err');
+      message = err.toString();
+      reviewState = ReviewState.error;
+    }
+    notifyListeners();
+  }
+
+  //! Add Rating
+  double rating = 0.0;
+  void changeRating(double value) {
+    rating = value;
+    notifyListeners();
+  }
+
+  bool isMyReview({required String userReviewId}) {
+    String userInfo = PreferencesManager.getString(AppConstants.userInfo)!;
+    UserModel localData = UserModel.fromJson(jsonDecode(userInfo));
+    if (localData.id == userReviewId) {
+      return true;
+    }
+    return false;
+  }
 }

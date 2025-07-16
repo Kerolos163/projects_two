@@ -1,13 +1,17 @@
+import 'dart:developer';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:projects_two/Core/constant/app_strings.dart';
 import 'package:projects_two/Features/user/product_details/view/widgets/actions_row.dart';
+import 'package:projects_two/Features/user/product_details/view/widgets/add_review_bottom_sheet.dart';
 import 'package:projects_two/Features/user/product_details/view/widgets/pricing_info.dart';
 import 'package:provider/provider.dart';
 import '../../../../Core/Services/service_locator.dart';
 import '../../../../Core/api/api_state.dart';
 import '../viewmodel/details_provider.dart';
-import 'user_review_card.dart';
+import 'widgets/review_list_view.dart';
 import '../../../../Core/widgets/rating_bar_widget.dart';
 import '../../../../Core/models/product_model.dart';
 import 'review_section.dart';
@@ -94,10 +98,12 @@ class ProductDetails extends StatelessWidget {
                           ActionsRow(),
                           SizedBox(height: 40),
                           ReviewSection(
-                            rating: double.parse(product.ratingsAverage),
+                            rating:
+                                double.tryParse(product.ratingsAverage) ?? 0.0,
                           ),
                           RatingBarWidget(
-                            initialRating: double.parse(product.ratingsAverage),
+                            initialRating:
+                                double.tryParse(product.ratingsAverage) ?? 0.0,
                           ),
                           Text(
                             product.ratingsQuantity.toString(),
@@ -106,8 +112,30 @@ class ProductDetails extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                          SizedBox(height: 30),
-                          UserReviewCard(),
+                          SizedBox(height: 20),
+
+                          ReviewListView(list: detailsProvider.reviews),
+                          SizedBox(height: 20),
+                          ElevatedButton(
+                            onPressed: () {
+                              final result = showModalBottomSheet(
+                                enableDrag: true,
+                                useSafeArea: true,
+                                showDragHandle: true,
+                                isScrollControlled: true,
+                                context: context,
+                                builder: (context) => SizedBox(
+                                  height: .7.sh,
+                                  child: AddReviewBottomSheet(
+                                    productId: product.id,
+                                    provider: detailsProvider,
+                                  ),
+                                ),
+                              );
+                              log("result: $result");
+                            },
+                            child: Text(AppStrings.addReview.tr()),
+                          ),
                         ],
                       ),
                     ),

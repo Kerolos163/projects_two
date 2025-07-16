@@ -3,9 +3,10 @@ import 'package:equatable/equatable.dart';
 class ReviewModel extends Equatable {
   final String id;
   final String title;
-  final int ratings;
+  final String ratings;
   final User user;
   final String product;
+  final DateTime createdAt;
 
   const ReviewModel({
     required this.id,
@@ -13,6 +14,7 @@ class ReviewModel extends Equatable {
     required this.ratings,
     required this.user,
     required this.product,
+    required this.createdAt,
   });
 
   factory ReviewModel.fromJson(Map<String, dynamic> json) => ReviewModel(
@@ -21,6 +23,7 @@ class ReviewModel extends Equatable {
     ratings: json["ratings"],
     user: User.fromJson(json["user"]),
     product: json["product"],
+    createdAt: DateTime.parse(json["createdAt"]),
   );
 
   Map<String, dynamic> toJson() => {
@@ -29,6 +32,7 @@ class ReviewModel extends Equatable {
     "ratings": ratings,
     "user": user.toJson(),
     "product": product,
+    "createdAt": createdAt.toIso8601String(),
   };
 
   @override
@@ -39,7 +43,7 @@ class User extends Equatable {
   final String id;
   final String firstName;
   final String lastName;
-  final String avatar;
+  final String? avatar;
 
   const User({
     required this.id,

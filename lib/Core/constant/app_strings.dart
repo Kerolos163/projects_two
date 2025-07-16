@@ -183,6 +183,11 @@ class AppStrings {
   static const String information = 'Information';
   static const String buyNow = 'Buy now';
   static const String addToCart = 'Add to cart';
+  static const String addReview = 'Add Review';
+  static const String review = 'Review';
+  static const String  pleaseEnterReview = 'Please enter review';
+  static const String  showLess = 'show less';
+  static const String  showMore = 'show more';
 
   static var coverImage = 'coverImage';
 
