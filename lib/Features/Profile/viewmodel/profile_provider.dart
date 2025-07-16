@@ -89,9 +89,6 @@ class ProfileProvider extends ChangeNotifier {
         ApiEndPoints.updateUserbyId(id: localData.id),
         body: updateModel.toJson(),
       );
-      // if (image != null) {
-      //   uploadImage();
-      // }
       getUserInfo();
       state = ApiState.success;
     } catch (error) {
