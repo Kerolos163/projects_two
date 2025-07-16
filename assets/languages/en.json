@@ -181,5 +181,9 @@
   "firstName": "First Name",
   "lastName": "Last Name",
   "quantity :": "Quantity :",
-  "price :": "Price :"
+  "price :": "Price :",
+  "Product Details": "Product Details",
+  "Information": "Information",
+  "Buy now": "Buy now",
+  "Add to cart": "Add to cart"
 }

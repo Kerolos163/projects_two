@@ -166,5 +166,9 @@
   "firstName": "الاسم الاول",
   "lastName": "الاسم الاخير",
   "quantity :": "الكمية :",
-  "price :": "السعر :"
+  "price :": "السعر :",
+  "Product Details": "تفاصيل المنتج",
+  "Information": "المعلومات",
+  "Buy now": "اشترى الان",
+  "Add to cart": "اضافة الى السلة"
 }

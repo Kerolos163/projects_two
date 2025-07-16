@@ -179,6 +179,10 @@ class AppStrings {
   static const String camera = 'Camera';
   static const String quant = 'quantity :';
   static const String price2 = 'price :';
+  static const String productDetails = 'Product Details';
+  static const String information = 'Information';
+  static const String buyNow = 'Buy now';
+  static const String addToCart = 'Add to cart';
 
   static var coverImage = 'coverImage';
 

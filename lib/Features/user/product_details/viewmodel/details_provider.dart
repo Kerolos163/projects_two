@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
+import 'package:carousel_slider/carousel_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:projects_two/Core/api/api_service.dart';
 import 'package:projects_two/Core/api/api_state.dart';
@@ -108,4 +109,7 @@ class DetailsProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  int myCurrentIndex = 0;
+  final CarouselSliderController controller = CarouselSliderController();
 }
