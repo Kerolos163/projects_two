@@ -53,8 +53,8 @@ class DetailsProvider extends ChangeNotifier {
   }
 
   Future<void> addToFavorite({required String productId}) async {
-    state = ApiState.loading;
-    notifyListeners();
+    // state = ApiState.loading;
+    // notifyListeners();
     try {
       final response = await apiService.post(
         ApiEndPoints.userFavorites(id: localData.id),
@@ -72,8 +72,8 @@ class DetailsProvider extends ChangeNotifier {
   }
 
   Future<void> removeToFavorite({required String productId}) async {
-    state = ApiState.loading;
-    notifyListeners();
+    // state = ApiState.loading;
+    // notifyListeners();
     try {
       final response = await apiService.delete(
         ApiEndPoints.userFavorites(id: localData.id),
