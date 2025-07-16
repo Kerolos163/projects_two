@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/Auth/views/login_screen.dart';
+import 'login_screen.dart';
 import '../../../Core/Services/service_locator.dart';
 import '../../../Core/api/api_state.dart';
 import '../../../Core/constant/app_colors.dart';

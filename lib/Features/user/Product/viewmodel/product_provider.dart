@@ -22,13 +22,16 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getProducts() async {
+  Future<void> getProducts({String keyword = ""}) async {
+    _filterName = keyword;
     displayedProducts = [];
     state = ApiState.loading;
     notifyListeners();
 
     try {
-      final response = await apiService.get(ApiEndPoints.homeProduct);
+      final response = await apiService.get(
+        "${ApiEndPoints.homeProduct}?keyword=$keyword",
+      );
       final jsonData = response.data["data"] as List;
       displayedProducts = jsonData
           .map((e) => ProductModel.fromJson(e))

@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/Services/service_locator.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Features/user/Home/view/widget/category_list_view.dart';
-import 'package:projects_two/Features/user/Home/view/widget/container_products.dart';
-import 'package:projects_two/Features/user/Home/view/widget/products_list.dart';
-import 'package:projects_two/Features/user/Home/viewmodel/home_provider.dart';
+import '../../../../Core/Services/service_locator.dart';
+import '../../../../Core/constant/app_strings.dart';
+import 'widget/category_list_view.dart';
+import 'widget/container_products.dart';
+import 'widget/products_list.dart';
+import '../viewmodel/home_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Core/Theme/app_provider.dart';
@@ -55,10 +55,15 @@ class HomeScreen extends StatelessWidget {
                   height: 100,
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: CategoryListView(
-                      items: provider.state == ApiState.loading
-                          ? []
-                          : provider.categories,
+                    child: Consumer<AppProvider>(
+                      builder: (context, appProvider, child) {
+                        return CategoryListView(
+                          appProvider: appProvider,
+                          items: provider.state == ApiState.loading
+                              ? []
+                              : provider.categories,
+                        );
+                      },
                     ),
                   ),
                 );
