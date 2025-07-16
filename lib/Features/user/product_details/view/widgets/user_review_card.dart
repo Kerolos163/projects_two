@@ -1,6 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -16,7 +13,8 @@ import '../../model/review_model.dart';
 
 class UserReviewCard extends StatelessWidget {
   final ReviewModel model;
-  const UserReviewCard({super.key, required this.model});
+  final void Function()? onTap;
+  const UserReviewCard({super.key, required this.model, this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -104,9 +102,7 @@ class UserReviewCard extends StatelessWidget {
                     top: 3,
                     right: 3,
                     child: GestureDetector(
-                      onTap: () {
-                        log("delete");
-                      },
+                      onTap: onTap,
                       child: CircleAvatar(
                         backgroundColor: AppColors.red,
                         radius: 16.r,

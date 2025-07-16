@@ -128,6 +128,19 @@ class DetailsProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> deleteReview({required String reviewId}) async {
+    state = ApiState.loading;
+    notifyListeners();
+    try {
+      await apiService.delete(ApiEndPoints.deleteReview(reviewId: reviewId));
+    } catch (err) {
+      log('error: $err');
+      message = err.toString();
+      state = ApiState.error;
+    }
+    notifyListeners();
+  }
+
   //! Add Rating
   double rating = 0.0;
   void changeRating(double value) {

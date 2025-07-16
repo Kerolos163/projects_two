@@ -78,7 +78,7 @@ class _AddReviewBottomSheetState extends State<AddReviewBottomSheet> {
                     } else {
                       toastification.show(
                         type: ToastificationType.error,
-                        alignment: Alignment.center,
+                        alignment: Alignment.bottomCenter,
                         context: context,
                         title: Text(widget.provider.message),
                         autoCloseDuration: const Duration(seconds: 5),

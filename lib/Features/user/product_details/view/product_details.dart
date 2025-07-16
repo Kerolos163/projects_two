@@ -10,6 +10,7 @@ import 'package:projects_two/Features/user/product_details/view/widgets/pricing_
 import 'package:provider/provider.dart';
 import '../../../../Core/Services/service_locator.dart';
 import '../../../../Core/api/api_state.dart';
+import '../../../Auth/views/login_screen.dart';
 import '../viewmodel/details_provider.dart';
 import 'widgets/review_list_view.dart';
 import '../../../../Core/widgets/rating_bar_widget.dart';
@@ -30,6 +31,16 @@ class ProductDetails extends StatelessWidget {
         ..getProductReviews(productId: product.id),
       builder: (context, child) => Consumer<DetailsProvider>(
         builder: (context, detailsProvider, child) {
+          if (detailsProvider.state == ApiState.error) {
+            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(builder: (context) => const LoginScreen()),
+                (route) => false,
+              );
+            });
+          }
+
           return detailsProvider.state == ApiState.loading
               ? Center(child: CircularProgressIndicator())
               : PopScope(
@@ -114,7 +125,10 @@ class ProductDetails extends StatelessWidget {
                           ),
                           SizedBox(height: 20),
 
-                          ReviewListView(list: detailsProvider.reviews),
+                          ReviewListView(
+                            list: detailsProvider.reviews,
+                            provider: detailsProvider,
+                          ),
                           SizedBox(height: 20),
                           ElevatedButton(
                             onPressed: () {
