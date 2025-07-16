@@ -109,6 +109,7 @@ class ProductDetails extends StatelessWidget {
                           ActionsRow(),
                           SizedBox(height: 40),
                           ReviewSection(
+                            reviews: detailsProvider.reviews,
                             rating:
                                 double.tryParse(product.ratingsAverage) ?? 0.0,
                           ),

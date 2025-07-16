@@ -1,8 +1,13 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
+import 'package:projects_two/Features/user/product_details/model/review_model.dart';
+import 'package:projects_two/Features/user/product_details/view/widgets/slider_rating.dart';
 
 class ReviewSection extends StatelessWidget {
   final double rating;
-  const ReviewSection({super.key, required this.rating});
+  final List<ReviewModel> reviews;
+  const ReviewSection({super.key, required this.rating, required this.reviews});
 
   @override
   Widget build(BuildContext context) {
@@ -10,7 +15,7 @@ class ReviewSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          "Rating and reviews",
+          AppStrings.ratingAndReviews.tr(),
           style: Theme.of(context).textTheme.titleLarge,
         ),
         SizedBox(height: 10),
@@ -29,16 +34,31 @@ class ReviewSection extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
-                  // SliderRating(rating: "5", value: 1.0),
-                  // SizedBox(height: 8),
-                  // SliderRating(rating: "4", value: 0.8),
-                  // SizedBox(height: 8),
-                  // SliderRating(rating: "3", value: 0.6),
-                  // SizedBox(height: 8),
-                  // SliderRating(rating: "2", value: 0.3),
-                  // SizedBox(height: 8),
-                  // SliderRating(rating: "1", value: 0.1),
+                children: [
+                  SliderRating(
+                    rating: "5",
+                    value: calculatingRating(number: 5),
+                  ),
+                  SizedBox(height: 8),
+                  SliderRating(
+                    rating: "4",
+                    value: calculatingRating(number: 4),
+                  ),
+                  SizedBox(height: 8),
+                  SliderRating(
+                    rating: "3",
+                    value: calculatingRating(number: 3),
+                  ),
+                  SizedBox(height: 8),
+                  SliderRating(
+                    rating: "2",
+                    value: calculatingRating(number: 2),
+                  ),
+                  SizedBox(height: 8),
+                  SliderRating(
+                    rating: "1",
+                    value: calculatingRating(number: 1),
+                  ),
                 ],
               ),
             ),
@@ -46,5 +66,18 @@ class ReviewSection extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  double calculatingRating({required int number}) {
+    int counter = 0;
+
+    for (int i = 0; i < reviews.length; i++) {
+      if (double.tryParse(reviews[i].ratings)?.round() == number) {
+        counter++;
+      }
+    }
+    if (reviews.isEmpty) return 0;
+
+    return counter / reviews.length;
   }
 }

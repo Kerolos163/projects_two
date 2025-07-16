@@ -189,6 +189,7 @@ class AppStrings {
   static const String  showLess = 'show less';
   static const String  showMore = 'show more';
   static const String  areYouSure = 'Are you sure you want to delete this item?';
+  static const String  ratingAndReviews = 'Rating and reviews';
 
   static var coverImage = 'coverImage';
 
