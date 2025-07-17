@@ -25,7 +25,7 @@ class CategoryItem extends StatelessWidget {
           islocal
               ? ClipRRect(
                   borderRadius: BorderRadiusGeometry.circular(30),
-                  child: Image.asset(item.image, width: 56, height: 56),
+                  child: Image.asset(item.image!, width: 56, height: 56),
                 )
               : ClipRRect(
                   borderRadius: BorderRadiusGeometry.circular(30),

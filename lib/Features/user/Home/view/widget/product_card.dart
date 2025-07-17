@@ -70,7 +70,7 @@ class ProductCardHome extends StatelessWidget {
                   ),
                   SizedBox(height: 2),
                   RatingBarWidget(
-                    initialRating: double.parse(productModel.ratingsAverage),
+                    initialRating: double.tryParse(productModel.ratingsAverage) ?? 0.0
                   ),
                 ],
               ),
