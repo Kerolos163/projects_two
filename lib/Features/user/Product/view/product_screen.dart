@@ -14,7 +14,7 @@ import '../viewmodel/product_provider.dart';
 import 'widget/product_item.dart';
 
 class ProductScreen extends StatelessWidget {
-  const ProductScreen({super.key, this.categoryName = "Mugs"});
+  const ProductScreen({super.key, this.categoryName = ""});
   final String categoryName;
 
   @override
@@ -27,7 +27,7 @@ class ProductScreen extends StatelessWidget {
           return provider.state == ApiState.loading
               ? const Center(child: CircularProgressIndicator())
               : SafeArea(
-                child: CustomScrollView(
+                  child: CustomScrollView(
                     slivers: [
                       SliverToBoxAdapter(
                         child: Consumer<AppProvider>(
@@ -35,8 +35,8 @@ class ProductScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.all(20),
                               child: HomeHeader(
-                                onChanged: (value) =>
-                                    provider.searchedProductsByText(text: value),
+                                onChanged: (value) => provider
+                                    .searchedProductsByText(text: value),
                                 onMenuTap: () => appProvider
                                     .scaffoldKey
                                     .currentState
@@ -87,18 +87,29 @@ class ProductScreen extends StatelessWidget {
                               columnCount: 2,
                               child: ScaleAnimation(
                                 child: FadeInAnimation(
-                                  child: GestureDetector(
-                                    onTap: () => Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) =>
-                                            ProductDetails(product: product),
-                                      ),
-                                    ),
-                                    child: ProductItem(
-                                      index: index,
-                                      productModel: product,
-                                    ),
+                                  child: Consumer<AppProvider>(
+                                    builder: (context, appProvider, child) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          appProvider.addRecentlyViewed(
+                                            product: product,
+                                          );
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProductDetails(
+                                                    product: product,
+                                                  ),
+                                            ),
+                                          );
+                                        },
+                                        child: ProductItem(
+                                          index: index,
+                                          productModel: product,
+                                        ),
+                                      );
+                                    },
                                   ),
                                 ),
                               ),
@@ -108,7 +119,7 @@ class ProductScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-              );
+                );
         },
       ),
     );

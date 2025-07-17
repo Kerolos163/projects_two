@@ -13,90 +13,114 @@ import '../../../../Core/api/api_state.dart';
 import '../../../../Core/constant/app_colors.dart';
 import '../../../../Core/widgets/home_header.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<AppProvider>(context, listen: false).getRecentlyViewed();
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => getIt<HomeProvider>()..loadHomeData(),
-      builder: (context, child) => Scaffold(
-        body: ListView(
-          children: [
-            Consumer<AppProvider>(
-              builder: (context, provider, child) {
-                return Padding(
+      builder: (context, child) => Consumer<AppProvider>(
+        builder: (context, appProvider, child) {
+          return Scaffold(
+            body: ListView(
+              children: [
+                Padding(
                   padding: const EdgeInsets.all(20),
                   child: HomeHeader(
                     readOnly: true,
-                    onTap: () => provider.changeIndex(index: 1),
+                    onTap: () => appProvider.changeIndex(index: 1),
                     onMenuTap: () =>
-                        provider.scaffoldKey.currentState?.openDrawer(),
-                    onAvatarTap: () => provider.changeIndex(index: 4),
+                        appProvider.scaffoldKey.currentState?.openDrawer(),
+                    onAvatarTap: () => appProvider.changeIndex(index: 4),
                   ),
-                );
-              },
-            ),
-
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                AppStrings.allFeatured.tr(),
-                style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w600,
                 ),
-              ),
-            ),
-            const SizedBox(height: 10),
-            Consumer<HomeProvider>(
-              builder: (context, provider, child) {
-                return SizedBox(
-                  height: 100,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: Consumer<AppProvider>(
-                      builder: (context, appProvider, child) {
-                        return CategoryListView(
-                          appProvider: appProvider,
-                          items: provider.state == ApiState.loading
-                              ? []
-                              : provider.categories,
-                        );
-                      },
+
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Text(
+                    AppStrings.allFeatured.tr(),
+                    style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                      color: AppColors.black,
+                      fontWeight: FontWeight.w600,
                     ),
                   ),
-                );
-              },
+                ),
+                const SizedBox(height: 10),
+                Consumer<HomeProvider>(
+                  builder: (context, provider, child) {
+                    return SizedBox(
+                      height: 100,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Consumer<AppProvider>(
+                          builder: (context, appProvider, child) {
+                            return CategoryListView(
+                              appProvider: appProvider,
+                              items: provider.state == ApiState.loading
+                                  ? []
+                                  : provider.categories,
+                            );
+                          },
+                        ),
+                      ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+                appProvider.recentlyViewed.isEmpty
+                    ? SizedBox()
+                    : ProductsList(
+                      appProvider: appProvider,
+                      products: appProvider.recentlyViewed
+                          .map((e) => e.recentlyViewed)
+                          .toList(),
+                    ),
+                const SizedBox(height: 20),
+                Consumer<HomeProvider>(
+                  builder: (context, provider, child) {
+                    return ProductsList(
+                      appProvider: appProvider,
+                      products: provider.products.take(4).toList(),
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: ProductContainer(
+                    btntext: "view all",
+                    colorr: AppColors.primary,
+                    textt: "Trending Products",
+                  ),
+                ),
+                const SizedBox(height: 20),
+                Consumer<HomeProvider>(
+                  builder: (context, provider, child) {
+                    return ProductsList(
+                      appProvider: appProvider,
+                      products: provider.products.skip(3).toList(),
+                    );
+                  },
+                ),
+                const SizedBox(height: 20),
+              ],
             ),
-            const SizedBox(height: 20),
-            Consumer<HomeProvider>(
-              builder: (context, provider, child) {
-                return ProductsList(
-                  products: provider.products.take(4).toList(),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ProductContainer(
-                btntext: "view all",
-                colorr: AppColors.primary,
-                textt: "Trending Products",
-              ),
-            ),
-            const SizedBox(height: 20),
-            Consumer<HomeProvider>(
-              builder: (context, provider, child) {
-                return ProductsList(
-                  products: provider.products.skip(3).toList(),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
