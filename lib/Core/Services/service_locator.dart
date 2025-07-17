@@ -1,4 +1,8 @@
 import 'package:get_it/get_it.dart';
+import 'package:projects_two/Features/admin/categories_dashboard/viewmodel/categories_dashboard_provider.dart';
+import 'package:projects_two/Features/admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
+import 'package:projects_two/Features/admin/products_dashboard/viewmodel/products_dashboard_provider.dart';
+import 'package:projects_two/Features/admin/users_dashboard/viewmodel/users_dashboard_provider.dart';
 import '../../Features/Auth/viewmodel/auth_provider.dart';
 import '../../Features/Profile/viewmodel/profile_provider.dart';
 
@@ -20,5 +24,12 @@ class ServiceLocator {
     getIt.registerFactory<ProfileProvider>(() => ProfileProvider());
     getIt.registerFactory<DetailsProvider>(() => DetailsProvider());
     getIt.registerFactory<FavoriteProvider>(() => FavoriteProvider());
+    getIt.registerLazySingleton<ProductsDashboardProvider>(() => ProductsDashboardProvider());
+    getIt.registerLazySingleton<CategoriesDashboardProvider>(() => CategoriesDashboardProvider());
+    getIt.registerLazySingleton<OrdersDashboardProvider>(() => OrdersDashboardProvider());
+    getIt.registerLazySingleton<UserDashboardProvider>(() => UserDashboardProvider());
+
+
+
   }
 }
