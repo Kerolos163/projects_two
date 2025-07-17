@@ -34,7 +34,7 @@ class ProductsList extends StatelessWidget {
                 "Recently Viewed",
                 style: Theme.of(context).textTheme.titleLarge,
               ),
-              SizedBox(height: 5),
+              SizedBox(height: 8),
               Expanded(
                 child: GridView.builder(
                   scrollDirection: Axis.horizontal,
