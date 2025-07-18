@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projects_two/Features/user/Drawer/view/custom_drawer_widget.dart';
 import '../../../../Core/Theme/app_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -13,6 +14,7 @@ class LayoutScreen extends StatelessWidget {
       builder: (context, provider, child) {
         return Scaffold(
           key: provider.scaffoldKey,
+          drawer: CustomDrawer(),
           body: provider.screens[provider.currentIndex],
           bottomNavigationBar: CustomBottomNavigationBar(appProvider: provider),
         );

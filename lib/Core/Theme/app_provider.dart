@@ -79,10 +79,10 @@ class AppProvider extends ChangeNotifier {
   }
 
   //! 👉 Recently Viewed
-  String getUserIdFromLocal() {
+  UserModel getUser() {
     String userInfo = PreferencesManager.getString(AppConstants.userInfo)!;
     UserModel localData = UserModel.fromJson(jsonDecode(userInfo));
-    return localData.id;
+    return localData;
   }
 
   List<RecentlyViewModel> recentlyViewed = [];
@@ -93,7 +93,7 @@ class AppProvider extends ChangeNotifier {
 
     recentlyViewed = rViewed
         .map((e) => RecentlyViewModel.fromJson(jsonDecode(e)))
-        .where((e) => e.userId == getUserIdFromLocal())
+        .where((e) => e.userId == getUser().id)
         .toList();
     log('recentlyViewed : $recentlyViewed');
     if (recentlyViewed.length > 10) {
@@ -104,7 +104,7 @@ class AppProvider extends ChangeNotifier {
 
   void addRecentlyViewed({required ProductModel product}) {
     RecentlyViewModel model = RecentlyViewModel(
-      userId: getUserIdFromLocal(),
+      userId: getUser().id,
       recentlyViewed: product,
     );
 

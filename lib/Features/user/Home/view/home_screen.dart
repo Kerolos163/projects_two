@@ -31,8 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => getIt<HomeProvider>()..loadHomeData(),
+    return ChangeNotifierProvider.value(
+      value: getIt<HomeProvider>()..loadHomeData(),
       builder: (context, child) => Consumer<AppProvider>(
         builder: (context, appProvider, child) {
           return Scaffold(

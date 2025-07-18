@@ -19,4 +19,6 @@ final class ApiEndPoints {
       "/api/products/$productId/reviews";
   static String deleteReview({required String reviewId}) =>
       "/api/reviews/$reviewId";
+  static String getSubCategory({required String categoryId}) =>
+      "/api/categories/$categoryId/subcategories";
 }
