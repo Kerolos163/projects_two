@@ -13,10 +13,12 @@ import '../../data/category_data.dart';
 class ProductsList extends StatelessWidget {
   final List<ProductModel> products;
   final AppProvider appProvider;
+  final String title;
   const ProductsList({
     super.key,
     required this.products,
     required this.appProvider,
+    required this.title,
   });
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class ProductsList extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Recently Viewed",
+                title,
                 style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(height: 8),

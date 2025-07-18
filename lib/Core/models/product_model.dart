@@ -109,7 +109,7 @@ class ProductModel extends Equatable {
 class Category extends Equatable {
   final String id;
   final String name;
-  final String categoryId;
+  final String? categoryId;
 
   const Category({
     required this.id,

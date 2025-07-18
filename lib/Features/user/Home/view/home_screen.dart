@@ -80,6 +80,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 appProvider.recentlyViewed.isEmpty
                     ? SizedBox()
                     : ProductsList(
+                        title: AppStrings.recentlyViewed.tr(),
                         appProvider: appProvider,
                         products: appProvider.recentlyViewed
                             .map((e) => e.recentlyViewed)
@@ -87,8 +88,33 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                 const SizedBox(height: 20),
                 Consumer<HomeProvider>(
+                  builder: (context, homeProvider, child) {
+                    return appProvider.recentlyViewed.isEmpty
+                        ? SizedBox()
+                        : ProductsList(
+                            title: AppStrings.trendingProduct.tr(),
+                            appProvider: appProvider,
+                            products: homeProvider.trandingProducts,
+                          );
+                  },
+                ),
+                const SizedBox(height: 20),
+                Consumer<HomeProvider>(
+                  builder: (context, homeProvider, child) {
+                    return appProvider.recentlyViewed.isEmpty
+                        ? SizedBox()
+                        : ProductsList(
+                            title: AppStrings.bestSellers.tr(),
+                            appProvider: appProvider,
+                            products: homeProvider.bestSellersProducts,
+                          );
+                  },
+                ),
+                const SizedBox(height: 20),
+                Consumer<HomeProvider>(
                   builder: (context, provider, child) {
                     return ProductsList(
+                      title: "",
                       appProvider: appProvider,
                       products: provider.products.take(4).toList(),
                     );
@@ -107,6 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Consumer<HomeProvider>(
                   builder: (context, provider, child) {
                     return ProductsList(
+                      title: "",
                       appProvider: appProvider,
                       products: provider.products.skip(3).toList(),
                     );

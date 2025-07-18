@@ -8,7 +8,9 @@ final class ApiEndPoints {
   static const String register = "api/users/Register";
   static const String homeCategory = "api/categories";
   static const String homeProduct = "api/products";
-  static const String addReview = "/api/reviews";
+  static const String addReview = "api/reviews";
+  static const String trendingProduct = "api/analytics/trending";
+  static const String bestSellers = "api/analytics/best-sellers";
 
   static String getUserbyId({required String id}) => "api/users/$id";
   static String updateUserbyId({required String id}) => "api/users/$id";

@@ -190,6 +190,9 @@ class AppStrings {
   static const String  showMore = 'show more';
   static const String  areYouSure = 'Are you sure you want to delete this item?';
   static const String  ratingAndReviews = 'Rating and reviews';
+  static const String  recentlyViewed = 'Recently Viewed';
+  static const String  trendingProduct = 'Trending Products';
+  static const String  bestSellers = 'bestSellers';
 
   static var coverImage = 'coverImage';
 

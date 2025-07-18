@@ -14,12 +14,15 @@ class HomeProvider extends ChangeNotifier {
   ApiService apiService = ApiService();
   List<CategoryModel> categories = [];
   List<ProductModel> products = [];
+  List<ProductModel> trandingProducts = [];
+  List<ProductModel> bestSellersProducts = [];
   Map<String, List<SubcategoryModel>> subCategoryMap = {};
 
   Future<void> loadHomeData() async {
     log('loadHomeData');
     await getCategories();
     await getProducts();
+    await getTrendingProducts();
   }
 
   Future<void> getCategories() async {
@@ -79,5 +82,34 @@ class HomeProvider extends ChangeNotifier {
       log('error: 🤙 $error');
       return [];
     }
+  }
+
+  Future<void> getTrendingProducts() async {
+    state = ApiState.loading;
+    notifyListeners();
+    try {
+      final response = await apiService.get(ApiEndPoints.trendingProduct);
+      final jsonData = response.data["data"] as List;
+      trandingProducts = jsonData.map((e) => ProductModel.fromJson(e)).toList();
+      state = ApiState.success;
+    } catch (error) {
+      log('error: $error');
+      state = ApiState.error;
+    }
+    notifyListeners();
+  }
+  Future<void> getBestSellers() async {
+    state = ApiState.loading;
+    notifyListeners();
+    try {
+      final response = await apiService.get(ApiEndPoints.bestSellers);
+      final jsonData = response.data["data"] as List;
+      trandingProducts = jsonData.map((e) => ProductModel.fromJson(e)).toList();
+      state = ApiState.success;
+    } catch (error) {
+      log('error: $error');
+      state = ApiState.error;
+    }
+    notifyListeners();
   }
 }
