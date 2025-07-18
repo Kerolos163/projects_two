@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:projects_two/Features/onboarding/presentation/views/onboarding_screen.dart';
+import 'Features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'Core/Services/preferences_manager.dart';
@@ -19,7 +20,8 @@ import 'Features/user/layout/view/layout_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.init();
-  Stripe.publishableKey = "stripePublishableKey";
+  Stripe.publishableKey =
+      "pk_test_51OuEXgP5ftpLBbyFbwXGDOdzbsnclAxoJMoyjGNN5GkdH3pXXxcXYekPORCW1SDKEVU2jwi4HHW7M58eCs1hLimV00wM7aBL4a";
   await PreferencesManager.init();
   // PreferencesManager.clear(); //! for testing ☠️
   await ScreenUtil.ensureScreenSize();

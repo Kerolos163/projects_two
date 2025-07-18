@@ -159,5 +159,12 @@
   "Search any Product...": "ابحث عن منتج ...",
   "contactSupport": "لأي استفسرات يرجى التواصل بنا",
   "All Featured": "جميع المنتجات المميزة",
-  "Showing results for:": "عرض النتائج لـ:"
+  "Showing results for:": "عرض النتائج لـ:",
+  "Choose Image Source": "اختر مصدر الصورة",
+  "Gallery": "المعرض",
+  "Camera": "الكاميرا",
+  "firstName": "الاسم الاول",
+  "lastName": "الاسم الاخير",
+  "quantity :": "الكمية :",
+  "price :": "السعر :"
 }

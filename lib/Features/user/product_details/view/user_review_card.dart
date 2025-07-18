@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/widgets/rating_bar_widget.dart';
+import '../../../../Core/widgets/rating_bar_widget.dart';
 import '../../../../../../../Core/constant/app_colors.dart';
 import '../../../../../../../Core/constant/image.dart';
 import 'package:readmore/readmore.dart';
@@ -11,7 +11,7 @@ class UserReviewCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 4,
-      shadowColor: Colors.grey.withValues(alpha:  0.3),
+      shadowColor: Colors.grey.withValues(alpha: 0.3),
       margin: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: Padding(
@@ -23,9 +23,7 @@ class UserReviewCard extends StatelessWidget {
             Row(
               children: [
                 CircleAvatar(
-                  backgroundImage: AssetImage(
-                    ImagePath.avatar,
-                  ),
+                  backgroundImage: AssetImage(ImagePath.avatar),
                   radius: 24,
                 ),
                 SizedBox(width: 12),

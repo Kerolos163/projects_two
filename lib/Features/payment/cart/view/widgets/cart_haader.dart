@@ -31,20 +31,14 @@ class CartHeader extends StatelessWidget {
                 child: SVGImage(path: ImagePath.menuIcon),
               ),
             ),
-            Row(
-              children: [
-                SVGImage(path: ImagePath.appLogo),
-                const SizedBox(width: 9),
-                Text(
-                  "Stylish",
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.logoTitleColor,
-                    fontFamily: "LibreCaslonText",
-                  ),
-                ),
-              ],
+            Text(
+              "My Cart",
+              style: TextStyle(
+                fontSize: 18.sp,
+                fontWeight: FontWeight.w700,
+                // color: AppColors.logoTitleColor,
+                fontFamily: "LibreCaslonText",
+              ),
             ),
             GestureDetector(
               onTap: onAvatarTap,

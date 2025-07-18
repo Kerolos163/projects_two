@@ -1,6 +1,12 @@
 import 'dart:convert';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/Services/preferences_manager.dart';
+import 'package:projects_two/Core/api/api_end_points.dart';
+import 'package:projects_two/Core/api/api_service.dart';
+import 'package:projects_two/Core/models/user_model.dart';
+import 'package:projects_two/Core/utils/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Core/api/api_state.dart';
@@ -8,6 +14,9 @@ import '../../../../Core/models/product_model.dart';
 
 class CartProvider extends ChangeNotifier {
   ApiState state = ApiState.initial;
+  ApiService apiService = ApiService();
+  String message = '';
+  late UserModel localData;
 
   final List<ProductModel> _cartItems = [];
 
@@ -40,23 +49,6 @@ class CartProvider extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     final cartJson = _cartItems.map((product) => product.toJson()).toList();
     await prefs.setString('user_cart', jsonEncode(cartJson));
-  }
-
-  Future<void> addToCart(ProductModel product) async {
-    final existingIndex = _cartItems.indexWhere(
-      (item) => item.id == product.id,
-    );
-
-    if (existingIndex != -1) {
-      _cartItems[existingIndex] = _cartItems[existingIndex].copyWith(
-        quantity: _cartItems[existingIndex].quantity + 1,
-      );
-    } else {
-      _cartItems.add(product.copyWith(quantity: 1));
-    }
-
-    await saveCartToStorage();
-    notifyListeners();
   }
 
   Future<void> removeFromCart(ProductModel product) async {
@@ -100,5 +92,35 @@ class CartProvider extends ChangeNotifier {
       saveCartToStorage();
       notifyListeners();
     }
+  }
+
+  Future<void> addNewOrder() async {
+    state = ApiState.loading;
+    notifyListeners();
+
+    try {
+      List<Map<String, dynamic>> products = _cartItems
+          .map((e) => {"pId": e.id, "quantity": e.quantity})
+          .toList();
+      String userInfo = PreferencesManager.getString(AppConstants.userInfo)!;
+      localData = UserModel.fromJson(jsonDecode(userInfo));
+      final response = await apiService.post(
+        ApiEndPoints.orders,
+        body: {
+          "custId": localData.id,
+          "paymentMethod": "Card Payments",
+          "products": products,
+        },
+      );
+
+      message = response.data["message"];
+      state = ApiState.success;
+    } catch (err) {
+      log('error: $err');
+      message = err.toString();
+      state = ApiState.error;
+    }
+
+    notifyListeners();
   }
 }

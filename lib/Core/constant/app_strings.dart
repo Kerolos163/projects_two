@@ -174,10 +174,15 @@ class AppStrings {
   static const String selectSubcategory = 'selectSubcategory';
   static const String allFeatured = 'All Featured';
   static const String showingResults = 'Showing results for:';
+  static const String chooseImage = 'Choose Image Source';
+  static const String gallery = 'Gallery';
+  static const String camera = 'Camera';
+  static const String quant = 'quantity :';
+  static const String price2 = 'price :';
 
   static var coverImage = 'coverImage';
 
-  static var productAdd='productAdd';
+  static var productAdd = 'productAdd';
 
   static var unknownProduct = "unknownProduct";
 

@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import '../../../../../Core/Theme/app_provider.dart';
 import '../../../../../Core/constant/app_colors.dart';
 
-
 class ProductContainer extends StatelessWidget {
   final Color? colorr;
   final String textt;

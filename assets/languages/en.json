@@ -174,5 +174,12 @@
   "unknownProduct": "Unknown Product",
   "contactSupport": "If you have any questions or concerns, feel free to contact us.",
   "All Featured": "All Featured",
-  "Showing results for:": "Showing results for:"
+  "Showing results for:": "Showing results for:",
+  "Choose Image Source": "Choose Image Source",
+  "Gallery": "Gallery",
+  "Camera": "Camera",
+  "firstName": "First Name",
+  "lastName": "Last Name",
+  "quantity :": "Quantity :",
+  "price :": "Price :"
 }

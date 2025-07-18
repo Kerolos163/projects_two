@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
@@ -13,6 +15,7 @@ import 'status_code.dart';
 class ApiService {
   static final ApiService _singleton = ApiService._internal();
   final Dio _dio = Dio();
+  final Dio dio = Dio();
 
   factory ApiService() {
     return _singleton;
@@ -25,7 +28,8 @@ class ApiService {
     final token = PreferencesManager.getString(AppConstants.userTokenKey);
 
     _dio.options.headers = {
-      "Content-Type": "application/json",
+      // "Content-Type": "multipart/form-data",
+      // "Content-Type": "application/json",
       "Accept": "application/json, text/plain, */*",
       'Authorization': 'Bearer $token',
     };
@@ -71,12 +75,31 @@ class ApiService {
     }
   }
 
+  Future<Response> postStrip({
+    required body,
+    required String url,
+    required String token,
+    String? contentType,
+  }) async {
+    var response = await dio.post(
+      url,
+      data: body,
+      options: Options(
+        contentType: contentType,
+        headers: {'Authorization': "Bearer $token"},
+      ),
+    );
+    return response;
+  }
+
   Future<Response> patch(
     String path, {
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? body,
     bool isFormData = false,
   }) async {
+    log("🫵");
+    log(body.toString());
     try {
       final response = await _dio.patch(
         path,
@@ -110,11 +133,13 @@ class ApiService {
   Future<Response> delete(
     String path, {
     Map<String, dynamic>? queryParameters,
+    Map<String, dynamic>? body,
   }) async {
     try {
       final response = await _dio.delete(
         path,
         queryParameters: queryParameters,
+        data: body,
       );
 
       return _handleResponseJson(response);

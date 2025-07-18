@@ -5,11 +5,11 @@ import '../constant/app_colors.dart';
 
 ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
-    colorScheme: ColorScheme.dark(
+  colorScheme: ColorScheme.dark(
     primary: AppColors.primary,
     secondary: Colors.white70,
     primaryContainer: AppColors.black,
-    outline: AppColors.white
+    outline: AppColors.white,
   ),
   scaffoldBackgroundColor: Colors.black,
   textSelectionTheme: TextSelectionThemeData(

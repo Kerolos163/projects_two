@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-class AppTextButton extends StatelessWidget {
+class PaymentTextButton extends StatelessWidget {
   final String buttonText;
-  final VoidCallback onPressed;
+  final Future<void> Function()? onPressed;
   final Color? backgroundColor;
   final Color? textColor;
   final double? height;
 
-  const AppTextButton({
+  const PaymentTextButton({
     super.key,
     required this.buttonText,
     required this.onPressed,

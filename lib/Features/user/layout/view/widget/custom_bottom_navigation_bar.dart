@@ -7,7 +7,6 @@ import '../../../../../Core/constant/app_strings.dart';
 import '../../../../../Core/constant/image.dart';
 import '../../../../../Core/widgets/svg_img.dart';
 
-
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({super.key, required this.appProvider});
   final AppProvider appProvider;

@@ -8,6 +8,10 @@ final class ApiEndPoints {
   static const String register = "api/users/Register";
   static const String homeCategory = "api/categories";
   static const String homeProduct = "api/products";
+  static const String orders = "api/orders";
   static String getUserbyId({required String id}) => "api/users/$id";
   static String updateUserbyId({required String id}) => "api/users/$id";
+  static String uploadImage({required String id}) =>
+      "/api/users/updateImage/$id";
+  static String userFavorites({required String id}) => "/api/favorites/$id";
 }
