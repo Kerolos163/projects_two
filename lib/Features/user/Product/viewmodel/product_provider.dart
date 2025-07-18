@@ -12,6 +12,7 @@ class ProductProvider extends ChangeNotifier {
   ApiService apiService = ApiService();
   List<ProductModel> displayedProducts = [];
   List<ProductModel> searchedProducts = [];
+  List<ProductModel> subCategory = [];
 
   String _filterName = "All Products";
 
@@ -23,7 +24,9 @@ class ProductProvider extends ChangeNotifier {
   }
 
   Future<void> getProducts({String keyword = ""}) async {
-    _filterName = keyword;
+    if (keyword.isNotEmpty) {
+      _filterName = keyword;
+    }
     displayedProducts = [];
     state = ApiState.loading;
     notifyListeners();
@@ -51,6 +54,19 @@ class ProductProvider extends ChangeNotifier {
     for (var item in displayedProducts) {
       if (item.title.toLowerCase().contains(text.toLowerCase())) {
         searchedProducts.add(item);
+      }
+    }
+    state = ApiState.success;
+    notifyListeners();
+  }
+
+  void filterBySubCategory({required String subCategoryId}) {
+    subCategory = [];
+    state = ApiState.loading;
+    notifyListeners();
+    for (var item in displayedProducts) {
+      if (item.subCategories.contains(subCategoryId)) {
+        subCategory.add(item);
       }
     }
     state = ApiState.success;

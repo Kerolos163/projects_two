@@ -76,10 +76,14 @@ class ProductScreen extends StatelessWidget {
                           crossAxisSpacing: 16,
                           childCount: provider.searchedProducts.isNotEmpty
                               ? provider.searchedProducts.length
+                              : provider.subCategory.isNotEmpty
+                              ? provider.subCategory.length
                               : provider.displayedProducts.length,
                           itemBuilder: (context, index) {
                             final product = provider.searchedProducts.isNotEmpty
                                 ? provider.searchedProducts[index]
+                                : provider.subCategory.isNotEmpty
+                                ? provider.subCategory[index]
                                 : provider.displayedProducts[index];
                             return AnimationConfiguration.staggeredGrid(
                               position: index,
