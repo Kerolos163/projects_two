@@ -3,8 +3,8 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_animations/flutter_staggered_animations.dart';
-import 'package:projects_two/Features/user/Favorite/view/widget/favorite_item.dart';
-import 'package:projects_two/Features/user/product_details/view/product_details.dart';
+import 'widget/favorite_item.dart';
+import '../../product_details/view/product_details.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Core/Services/service_locator.dart';

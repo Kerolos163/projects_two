@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/user/Drawer/view/custom_drawer_widget.dart';
+import '../../Drawer/view/custom_drawer_widget.dart';
 import '../../../../Core/Services/service_locator.dart';
 import '../../../../Core/Theme/app_provider.dart';
 import 'package:provider/provider.dart';

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import '../../../../../Core/constant/app_colors.dart';
 
 class SliderRating extends StatelessWidget {

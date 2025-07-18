@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/Services/service_locator.dart';
-import 'package:projects_two/Core/Theme/app_provider.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Features/user/Drawer/view/widget/category_drawer_list_view.dart';
-import 'package:projects_two/Features/user/Drawer/view/widget/drawer_header.dart';
+import '../../../../Core/Services/service_locator.dart';
+import '../../../../Core/Theme/app_provider.dart';
+import '../../../../Core/constant/app_strings.dart';
+import 'widget/category_drawer_list_view.dart';
+import 'widget/drawer_header.dart';
 import 'package:provider/provider.dart';
 
 import '../../Home/viewmodel/home_provider.dart';

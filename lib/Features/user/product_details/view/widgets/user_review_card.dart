@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Features/user/product_details/viewmodel/details_provider.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../../viewmodel/details_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:readmore/readmore.dart';
 import '../../../../../../../../Core/constant/app_colors.dart';

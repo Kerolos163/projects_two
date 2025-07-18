@@ -1,7 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Features/user/Product/viewmodel/product_provider.dart';
+import '../../../Product/viewmodel/product_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../Core/Theme/app_provider.dart';

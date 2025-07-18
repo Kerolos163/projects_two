@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Core/api/api_state.dart';
-import 'package:projects_two/Core/models/recently_view_model.dart';
+import '../api/api_service.dart';
+import '../api/api_state.dart';
+import '../models/recently_view_model.dart';
 import '../../Features/user/Product/view/product_screen.dart';
 import '../../Features/Profile/view/profile_screen.dart';
 import '../../Features/user/Favorite/view/favorite_screen.dart';

@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/widgets/rating_bar_widget.dart';
+import '../../../../../Core/widgets/rating_bar_widget.dart';
 import 'package:toastification/toastification.dart';
 
 import '../../../../../Core/constant/app_strings.dart';

@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Core/api/api_state.dart';
+import '../../../../Core/api/api_service.dart';
+import '../../../../Core/api/api_state.dart';
 import '../../../../Core/Services/preferences_manager.dart';
 import '../../../../Core/api/api_end_points.dart';
 import '../../../../Core/models/user_model.dart';

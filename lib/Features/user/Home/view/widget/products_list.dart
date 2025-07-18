@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/Theme/app_provider.dart';
+import '../../../../../Core/Theme/app_provider.dart';
 import 'product_card.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 

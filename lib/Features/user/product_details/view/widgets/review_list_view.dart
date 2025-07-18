@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Features/user/product_details/view/widgets/user_review_card.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import 'user_review_card.dart';
 import '../../model/review_model.dart';
 import '../../viewmodel/details_provider.dart';
 

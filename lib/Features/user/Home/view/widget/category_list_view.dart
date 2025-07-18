@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/user/Home/data/category_data.dart';
-import 'package:projects_two/Features/user/Product/viewmodel/product_provider.dart';
+import '../../data/category_data.dart';
+import '../../../Product/viewmodel/product_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../../../Core/Theme/app_provider.dart';
 import 'category_item.dart';
