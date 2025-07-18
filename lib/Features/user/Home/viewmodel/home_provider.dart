@@ -7,7 +7,7 @@ import '../../../../Core/api/api_service.dart';
 import '../../../../Core/api/api_state.dart';
 import '../../../../Core/models/category_model.dart';
 import '../../../../Core/models/product_model.dart';
-import '../../Drawer/model/subcategory_model.dart';
+import '../model/subcategory_model.dart';
 
 class HomeProvider extends ChangeNotifier {
   ApiState state = ApiState.initial;

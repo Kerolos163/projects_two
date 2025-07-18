@@ -6,7 +6,7 @@ import 'package:provider/provider.dart';
 import '../../../../../Core/Theme/app_provider.dart';
 import '../../../../../Core/api/api_end_points.dart';
 import '../../../../../Core/models/category_model.dart';
-import '../../model/subcategory_model.dart';
+import '../../../Home/model/subcategory_model.dart';
 
 class CategoryDrawerItem extends StatelessWidget {
   const CategoryDrawerItem({
