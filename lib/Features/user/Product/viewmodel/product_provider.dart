@@ -76,6 +76,6 @@ class ProductProvider extends ChangeNotifier {
       if (item.subCategories.contains(subFilterId)) {
         subCategoryProducts.add(item);
       }
-    }u
+    }
   }
 }

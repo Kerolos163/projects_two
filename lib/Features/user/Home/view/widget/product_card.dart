@@ -49,9 +49,11 @@ class ProductCardHome extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    productModel.title,
-                    style: Theme.of(context).textTheme.titleMedium,
+                  FittedBox(
+                    child: Text(
+                      productModel.title,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
                   ),
                   SizedBox(height: 2),
                   Text(
