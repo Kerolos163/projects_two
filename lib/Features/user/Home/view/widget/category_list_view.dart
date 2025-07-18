@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:projects_two/Features/user/Home/data/category_data.dart';
 import 'package:projects_two/Features/user/Product/viewmodel/product_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../../../Core/Theme/app_provider.dart';
@@ -22,10 +23,9 @@ class CategoryListView extends StatelessWidget {
       enabled: items.isEmpty,
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
-        itemCount: items.length,
+        itemCount: items.isEmpty ? categories.length : items.length,
         itemBuilder: (context, index) {
-          final item = items[index];
-
+          final item = items.isEmpty ? categories[index] : items[index];
           return Consumer<ProductProvider>(
             builder: (context, productProvider, child) {
               return GestureDetector(

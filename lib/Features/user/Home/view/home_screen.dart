@@ -9,7 +9,6 @@ import '../viewmodel/home_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Core/Theme/app_provider.dart';
-import '../../../../Core/api/api_state.dart';
 import '../../../../Core/constant/app_colors.dart';
 import '../../../../Core/widgets/home_header.dart';
 
@@ -48,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
                     onAvatarTap: () => appProvider.changeIndex(index: 4),
                   ),
                 ),
-
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
                   child: Text(
@@ -70,9 +68,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           builder: (context, appProvider, child) {
                             return CategoryListView(
                               appProvider: appProvider,
-                              items: provider.state == ApiState.loading
-                                  ? []
-                                  : provider.categories,
+                              items: provider.categories,
                             );
                           },
                         ),
@@ -84,11 +80,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 appProvider.recentlyViewed.isEmpty
                     ? SizedBox()
                     : ProductsList(
-                      appProvider: appProvider,
-                      products: appProvider.recentlyViewed
-                          .map((e) => e.recentlyViewed)
-                          .toList(),
-                    ),
+                        appProvider: appProvider,
+                        products: appProvider.recentlyViewed
+                            .map((e) => e.recentlyViewed)
+                            .toList(),
+                      ),
                 const SizedBox(height: 20),
                 Consumer<HomeProvider>(
                   builder: (context, provider, child) {
