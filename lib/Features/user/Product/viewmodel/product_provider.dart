@@ -72,15 +72,10 @@ class ProductProvider extends ChangeNotifier {
   }
 
   void filterBySubCategory({required String subFilterId}) {
-    subCategoryProducts = [];
-    state = ApiState.loading;
-    notifyListeners();
     for (var item in displayedProducts) {
       if (item.subCategories.contains(subFilterId)) {
         subCategoryProducts.add(item);
       }
-    }
-    state = ApiState.success;
-    notifyListeners();
+    }u
   }
 }
