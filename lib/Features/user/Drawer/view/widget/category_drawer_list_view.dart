@@ -18,7 +18,8 @@ class CategoryDrawerListView extends StatelessWidget {
                 physics: const NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) => CategoryDrawerItem(
                   item: homeProvider.categories[index],
-                  subCategory: homeProvider.subCategory[index],
+                  subCategory: homeProvider
+                      .subCategoryMap[homeProvider.categories[index].id]!,
                 ),
                 itemCount: homeProvider.categories.length,
                 separatorBuilder: (context, index) => SizedBox(height: 8),

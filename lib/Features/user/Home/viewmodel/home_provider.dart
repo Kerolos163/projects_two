@@ -14,6 +14,7 @@ class HomeProvider extends ChangeNotifier {
   ApiService apiService = ApiService();
   List<CategoryModel> categories = [];
   List<ProductModel> products = [];
+  Map<String, List<SubcategoryModel>> subCategoryMap = {};
 
   Future<void> loadHomeData() async {
     log('loadHomeData');
@@ -22,6 +23,7 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> getCategories() async {
+    subCategoryMap = {};
     categories = [];
     state = ApiState.loading;
     notifyListeners();
@@ -29,9 +31,13 @@ class HomeProvider extends ChangeNotifier {
       final response = await apiService.get(ApiEndPoints.homeCategory);
       final jsonData = response.data["data"] as List;
       categories = jsonData.map((e) => CategoryModel.fromJson(e)).toList();
+      log('categories: ${categories.length}');
+
       for (var c in categories) {
-        getSubCategory(categoryId: c.id);
+        List<SubcategoryModel> sub = await getSubCategory(categoryId: c.id);
+        subCategoryMap[c.id] = sub;
       }
+
       state = ApiState.success;
     } catch (error) {
       state = ApiState.error;
@@ -57,25 +63,21 @@ class HomeProvider extends ChangeNotifier {
   }
 
   //! SubCategory
-    List<List<SubcategoryModel>> subCategory = [];
-
-  Future<void> getSubCategory({required String categoryId}) async {
-    state = ApiState.loading;
-    notifyListeners();
+  Future<List<SubcategoryModel>> getSubCategory({
+    required String categoryId,
+  }) async {
     try {
       final response = await apiService.get(
         ApiEndPoints.getSubCategory(categoryId: categoryId),
       );
       final jsonData = response.data["data"] as List;
-      subCategory.add(
-        jsonData.map((e) => SubcategoryModel.fromJson(e)).toList(),
-      );
-      log('subCategory: $subCategory');
-      state = ApiState.success;
+      List<SubcategoryModel> sub = jsonData
+          .map((e) => SubcategoryModel.fromJson(e))
+          .toList();
+      return sub;
     } catch (error) {
-      log('error: $error');
-      state = ApiState.error;
+      log('error: 🤙 $error');
+      return [];
     }
-    notifyListeners();
   }
 }

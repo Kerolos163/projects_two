@@ -22,14 +22,13 @@ class AppProvider extends ChangeNotifier {
   bool isDark = PreferencesManager.getBool(AppConstants.isDarkMood) ?? false;
 
   //!Navigate With Filter
-  String filter = "";
 
   // Navigation Management
   int currentIndex = 0;
   final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   List<Widget> get screens => [
     HomeScreen(),
-    ProductScreen(categoryName: filter),
+    ProductScreen(),
     CartScreen(),
     FavoriteScreen(),
     ProfileScreen(),
@@ -42,16 +41,8 @@ class AppProvider extends ChangeNotifier {
   }
 
   void changeIndex({required int index}) {
-    filter = "";
     if (index == currentIndex) return;
     currentIndex = index;
-    notifyListeners();
-  }
-
-  void changeIndexToProductWithFilter({required String filter}) {
-    this.filter = filter;
-    log('this.filter: ${this.filter}');
-    currentIndex = 1;
     notifyListeners();
   }
 
@@ -95,7 +86,7 @@ class AppProvider extends ChangeNotifier {
         .map((e) => RecentlyViewModel.fromJson(jsonDecode(e)))
         .where((e) => e.userId == getUser().id)
         .toList();
-    log('recentlyViewed : $recentlyViewed');
+    // log('recentlyViewed : $recentlyViewed');
     if (recentlyViewed.length > 10) {
       recentlyViewed = recentlyViewed.sublist(5);
     }

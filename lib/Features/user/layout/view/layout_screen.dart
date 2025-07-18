@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:projects_two/Features/user/Drawer/view/custom_drawer_widget.dart';
+import '../../../../Core/Services/service_locator.dart';
 import '../../../../Core/Theme/app_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../Product/viewmodel/product_provider.dart';
 import 'widget/custom_bottom_navigation_bar.dart';
 
 class LayoutScreen extends StatelessWidget {
@@ -12,11 +14,16 @@ class LayoutScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<AppProvider>(
       builder: (context, provider, child) {
-        return Scaffold(
-          key: provider.scaffoldKey,
-          drawer: CustomDrawer(),
-          body: provider.screens[provider.currentIndex],
-          bottomNavigationBar: CustomBottomNavigationBar(appProvider: provider),
+        return ChangeNotifierProvider(
+          create: (_) => getIt<ProductProvider>()..getProducts(),
+          builder: (context, child) => Scaffold(
+            key: provider.scaffoldKey,
+            drawer: CustomDrawer(),
+            body: provider.screens[provider.currentIndex],
+            bottomNavigationBar: CustomBottomNavigationBar(
+              appProvider: provider,
+            ),
+          ),
         );
       },
     );

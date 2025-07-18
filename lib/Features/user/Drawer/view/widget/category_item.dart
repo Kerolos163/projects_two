@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:projects_two/Features/user/Product/viewmodel/product_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../Core/Theme/app_provider.dart';
@@ -38,11 +39,19 @@ class CategoryDrawerItem extends StatelessWidget {
           .map(
             (e) => Consumer<AppProvider>(
               builder: (context, appProvider, child) {
-                return ListTile(
-                  title: Text(e.name),
-                  onTap: () {
-                    appProvider.changeIndex(index: 1);
-                    Navigator.pop(context);
+                return Consumer<ProductProvider>(
+                  builder: (context, productProvider, child) {
+                    return ListTile(
+                      title: Text(e.name),
+                      onTap: () {
+                        appProvider.changeIndex(index: 1);
+                        productProvider.getProducts(
+                          filter: item.name,
+                          subFilterId: e.id,
+                        );
+                        Navigator.pop(context);
+                      },
+                    );
                   },
                 );
               },

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:projects_two/Features/user/Product/viewmodel/product_provider.dart';
+import 'package:provider/provider.dart';
 import '../../../../../Core/Theme/app_provider.dart';
 import 'category_item.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -24,10 +26,16 @@ class CategoryListView extends StatelessWidget {
         itemBuilder: (context, index) {
           final item = items[index];
 
-          return GestureDetector(
-            onTap: () =>
-                appProvider.changeIndexToProductWithFilter(filter: item.name),
-            child: CategoryItem(islocal: items.isEmpty, item: item),
+          return Consumer<ProductProvider>(
+            builder: (context, productProvider, child) {
+              return GestureDetector(
+                onTap: () {
+                  appProvider.changeIndex(index: 1);
+                  productProvider.getProducts(filter: item.name);
+                },
+                child: CategoryItem(islocal: items.isEmpty, item: item),
+              );
+            },
           );
         },
         separatorBuilder: (context, index) => const SizedBox(width: 8),
