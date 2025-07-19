@@ -1,12 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import '../../../Product/viewmodel/product_provider.dart';
+import 'package:provider/provider.dart';
 
 import '../../../../../Core/Theme/app_provider.dart';
 import '../../../../../Core/constant/app_colors.dart';
 import '../../../../../Core/constant/app_strings.dart';
 import '../../../../../Core/constant/image.dart';
 import '../../../../../Core/widgets/svg_img.dart';
-
 
 class CustomBottomNavigationBar extends StatelessWidget {
   const CustomBottomNavigationBar({super.key, required this.appProvider});
@@ -16,7 +17,12 @@ class CustomBottomNavigationBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: appProvider.currentIndex,
-      onTap: (value) => appProvider.changeIndex(index: value),
+      onTap: (value) {
+        if (value == 1) {
+          Provider.of<ProductProvider>(context, listen: false).getProducts();
+        }
+        appProvider.changeIndex(index: value);
+      },
       items: [
         BottomNavigationBarItem(
           icon: SVGImage(

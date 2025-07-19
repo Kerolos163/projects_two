@@ -1,9 +1,11 @@
+
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:projects_two/Features/splashscreen/customSplahscreen.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
 
 import 'Core/Services/preferences_manager.dart';
@@ -16,6 +18,8 @@ import 'Core/utils/app_constants.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.init();
+  Stripe.publishableKey =
+      "pk_test_51OuEXgP5ftpLBbyFbwXGDOdzbsnclAxoJMoyjGNN5GkdH3pXXxcXYekPORCW1SDKEVU2jwi4HHW7M58eCs1hLimV00wM7aBL4a";
   await PreferencesManager.init();
   // PreferencesManager.clear(); //! for testing ☠️
   await ScreenUtil.ensureScreenSize();
@@ -66,3 +70,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
+
+

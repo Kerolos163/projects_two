@@ -28,10 +28,7 @@ class AppTextButton extends StatelessWidget {
           backgroundColor: backgroundColor,
           foregroundColor: textColor,
         ),
-        child: Text(
-          buttonText,
-          style: Theme.of(context).textTheme.labelMedium,
-        ),
+        child: Text(buttonText, style: Theme.of(context).textTheme.labelMedium),
       ),
     );
   }

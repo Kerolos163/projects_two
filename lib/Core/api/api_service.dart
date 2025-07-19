@@ -15,6 +15,7 @@ import 'status_code.dart';
 class ApiService {
   static final ApiService _singleton = ApiService._internal();
   final Dio _dio = Dio();
+  final Dio dio = Dio();
 
   factory ApiService() {
     return _singleton;
@@ -72,6 +73,23 @@ class ApiService {
     } on DioException catch (error) {
       throw _handleDioError(error);
     }
+  }
+
+  Future<Response> postStrip({
+    required body,
+    required String url,
+    required String token,
+    String? contentType,
+  }) async {
+    var response = await dio.post(
+      url,
+      data: body,
+      options: Options(
+        contentType: contentType,
+        headers: {'Authorization': "Bearer $token"},
+      ),
+    );
+    return response;
   }
 
   Future<Response> patch(
@@ -147,7 +165,7 @@ class ApiService {
       case DioExceptionType.badResponse:
         switch (error.response?.statusCode) {
           case StatusCode.badRequest:
-            throw BadRequestException(error.response?.data);
+            throw BadRequestException(error.response?.data["message"]);
           case StatusCode.unauthorized:
           case StatusCode.forbidden:
             throw UnauthorizedException(error.response?.data["message"]);

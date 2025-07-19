@@ -6,6 +6,7 @@ final class AppConstants {
   static const String isDarkMood = 'isDarkMood';
   static const String userInfo = 'userInfo';
   static const String firstTime = 'firstTime';
+  static const String recentlyViewed = 'recentlyViewed';
 
   //api
   static const String contentType = 'Content-Type';

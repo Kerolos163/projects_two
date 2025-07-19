@@ -1,3 +1,4 @@
+
 import '../../../../Core/constant/image.dart';
 import '../../../../Core/models/category_model.dart';
 import '../../../../Core/models/product_model.dart';
@@ -40,18 +41,18 @@ List<ProductModel> fakeProduct = [
     price: 1200,
     priceAfterDiscount: 1100,
     colors: ["Black", "Silver", "Gold"],
-    imageCover: "https://example.com/iphone15pro.jpg",
+    imageCover: "https://m.media-amazon.com/images/I/61ZO3NAONrL.jpg",
     images: [
       "https://example.com/iphone15pro_1.jpg",
       "https://example.com/iphone15pro_2.jpg",
     ],
-    category: Category(id: "cat1", name: "Electronics", categoryId: "cat1-id"),
+    category: CategoryModel(id: "cat1", name: "Electronics"),
     subCategories: ["smartphones", "apple"],
     ratingsAverage: "4.8",
     ratingsQuantity: 1500,
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
-    categorieModelId: "cat1-id",
+    // categorieModelId: "cat1-id",
   ),
   ProductModel(
     id: "2",
@@ -63,18 +64,18 @@ List<ProductModel> fakeProduct = [
     price: 200,
     priceAfterDiscount: 180,
     colors: ["Red", "White", "Black"],
-    imageCover: "https://example.com/nikeairmax.jpg",
+    imageCover: "https://m.media-amazon.com/images/I/61ZO3NAONrL.jpg",
     images: [
       "https://example.com/nikeairmax_1.jpg",
       "https://example.com/nikeairmax_2.jpg",
     ],
-    category: Category(id: "cat2", name: "Fashion", categoryId: "cat2-id"),
+    category: CategoryModel(id: "cat2", name: "Fashion"),
     subCategories: ["shoes", "sneakers"],
     ratingsAverage: "4.5",
     ratingsQuantity: 800,
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
-    categorieModelId: "cat2-id",
+    // categorieModelId: "cat2-id",
   ),
   ProductModel(
     id: "3",
@@ -86,17 +87,17 @@ List<ProductModel> fakeProduct = [
     price: 100,
     priceAfterDiscount: 90,
     colors: [],
-    imageCover: "https://example.com/harrypotter.jpg",
+    imageCover: "https://m.media-amazon.com/images/I/61ZO3NAONrL.jpg",
     images: [
       "https://example.com/harrypotter_1.jpg",
       "https://example.com/harrypotter_2.jpg",
     ],
-    category: Category(id: "cat3", name: "Books", categoryId: "cat3-id"),
+    category: CategoryModel(id: "cat3", name: "Books"),
     subCategories: ["novels", "fantasy"],
     ratingsAverage: "5.0",
     ratingsQuantity: 300,
     createdAt: DateTime.now(),
     updatedAt: DateTime.now(),
-    categorieModelId: "cat3-id",
+    // categorieModelId: "cat3-id",
   ),
 ];

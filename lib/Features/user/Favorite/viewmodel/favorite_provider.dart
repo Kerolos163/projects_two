@@ -2,9 +2,9 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Core/api/api_state.dart';
-import 'package:projects_two/Core/models/product_model.dart';
+import '../../../../Core/api/api_service.dart';
+import '../../../../Core/api/api_state.dart';
+import '../../../../Core/models/product_model.dart';
 
 import '../../../../Core/Services/preferences_manager.dart';
 import '../../../../Core/api/api_end_points.dart';
@@ -25,7 +25,9 @@ class FavoriteProvider extends ChangeNotifier {
     state = ApiState.loading;
     notifyListeners();
     try {
-      final response = await apiService.get(ApiEndPoints.userFavorites(id: localData.id));
+      final response = await apiService.get(
+        ApiEndPoints.userFavorites(id: localData.id),
+      );
       final jsonData = response.data["data"]["products"] as List;
       favoriteList = jsonData.map((e) => ProductModel.fromJson(e)).toList();
       state = ApiState.success;
@@ -36,7 +38,7 @@ class FavoriteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-    Future<void> removeToFavorite({required String productId}) async {
+  Future<void> removeToFavorite({required String productId}) async {
     state = ApiState.loading;
     notifyListeners();
     try {
