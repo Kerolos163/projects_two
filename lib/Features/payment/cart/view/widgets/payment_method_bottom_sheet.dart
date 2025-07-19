@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projects_two/Core/api/api_state.dart';
+import 'package:projects_two/Core/constant/payment_methods.dart';
 import 'package:projects_two/Features/payment/cart/data/model/payment_intent_input_model.dart';
 import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
 import 'package:projects_two/Features/payment/cart/logic/stripe_payment_provider.dart';
@@ -21,41 +22,67 @@ class PaymentMethodBottomSheet extends StatelessWidget {
         mainAxisSize: MainAxisSize.min,
         children: [
           const SizedBox(height: 16),
-          const PaymentMethods(),
+          PaymentMethods(
+            onChanged: (int selectedIndex) {
+              cartProvider.paymentMethodIndex = selectedIndex;
+              print(cartProvider.paymentMethodIndex);
+            },
+          ),
           const SizedBox(height: 32),
-          PaymentTextButton(
-            buttonText: stripeProvider.state == ApiState.loading
-                ? "Processing..."
-                : "Pay with Stripe",
-            onPressed: stripeProvider.state == ApiState.loading
-                ? null
-                : () async {
-                    final amount = (cartProvider.totalPrice * 100).toInt();
-                    final inputModel = PaymentIntentInputModel(
-                      amount: amount,
-                      currency: 'EGP',
-                    );
+          Consumer<CartProvider>(
+            builder: (context, cartProvider, _) {
+              return PaymentTextButton(
+                buttonText: stripeProvider.state == ApiState.loading
+                    ? "Processing..."
+                    : cartProvider.paymentMethodIndex == 0
+                    ? "Pay with card"
+                    : "Pay COD",
+                onPressed: stripeProvider.state == ApiState.loading
+                    ? null
+                    : () async {
+                        final amount = (cartProvider.totalPrice * 100).toInt();
+                        final inputModel = PaymentIntentInputModel(
+                          amount: amount,
+                          currency: 'EGP',
+                        );
 
-                    await stripeProvider.makePayment(inputModel);
+                        if (cartProvider.paymentMethodIndex == 0) {
+                          await stripeProvider.makePayment(inputModel);
 
-                    if (stripeProvider.state == ApiState.success) {
-                      await cartProvider.addNewOrder();
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Payment Successful')),
-                      );
-                      await cartProvider.clearCart();
-                    } else {
-                      Navigator.pop(context);
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(
-                            'Payment Failed: ${stripeProvider.error}',
-                          ),
-                        ),
-                      );
-                    }
-                  },
+                          if (stripeProvider.state == ApiState.success) {
+                            await cartProvider.addNewOrder(
+                              paymentMethod: PaymentMethodsType.card,
+                            );
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text('Payment Successful'),
+                              ),
+                            );
+                            await cartProvider.clearCart();
+                          } else {
+                            Navigator.pop(context);
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  'Payment Failed: ${stripeProvider.error}',
+                                ),
+                              ),
+                            );
+                          }
+                        } else {
+                          await cartProvider.addNewOrder(
+                            paymentMethod: PaymentMethodsType.cod,
+                          );
+                          Navigator.pop(context);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(content: Text('Payment Successful')),
+                          );
+                          await cartProvider.clearCart();
+                        }
+                      },
+              );
+            },
           ),
         ],
       ),

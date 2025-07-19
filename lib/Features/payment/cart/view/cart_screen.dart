@@ -165,7 +165,7 @@ class CartScreen extends StatelessWidget {
                                         ),
                                       );
                                     },
-                                    child: Text('Checkout with Stripe'),
+                                    child: Text('Payment'),
                                   ),
                                 ),
                               ),

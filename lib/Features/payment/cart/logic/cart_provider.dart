@@ -13,6 +13,15 @@ import '../../../../Core/api/api_state.dart';
 import '../../../../Core/models/product_model.dart';
 
 class CartProvider extends ChangeNotifier {
+  int _paymentMethodIndex = 0;
+
+  int get paymentMethodIndex => _paymentMethodIndex;
+
+  set paymentMethodIndex(int index) {
+    _paymentMethodIndex = index;
+    notifyListeners(); // 👈 without this, Consumer won't rebuild
+  }
+
   ApiState state = ApiState.initial;
   ApiService apiService = ApiService();
   String message = '';
@@ -94,7 +103,7 @@ class CartProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> addNewOrder() async {
+  Future<void> addNewOrder({required String paymentMethod}) async {
     state = ApiState.loading;
     notifyListeners();
 
@@ -108,7 +117,7 @@ class CartProvider extends ChangeNotifier {
         ApiEndPoints.orders,
         body: {
           "custId": localData.id,
-          "paymentMethod": "Card Payments",
+          "paymentMethod": paymentMethod,
           "products": products,
         },
       );
