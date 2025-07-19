@@ -110,9 +110,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: ProductContainer(
-                        btntext: "view all",
+                        btntext: AppStrings.viewAll.tr(),
                         colorr: AppColors.primary,
-                        textt: "Trending Products",
+                        textt: AppStrings.otherProducts.tr(),
                       ),
                     ),
                     const SizedBox(height: 20),
