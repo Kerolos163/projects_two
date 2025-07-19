@@ -147,7 +147,7 @@ class ApiService {
       case DioExceptionType.badResponse:
         switch (error.response?.statusCode) {
           case StatusCode.badRequest:
-            throw BadRequestException(error.response?.data);
+            throw BadRequestException(error.response?.data["message"]);
           case StatusCode.unauthorized:
           case StatusCode.forbidden:
             throw UnauthorizedException(error.response?.data["message"]);

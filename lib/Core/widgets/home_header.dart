@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/Theme/app_provider.dart';
+import '../Theme/app_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../api/api_end_points.dart';

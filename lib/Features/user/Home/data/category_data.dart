@@ -40,7 +40,7 @@ List<ProductModel> fakeProduct = [
     price: 1200,
     priceAfterDiscount: 1100,
     colors: ["Black", "Silver", "Gold"],
-    imageCover: "https://example.com/iphone15pro.jpg",
+    imageCover: "https://m.media-amazon.com/images/I/61ZO3NAONrL.jpg",
     images: [
       "https://example.com/iphone15pro_1.jpg",
       "https://example.com/iphone15pro_2.jpg",
@@ -63,7 +63,7 @@ List<ProductModel> fakeProduct = [
     price: 200,
     priceAfterDiscount: 180,
     colors: ["Red", "White", "Black"],
-    imageCover: "https://example.com/nikeairmax.jpg",
+    imageCover: "https://m.media-amazon.com/images/I/61ZO3NAONrL.jpg",
     images: [
       "https://example.com/nikeairmax_1.jpg",
       "https://example.com/nikeairmax_2.jpg",
@@ -86,7 +86,7 @@ List<ProductModel> fakeProduct = [
     price: 100,
     priceAfterDiscount: 90,
     colors: [],
-    imageCover: "https://example.com/harrypotter.jpg",
+    imageCover: "https://m.media-amazon.com/images/I/61ZO3NAONrL.jpg",
     images: [
       "https://example.com/harrypotter_1.jpg",
       "https://example.com/harrypotter_2.jpg",

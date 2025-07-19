@@ -166,5 +166,19 @@
   "firstName": "الاسم الاول",
   "lastName": "الاسم الاخير",
   "quantity :": "الكمية :",
-  "price :": "السعر :"
+  "price :": "السعر :",
+  "Product Details": "تفاصيل المنتج",
+  "Information": "المعلومات",
+  "Buy now": "اشترى الان",
+  "Add to cart": "اضافة الى السلة",
+  "Add Review": "اضافة مراجعة",
+  "Review": "مراجعة",
+  "Please enter review": "الرجاء إدخال المراجعة",
+  "show less": "إظهار أقل",
+  "show more": "إظهار المزيد",
+  "Are you sure you want to delete this item?": "هل تريد حذف هذا المنتج؟",
+  "Rating and reviews": "تقييم ومراجعات",
+  "Recently Viewed": "تمت مشاهدته مؤخرًا",
+  "Trending Products": "المنتجات الشائعة",
+  "bestSellers": "المنتجات المفضلة"
 }

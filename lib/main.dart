@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'Features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'Core/Services/preferences_manager.dart';
@@ -13,6 +12,7 @@ import 'Core/Theme/dark_theme.dart';
 import 'Core/Theme/ligth_theme.dart';
 import 'Core/utils/app_constants.dart';
 import 'Features/Auth/views/login_screen.dart';
+import 'Features/onboarding/presentation/views/onboarding_screen.dart';
 import 'Features/user/layout/view/layout_screen.dart';
 
 void main() async {

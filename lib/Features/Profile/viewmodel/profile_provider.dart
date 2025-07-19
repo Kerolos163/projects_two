@@ -7,12 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:mime/mime.dart';
+
+import '../../../Core/Services/preferences_manager.dart';
 import '../../../Core/api/api_end_points.dart';
 import '../../../Core/api/api_service.dart';
 import '../../../Core/api/api_state.dart';
 import '../../../Core/models/user_model.dart';
-
-import '../../../Core/Services/preferences_manager.dart';
 import '../../../Core/utils/app_constants.dart';
 import '../model/update_model.dart';
 
@@ -89,9 +89,6 @@ class ProfileProvider extends ChangeNotifier {
         ApiEndPoints.updateUserbyId(id: localData.id),
         body: updateModel.toJson(),
       );
-      if (image != null) {
-        uploadImage();
-      }
       getUserInfo();
       state = ApiState.success;
     } catch (error) {

@@ -179,6 +179,20 @@ class AppStrings {
   static const String camera = 'Camera';
   static const String quant = 'quantity :';
   static const String price2 = 'price :';
+  static const String productDetails = 'Product Details';
+  static const String information = 'Information';
+  static const String buyNow = 'Buy now';
+  static const String addToCart = 'Add to cart';
+  static const String addReview = 'Add Review';
+  static const String review = 'Review';
+  static const String  pleaseEnterReview = 'Please enter review';
+  static const String  showLess = 'show less';
+  static const String  showMore = 'show more';
+  static const String  areYouSure = 'Are you sure you want to delete this item?';
+  static const String  ratingAndReviews = 'Rating and reviews';
+  static const String  recentlyViewed = 'Recently Viewed';
+  static const String  trendingProduct = 'Trending Products';
+  static const String  bestSellers = 'bestSellers';
 
   static var coverImage = 'coverImage';
 

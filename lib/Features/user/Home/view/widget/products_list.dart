@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../../../../../Core/Theme/app_provider.dart';
 import 'product_card.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -11,7 +12,14 @@ import '../../data/category_data.dart';
 
 class ProductsList extends StatelessWidget {
   final List<ProductModel> products;
-  const ProductsList({super.key, required this.products});
+  final AppProvider appProvider;
+  final String title;
+  const ProductsList({
+    super.key,
+    required this.products,
+    required this.appProvider,
+    required this.title,
+  });
   @override
   Widget build(BuildContext context) {
     log("${products.isEmpty} 🫵");
@@ -21,30 +29,47 @@ class ProductsList extends StatelessWidget {
         enabled: products.isEmpty,
         child: Padding(
           padding: const EdgeInsets.only(left: 10),
-          child: GridView.builder(
-            scrollDirection: Axis.horizontal,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 1,
-              mainAxisSpacing: 8,
-              childAspectRatio: 1.4,
-            ),
-            itemCount: products.isEmpty ? fakeProduct.length : products.length,
-            itemBuilder: (context, index) {
-              return GestureDetector(
-                onTap: () => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        ProductDetails(product: products[index]),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                title,
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              SizedBox(height: 8),
+              Expanded(
+                child: GridView.builder(
+                  scrollDirection: Axis.horizontal,
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 1,
+                    mainAxisSpacing: 8,
+                    childAspectRatio: 1.4,
                   ),
+                  itemCount: products.isEmpty
+                      ? fakeProduct.length
+                      : products.length,
+                  itemBuilder: (context, index) {
+                    return GestureDetector(
+                      onTap: () {
+                        appProvider.addRecentlyViewed(product: products[index]);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ProductDetails(product: products[index]),
+                          ),
+                        );
+                      },
+                      child: ProductCardHome(
+                        productModel: products.isEmpty
+                            ? fakeProduct[index]
+                            : products[index],
+                      ),
+                    );
+                  },
                 ),
-                child: ProductCardHome(
-                  productModel: products.isEmpty
-                      ? fakeProduct[index]
-                      : products[index],
-                ),
-              );
-            },
+              ),
+            ],
           ),
         ),
       ),

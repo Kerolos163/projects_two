@@ -18,7 +18,7 @@ class ProductModel extends Equatable {
   final int ratingsQuantity;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final String categorieModelId;
+  final String? categorieModelId;
 
   const ProductModel({
     required this.id,
@@ -55,7 +55,7 @@ class ProductModel extends Equatable {
     images: List<dynamic>.from(json["images"].map((x) => x)),
     category: Category.fromJson(json["category"]),
     subCategories: List<String>.from(json["subCategories"].map((x) => x)),
-    ratingsAverage: json["ratingsAverage"],
+    ratingsAverage: json["ratingsAverage"] ?? "",
     ratingsQuantity: json["ratingsQuantity"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
@@ -109,7 +109,7 @@ class ProductModel extends Equatable {
 class Category extends Equatable {
   final String id;
   final String name;
-  final String categoryId;
+  final String? categoryId;
 
   const Category({
     required this.id,
