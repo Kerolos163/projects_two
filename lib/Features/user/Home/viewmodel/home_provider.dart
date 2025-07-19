@@ -23,6 +23,7 @@ class HomeProvider extends ChangeNotifier {
     await getCategories();
     await getProducts();
     await getTrendingProducts();
+    await getBestSellers();
   }
 
   Future<void> getCategories() async {
@@ -98,13 +99,14 @@ class HomeProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
+
   Future<void> getBestSellers() async {
     state = ApiState.loading;
     notifyListeners();
     try {
       final response = await apiService.get(ApiEndPoints.bestSellers);
       final jsonData = response.data["data"] as List;
-      trandingProducts = jsonData.map((e) => ProductModel.fromJson(e)).toList();
+      bestSellersProducts = jsonData.map((e) => ProductModel.fromJson(e)).toList();
       state = ApiState.success;
     } catch (error) {
       log('error: $error');

@@ -89,7 +89,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 20),
                 Consumer<HomeProvider>(
                   builder: (context, homeProvider, child) {
-                    return appProvider.recentlyViewed.isEmpty
+                    return homeProvider.trandingProducts.isEmpty
                         ? SizedBox()
                         : ProductsList(
                             title: AppStrings.trendingProduct.tr(),
@@ -101,7 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(height: 20),
                 Consumer<HomeProvider>(
                   builder: (context, homeProvider, child) {
-                    return appProvider.recentlyViewed.isEmpty
+                    return homeProvider.bestSellersProducts.isEmpty
                         ? SizedBox()
                         : ProductsList(
                             title: AppStrings.bestSellers.tr(),
