@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../Theme/app_provider.dart';
+import 'package:provider/provider.dart';
 
+import '../api/api_end_points.dart';
+import '../api/api_state.dart';
 import '../constant/app_colors.dart';
 import '../constant/image.dart';
 import 'search_text_field.dart';
 import 'svg_img.dart';
 
-class HomeHeader extends StatelessWidget {
+class HomeHeader extends StatefulWidget {
   const HomeHeader({
     super.key,
     required this.onMenuTap,
@@ -20,6 +24,19 @@ class HomeHeader extends StatelessWidget {
   final bool readOnly;
   final VoidCallback onMenuTap;
   final VoidCallback onAvatarTap;
+
+  @override
+  State<HomeHeader> createState() => _HomeHeaderState();
+}
+
+class _HomeHeaderState extends State<HomeHeader> {
+  @override
+  void initState() {
+    AppProvider appProvider = Provider.of<AppProvider>(context, listen: false);
+    Future.microtask(() => appProvider.getUserImage());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -35,7 +52,7 @@ class HomeHeader extends StatelessWidget {
                 shape: BoxShape.circle,
               ),
               child: GestureDetector(
-                onTap: onMenuTap,
+                onTap: widget.onMenuTap,
                 child: SVGImage(path: ImagePath.menuIcon),
               ),
             ),
@@ -55,18 +72,28 @@ class HomeHeader extends StatelessWidget {
               ],
             ),
             GestureDetector(
-              onTap: onAvatarTap,
-              child: CircleAvatar(
-                backgroundImage: AssetImage(ImagePath.avatar),
+              onTap: widget.onAvatarTap,
+              child: Consumer<AppProvider>(
+                builder: (context, appProvider, child) {
+                  return appProvider.state == ApiState.loading
+                      ? const CircularProgressIndicator()
+                      : CircleAvatar(
+                          backgroundImage: appProvider.image != null
+                              ? NetworkImage(
+                                  "${ApiEndPoints.baseUrl}uploads/${appProvider.image}",
+                                )
+                              : AssetImage(ImagePath.avatar),
+                        );
+                },
               ),
             ),
           ],
         ),
         const SizedBox(height: 16),
         SearchTextField(
-          onTap: onTap,
-          readOnly: readOnly,
-          onChanged: onChanged,
+          onTap: widget.onTap,
+          readOnly: widget.readOnly,
+          onChanged: widget.onChanged,
         ),
       ],
     );

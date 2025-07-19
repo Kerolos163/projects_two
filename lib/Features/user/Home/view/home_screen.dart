@@ -1,98 +1,137 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/Services/service_locator.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Features/user/Home/view/widget/category_list_view.dart';
-import 'package:projects_two/Features/user/Home/view/widget/container_products.dart';
-import 'package:projects_two/Features/user/Home/view/widget/products_list.dart';
-import 'package:projects_two/Features/user/Home/viewmodel/home_provider.dart';
+import '../../../../Core/constant/app_strings.dart';
+import 'widget/category_list_view.dart';
+import 'widget/container_products.dart';
+import 'widget/products_list.dart';
+import '../viewmodel/home_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../Core/Theme/app_provider.dart';
-import '../../../../Core/api/api_state.dart';
 import '../../../../Core/constant/app_colors.dart';
 import '../../../../Core/widgets/home_header.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => getIt<HomeProvider>()..loadHomeData(),
-      builder: (context, child) => Scaffold(
-        body: ListView(
-          children: [
-            Consumer<AppProvider>(
-              builder: (context, provider, child) {
-                return Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: HomeHeader(
-                    readOnly: true,
-                    onTap: () => provider.changeIndex(index: 1),
-                    onMenuTap: () =>
-                        provider.scaffoldKey.currentState?.openDrawer(),
-                    onAvatarTap: () => provider.changeIndex(index: 4),
-                  ),
-                );
-              },
-            ),
+  State<HomeScreen> createState() => _HomeScreenState();
+}
 
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: Text(
-                AppStrings.allFeatured.tr(),
-                style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                  color: AppColors.black,
-                  fontWeight: FontWeight.w600,
+class _HomeScreenState extends State<HomeScreen> {
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      Provider.of<AppProvider>(context, listen: false).getRecentlyViewed();
+    });
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Consumer<AppProvider>(
+      builder: (context, appProvider, child) {
+        return Consumer<HomeProvider>(
+          builder: (context, homeProvider, child) {
+            return Scaffold(
+              body: RefreshIndicator(
+                onRefresh: () => homeProvider.loadHomeData(),
+                child: ListView(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(20),
+                      child: HomeHeader(
+                        readOnly: true,
+                        onTap: () => appProvider.changeIndex(index: 1),
+                        onMenuTap: () =>
+                            appProvider.scaffoldKey.currentState?.openDrawer(),
+                        onAvatarTap: () => appProvider.changeIndex(index: 4),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: Text(
+                        AppStrings.allFeatured.tr(),
+                        style: Theme.of(context).textTheme.displayLarge
+                            ?.copyWith(
+                              color: AppColors.black,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
+                    ),
+                    const SizedBox(height: 10),
+                    SizedBox(
+                      height: 100,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 20),
+                        child: Consumer<AppProvider>(
+                          builder: (context, appProvider, child) {
+                            return CategoryListView(
+                              appProvider: appProvider,
+                              items: homeProvider.categories,
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    appProvider.recentlyViewed.isEmpty
+                        ? SizedBox()
+                        : ProductsList(
+                            title: AppStrings.recentlyViewed.tr(),
+                            appProvider: appProvider,
+                            products: appProvider.recentlyViewed
+                                .map((e) => e.recentlyViewed)
+                                .toList()
+                                .reversed
+                                .toList(),
+                          ),
+                    const SizedBox(height: 20),
+                    homeProvider.trandingProducts.isEmpty
+                        ? SizedBox()
+                        : ProductsList(
+                            title: AppStrings.trendingProduct.tr(),
+                            appProvider: appProvider,
+                            products: homeProvider.trandingProducts,
+                          ),
+                    const SizedBox(height: 20),
+                    homeProvider.bestSellersProducts.isEmpty
+                        ? SizedBox()
+                        : ProductsList(
+                            title: AppStrings.bestSellers.tr(),
+                            appProvider: appProvider,
+                            products: homeProvider.bestSellersProducts,
+                          ),
+                    const SizedBox(height: 20),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      child: ProductContainer(
+                        btntext: AppStrings.viewAll.tr(),
+                        colorr: AppColors.primary,
+                        textt: AppStrings.otherProducts.tr(),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    ProductsList(
+                      title: "",
+                      appProvider: appProvider,
+                      products: homeProvider.products.take(4).toList(),
+                    ),
+                    const SizedBox(height: 20),
+
+                    ProductsList(
+                      title: "",
+                      appProvider: appProvider,
+                      products: homeProvider.products.skip(3).toList(),
+                    ),
+                    const SizedBox(height: 20),
+                  ],
                 ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Consumer<HomeProvider>(
-              builder: (context, provider, child) {
-                return SizedBox(
-                  height: 100,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: CategoryListView(
-                      items: provider.state == ApiState.loading
-                          ? []
-                          : provider.categories,
-                    ),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            Consumer<HomeProvider>(
-              builder: (context, provider, child) {
-                return ProductsList(
-                  products: provider.products.take(4).toList(),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: ProductContainer(
-                btntext: "view all",
-                colorr: AppColors.primary,
-                textt: "Trending Products",
-              ),
-            ),
-            const SizedBox(height: 20),
-            Consumer<HomeProvider>(
-              builder: (context, provider, child) {
-                return ProductsList(
-                  products: provider.products.skip(3).toList(),
-                );
-              },
-            ),
-            const SizedBox(height: 20),
-          ],
-        ),
-      ),
+            );
+          },
+        );
+      },
     );
   }
 }

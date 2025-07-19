@@ -1,8 +1,14 @@
+import 'dart:convert';
+
 import 'package:device_preview/device_preview.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:projects_two/Core/models/user_model.dart';
+import 'package:projects_two/Core/utils/account_type.dart';
+import 'package:projects_two/Features/admin/dashboard_screen/view/dashboard_screen.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:projects_two/Features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -18,6 +24,8 @@ import 'Features/user/layout/view/layout_screen.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   ServiceLocator.init();
+  Stripe.publishableKey =
+      "pk_test_51OuEXgP5ftpLBbyFbwXGDOdzbsnclAxoJMoyjGNN5GkdH3pXXxcXYekPORCW1SDKEVU2jwi4HHW7M58eCs1hLimV00wM7aBL4a";
   await PreferencesManager.init();
   // PreferencesManager.clear(); //! for testing ☠️
   await ScreenUtil.ensureScreenSize();
@@ -79,10 +87,10 @@ Widget getStartScreen() {
   final String? userInfo = PreferencesManager.getString(AppConstants.userInfo);
   if (userInfo == null) return const LoginScreen();
   //todo check role
-  // final UserModel userModel = UserModel.fromJson(jsonDecode(userInfo));
-  // return userModel.role == AccountType.admin
-  //     ? DashboardScreen()
-  //     : LayoutScreen();
+  final UserModel userModel = UserModel.fromJson(jsonDecode(userInfo));
+  return userModel.role == AccountType.admin
+      ? DashboardScreen()
+      : LayoutScreen();
 
-  return LayoutScreen();
+  //return LayoutScreen();
 }

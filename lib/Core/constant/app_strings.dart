@@ -174,10 +174,31 @@ class AppStrings {
   static const String selectSubcategory = 'selectSubcategory';
   static const String allFeatured = 'All Featured';
   static const String showingResults = 'Showing results for:';
+  static const String chooseImage = 'Choose Image Source';
+  static const String gallery = 'Gallery';
+  static const String camera = 'Camera';
+  static const String quant = 'quantity :';
+  static const String price2 = 'price :';
+  static const String productDetails = 'Product Details';
+  static const String information = 'Information';
+  static const String buyNow = 'Buy now';
+  static const String addToCart = 'Add to cart';
+  static const String addReview = 'Add Review';
+  static const String review = 'Review';
+  static const String pleaseEnterReview = 'Please enter review';
+  static const String showLess = 'show less';
+  static const String showMore = 'show more';
+  static const String areYouSure = 'Are you sure you want to delete this item?';
+  static const String ratingAndReviews = 'Rating and reviews';
+  static const String recentlyViewed = 'Recently Viewed';
+  static const String trendingProduct = 'Trending Products';
+  static const String bestSellers = 'bestSellers';
+  static const String otherProducts = 'Other Products';
+  static const String viewAll = 'view all';
 
   static var coverImage = 'coverImage';
 
-  static var productAdd='productAdd';
+  static var productAdd = 'productAdd';
 
   static var unknownProduct = "unknownProduct";
 

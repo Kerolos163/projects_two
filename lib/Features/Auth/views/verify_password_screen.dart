@@ -1,6 +1,9 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:pinput/pinput.dart';
+import 'package:provider/provider.dart';
+
 import '../../../Core/Services/service_locator.dart';
 import '../../../Core/api/api_state.dart';
 import '../../../Core/constant/app_colors.dart';
@@ -8,8 +11,6 @@ import '../../../Core/constant/app_strings.dart';
 import '../../../Core/utils/custom_snak_bar.dart';
 import '../viewmodel/auth_provider.dart';
 import 'reset_password_screen.dart';
-import 'package:pinput/pinput.dart';
-import 'package:provider/provider.dart';
 
 class VerifyPasswordScreen extends StatefulWidget {
   const VerifyPasswordScreen({super.key, required this.email});

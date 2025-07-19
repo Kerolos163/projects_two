@@ -12,6 +12,7 @@ class ProductProvider extends ChangeNotifier {
   ApiService apiService = ApiService();
   List<ProductModel> displayedProducts = [];
   List<ProductModel> searchedProducts = [];
+  List<ProductModel> subCategoryProducts = [];
 
   String _filterName = "All Products";
 
@@ -22,17 +23,33 @@ class ProductProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> getProducts() async {
+  Future<void> getProducts({
+    String filter = "",
+    String subFilterId = "",
+  }) async {
+    if (filter != "") {
+      _filterName = filter;
+    } else {
+      _filterName = "All Products";
+    }
     displayedProducts = [];
+    subCategoryProducts = [];
     state = ApiState.loading;
     notifyListeners();
 
     try {
-      final response = await apiService.get(ApiEndPoints.homeProduct);
+      final response = await apiService.get(
+        "${ApiEndPoints.homeProduct}?keyword=$filter",
+      );
       final jsonData = response.data["data"] as List;
       displayedProducts = jsonData
           .map((e) => ProductModel.fromJson(e))
           .toList();
+
+      if (subFilterId != "") {
+        filterBySubCategory(subFilterId: subFilterId);
+      }
+
       state = ApiState.success;
     } catch (error) {
       log('error: $error');
@@ -52,5 +69,13 @@ class ProductProvider extends ChangeNotifier {
     }
     state = ApiState.success;
     notifyListeners();
+  }
+
+  void filterBySubCategory({required String subFilterId}) {
+    for (var item in displayedProducts) {
+      if (item.subCategories.contains(subFilterId)) {
+        subCategoryProducts.add(item);
+      }
+    }
   }
 }

@@ -1,18 +1,18 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/Services/service_locator.dart';
-import 'package:projects_two/Features/Auth/views/login_screen.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../core/widgets/app_text_button.dart';
+import '../../../../core/widgets/app_text_form_field.dart';
+import '../../../Core/Services/service_locator.dart';
 import '../../../Core/api/api_state.dart';
 import '../../../Core/constant/app_strings.dart';
 import '../../../Core/utils/custom_snak_bar.dart';
 import '../models/sign_up_param.dart';
 import '../viewmodel/auth_provider.dart';
+import 'login_screen.dart';
 import 'widget/app_dropdown_form_field.dart';
-import 'package:provider/provider.dart';
-
-import '../../../../core/widgets/app_text_button.dart';
-import '../../../../core/widgets/app_text_form_field.dart';
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({super.key});
