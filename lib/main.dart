@@ -3,7 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'Features/onboarding/presentation/views/onboarding_screen.dart';
+import 'package:projects_two/Features/splashscreen/customSplahscreen.dart';
 import 'package:provider/provider.dart';
 
 import 'Core/Services/preferences_manager.dart';
@@ -12,8 +12,6 @@ import 'Core/Theme/app_provider.dart';
 import 'Core/Theme/dark_theme.dart';
 import 'Core/Theme/ligth_theme.dart';
 import 'Core/utils/app_constants.dart';
-import 'Features/Auth/views/login_screen.dart';
-import 'Features/user/layout/view/layout_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -60,29 +58,11 @@ class MyApp extends StatelessWidget {
               themeMode: appProvider.isDark ? ThemeMode.dark : ThemeMode.light,
               theme: lightTheme,
               darkTheme: darkTheme,
-              home: getStartScreen(),
+              home: CustomSplashScreen(),
             );
           },
         ),
       ),
     );
   }
-}
-
-Widget getStartScreen() {
-  final bool? isFirstTime = PreferencesManager.getBool(AppConstants.firstTime);
-  if (isFirstTime == null) return const OnboardingScreen();
-
-  final String? token = PreferencesManager.getString(AppConstants.userTokenKey);
-  if (token == null) return const LoginScreen();
-
-  final String? userInfo = PreferencesManager.getString(AppConstants.userInfo);
-  if (userInfo == null) return const LoginScreen();
-  //todo check role
-  // final UserModel userModel = UserModel.fromJson(jsonDecode(userInfo));
-  // return userModel.role == AccountType.admin
-  //     ? DashboardScreen()
-  //     : LayoutScreen();
-
-  return LayoutScreen();
 }
