@@ -82,6 +82,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             appProvider: appProvider,
                             products: appProvider.recentlyViewed
                                 .map((e) => e.recentlyViewed)
+                                .toList()
+                                .reversed
                                 .toList(),
                           ),
                     const SizedBox(height: 20),
