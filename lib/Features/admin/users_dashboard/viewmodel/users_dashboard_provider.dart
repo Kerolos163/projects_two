@@ -13,28 +13,23 @@ class UserDashboardProvider extends ChangeNotifier {
     apiState = ApiState.loading;
     notifyListeners();
 
-   // try {
-      print("Fetching users...");
+   try {
+
       users.clear();
       users = await UserService.getAllUsers();
-      print("Users fetched successfully: ${users.length}");
-      // Debugging output to check the first user's name
       if (users.isNotEmpty) {
-        print("First user: ${users[0].fName} ${users[0].lName}");
       } else {
-        print("No users found");
       }
-      print(users[0].fName);
       if (users.isEmpty) {
         errorMessage = "No users found";
       } else {
         errorMessage = null;
       }
       apiState = ApiState.success;
-    // } catch (e) {
-    //   errorMessage = e.toString();
-    //   apiState = ApiState.error;
-    // }
+    } catch (e) {
+      errorMessage = e.toString();
+      apiState = ApiState.error;
+    }
 
     notifyListeners();
   }

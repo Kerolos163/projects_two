@@ -17,16 +17,7 @@ class ProductService {
     _dio.options.headers['Authorization'] =
         'Bearer ${PreferencesManager.getString(AppConstants.userTokenKey)}';
 
-    _dio.interceptors.add(
-      LogInterceptor(
-        request: true,
-        requestHeader: true,
-        requestBody: true,
-        responseHeader: false,
-        responseBody: true,
-        error: true,
-      ),
-    );
+  
   }
 
   Future<List<ProductModel>> getAllProducts() async {

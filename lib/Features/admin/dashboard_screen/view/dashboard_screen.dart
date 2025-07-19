@@ -2,6 +2,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:projects_two/Core/Services/service_locator.dart';
+import 'package:projects_two/Features/admin/analytics_dashboard/analytics_screen/view/analytics_screen.dart';
+import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
 import 'package:projects_two/Features/admin/categories_dashboard/display_categories/view/display_categories.dart';
 import 'package:projects_two/Features/admin/categories_dashboard/viewmodel/categories_dashboard_provider.dart';
 import 'package:projects_two/Features/admin/orders_dashboard/display_orders/view/display_orders_screen.dart';
@@ -12,7 +14,6 @@ import 'package:projects_two/Features/admin/users_dashboard/display_users/view/d
 import 'package:projects_two/Features/admin/users_dashboard/viewmodel/users_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../../Core/constant/image.dart';
-import '../../../profile/view/profile_screen.dart';
 import '../../../../Core/constant/app_colors.dart';
 import '../../../../Core/constant/app_strings.dart';
 
@@ -30,6 +31,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late final CategoriesDashboardProvider _categoriesProvider;
   late final OrdersDashboardProvider _ordersProvider;
   late final UserDashboardProvider _usersProvider;
+  late final AnalyticsDashboardProvider _analyticsProvider;
+
 
   @override
   void initState() {
@@ -38,6 +41,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
     _categoriesProvider = getIt<CategoriesDashboardProvider>()..fetchCategoriesAndSubcategories();
     _ordersProvider = getIt<OrdersDashboardProvider>()..fetchAllOrders();
     _usersProvider = getIt<UserDashboardProvider>()..fetchUsers();
+    _analyticsProvider = getIt<AnalyticsDashboardProvider>();
   }
 
   @override
@@ -56,6 +60,10 @@ class _DashboardScreenState extends State<DashboardScreen> {
         index: _currentIndex,
         children: [
           ChangeNotifierProvider.value(
+            value: _analyticsProvider,
+            child: const AnalyticsScreen(),
+          ),
+          ChangeNotifierProvider.value(
             value: _productsProvider,
             child: const DashboardDisplayProductsScreen(),
           ),
@@ -71,7 +79,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             value: _usersProvider,
             child: const DashboardDisplayUsersScreen(),
           ),
-          const ProfileScreen(),
+           Container(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -81,11 +89,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
         type: BottomNavigationBarType.fixed,
         onTap: (index) => setState(() => _currentIndex = index),
         items: [
+            BottomNavigationBarItem(
+            icon: const Icon(Icons.analytics),
+            label:"Analytics",
+          ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
               ImagePath.products,
               colorFilter: ColorFilter.mode(
-                _currentIndex == 0 ? AppColors.primary : AppColors.black,
+                _currentIndex == 1 ? AppColors.primary : AppColors.black,
                 BlendMode.srcIn,
               ),
               width: 24,
@@ -101,7 +113,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
             icon: SvgPicture.asset(
               ImagePath.orders,
               colorFilter: ColorFilter.mode(
-                _currentIndex == 2 ? AppColors.primary : AppColors.black,
+                _currentIndex == 3 ? AppColors.primary : AppColors.black,
                 BlendMode.srcIn,
               ),
               width: 24,

@@ -51,8 +51,6 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
     selectedSubCategoryId = widget.product.subCategories.isNotEmpty == true
         ? widget.product.subCategories.first
         : null;
-
-
   }
 
   @override
@@ -65,88 +63,87 @@ class _ProductDetailsFormState extends State<ProductDetailsForm> {
     super.dispose();
   }
 
-Future<void> _submit(ProductsDashboardProvider provider) async {
-  if (!_formKey.currentState!.validate()) return;
+  Future<void> _submit(ProductsDashboardProvider provider) async {
+    if (!_formKey.currentState!.validate()) return;
 
-  setState(() => _isLoading = true);
-
-  try {
-    await provider.updateProduct(
-      id: widget.product.id,
-      title: titleCtrl.text.trim(),
-      description: descCtrl.text.trim(),
-      quantity: int.parse(qtyCtrl.text.trim()),
-      price: double.parse(priceCtrl.text.trim()),
-      priceAfterDiscount: priceAfterCtrl.text.isNotEmpty
-          ? double.parse(priceAfterCtrl.text.trim())
-          : null,
-      categoryId: selectedCategoryId!,
-      subCategoryIds: selectedSubCategoryId != null
-          ? [selectedSubCategoryId!]
-          : null,
-      imageCover: selectedImages.isNotEmpty ? selectedImages.first : null,
-      images:
-          selectedImages.length > 1 ? selectedImages.sublist(1) : null,
-    );
-
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text(AppStrings.productUpdated.tr())),
-      );
-      Navigator.pop(context, true);
-    }
-  } catch (e) {
-    if (mounted) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('${AppStrings.error.tr()}: $e')),
-      );
-    }
-  } finally {
-    if (mounted) setState(() => _isLoading = false);
-  }
-}
-
-Future<void> _confirmDelete(ProductsDashboardProvider provider) async {
-  final confirmed = await showDialog<bool>(
-    context: context,
-    builder: (context) => AlertDialog(
-      title: Text(AppStrings.confirmDelete.tr()),
-      content: Text(AppStrings.deleteWarning.tr()),
-      actions: [
-        TextButton(
-          onPressed: () => Navigator.pop(context, false),
-          child: Text(AppStrings.cancel.tr()),
-        ),
-        ElevatedButton(
-          style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-          onPressed: () => Navigator.pop(context, true),
-          child: Text(AppStrings.delete.tr()),
-        ),
-      ],
-    ),
-  );
-
-  if (confirmed == true) {
     setState(() => _isLoading = true);
+
     try {
-      await provider.deleteProduct(widget.product.id);
+      await provider.updateProduct(
+        id: widget.product.id,
+        title: titleCtrl.text.trim(),
+        description: descCtrl.text.trim(),
+        quantity: int.parse(qtyCtrl.text.trim()),
+        price: double.parse(priceCtrl.text.trim()),
+        priceAfterDiscount: priceAfterCtrl.text.isNotEmpty
+            ? double.parse(priceAfterCtrl.text.trim())
+            : null,
+        categoryId: selectedCategoryId!,
+        subCategoryIds: selectedSubCategoryId != null
+            ? [selectedSubCategoryId!]
+            : null,
+        imageCover: selectedImages.isNotEmpty ? selectedImages.first : null,
+        images: selectedImages.length > 1 ? selectedImages.sublist(1) : null,
+      );
+
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text(AppStrings.productDeleted.tr())),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text(AppStrings.productUpdated.tr())));
         Navigator.pop(context, true);
       }
     } catch (e) {
       if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('${AppStrings.error.tr()}: $e')),
-        );
+        ScaffoldMessenger.of(
+          context,
+        ).showSnackBar(SnackBar(content: Text('${AppStrings.error.tr()}: $e')));
       }
     } finally {
       if (mounted) setState(() => _isLoading = false);
     }
   }
-}
+
+  Future<void> _confirmDelete(ProductsDashboardProvider provider) async {
+    final confirmed = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        title: Text(AppStrings.confirmDelete.tr()),
+        content: Text(AppStrings.deleteWarning.tr()),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child: Text(AppStrings.cancel.tr()),
+          ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
+            onPressed: () => Navigator.pop(context, true),
+            child: Text(AppStrings.delete.tr()),
+          ),
+        ],
+      ),
+    );
+
+    if (confirmed == true) {
+      setState(() => _isLoading = true);
+      try {
+        await provider.deleteProduct(widget.product.id);
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(AppStrings.productDeleted.tr())),
+          );
+          Navigator.pop(context, true);
+        }
+      } catch (e) {
+        if (mounted) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('${AppStrings.error.tr()}: $e')),
+          );
+        }
+      } finally {
+        if (mounted) setState(() => _isLoading = false);
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -173,12 +170,41 @@ Future<void> _confirmDelete(ProductsDashboardProvider provider) async {
                 const SizedBox(height: 12),
                 _priceFields(),
                 const SizedBox(height: 12),
-                CustomLabel(text: AppStrings.quantity.tr()),
-                CustomTextfield(
-                  controller: qtyCtrl,
-                  hint: AppStrings.enterQuantity.tr(),
-                  type: TextInputType.number,
+                Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomLabel(text: AppStrings.quantity.tr()),
+                          CustomTextfield(
+                            controller: qtyCtrl,
+                            hint: AppStrings.enterQuantity.tr(),
+                            type: TextInputType.number,
+                          ),
+                        ],
+                      ),
+                    ),
+                    const SizedBox(width: 12),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          CustomLabel(text: "Sold Quantity".tr()),
+                          CustomTextfield(
+                            enabled: false,
+                            controller: TextEditingController(
+                              text: widget.product.sold.toString(),
+                            ),
+                            hint: widget.product.sold.toString(),
+                            type: TextInputType.number,
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
                 ),
+
                 const SizedBox(height: 12),
                 ProductCategoryDropdowns(
                   initialCategoryId: selectedCategoryId,

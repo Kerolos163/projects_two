@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
 import 'package:projects_two/Features/admin/categories_dashboard/viewmodel/categories_dashboard_provider.dart';
 import 'package:projects_two/Features/admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
 import 'package:projects_two/Features/admin/products_dashboard/viewmodel/products_dashboard_provider.dart';
@@ -28,6 +29,8 @@ class ServiceLocator {
     getIt.registerLazySingleton<CategoriesDashboardProvider>(() => CategoriesDashboardProvider());
     getIt.registerLazySingleton<OrdersDashboardProvider>(() => OrdersDashboardProvider());
     getIt.registerLazySingleton<UserDashboardProvider>(() => UserDashboardProvider());
+    getIt.registerLazySingleton<AnalyticsDashboardProvider>(() => AnalyticsDashboardProvider());
+
 
 
 

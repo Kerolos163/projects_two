@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart';
+import 'package:projects_two/Core/models/category_model.dart';
 
 class ProductModel extends Equatable {
   final String id;
@@ -12,13 +13,13 @@ class ProductModel extends Equatable {
   final List<dynamic> colors;
   final String imageCover;
   final List<dynamic> images;
-  final Category category;
+  final CategoryModel category;
   final List<String> subCategories;
   final String ratingsAverage;
   final int ratingsQuantity;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final String categorieModelId;
+  // final String categorieModelId;
 
   const ProductModel({
     required this.id,
@@ -38,7 +39,7 @@ class ProductModel extends Equatable {
     required this.ratingsQuantity,
     required this.createdAt,
     required this.updatedAt,
-    required this.categorieModelId,
+    // required this.categorieModelId,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -53,14 +54,15 @@ class ProductModel extends Equatable {
     colors: List<dynamic>.from(json["colors"].map((x) => x)),
     imageCover: json["imageCover"],
     images: List<dynamic>.from(json["images"].map((x) => x)),
-    category: Category.fromJson(json["category"]),
+    category: CategoryModel.fromJson(json["category"]),
     subCategories: List<String>.from(json["subCategories"].map((x) => x)),
-    ratingsAverage: json["ratingsAverage"],
-    ratingsQuantity: json["ratingsQuantity"],
+    ratingsAverage: json["ratingsAverage"]?.toString() ?? '0',
+    ratingsQuantity: json["ratingsQuantity"]?? 0,
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
-    categorieModelId: json["id"],
+    // categorieModelId: json["id"],
   );
+
 
   Map<String, dynamic> toJson() => {
     "_id": id,
@@ -80,7 +82,7 @@ class ProductModel extends Equatable {
     "ratingsQuantity": ratingsQuantity,
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
-    "id": categorieModelId,
+    // "id": categorieModelId,
   };
 
   @override
@@ -102,26 +104,26 @@ class ProductModel extends Equatable {
     ratingsQuantity,
     createdAt,
     updatedAt,
-    categorieModelId,
+    // categorieModelId,
   ];
 }
 
-class Category extends Equatable {
-  final String id;
-  final String name;
-  final String categoryId;
+// class Category extends Equatable {
+//   final String id;
+//   final String name;
+//   final String categoryId;
 
-  const Category({
-    required this.id,
-    required this.name,
-    required this.categoryId,
-  });
+//   const Category({
+//     required this.id,
+//     required this.name,
+//     required this.categoryId,
+//   });
 
-  factory Category.fromJson(Map<String, dynamic> json) =>
-      Category(id: json["_id"], name: json["name"], categoryId: json["id"]);
+//   factory Category.fromJson(Map<String, dynamic> json) =>
+//       Category(id: json["_id"], name: json["name"]);
 
-  Map<String, dynamic> toJson() => {"_id": id, "name": name, "id": categoryId};
+//   Map<String, dynamic> toJson() => {"_id": id, "name": name, "id": categoryId};
 
-  @override
-  List<Object?> get props => [id, name, categoryId];
-}
+//   @override
+//   List<Object?> get props => [id, name, categoryId];
+// }

@@ -73,7 +73,7 @@ class ProductItem extends StatelessWidget {
                 Row(
                   children: [
                     Text(
-                      '\$${productModel.price.toStringAsFixed(2)}',
+                      '\$${productModel.price}',
                       style: Theme.of(
                         context,
                       ).textTheme.labelMedium?.copyWith(height: 2),
@@ -81,7 +81,7 @@ class ProductItem extends StatelessWidget {
                     ...[
                       SizedBox(width: 8.w),
                       Text(
-                        '\$${productModel.priceAfterDiscount.toStringAsFixed(2)}',
+                        '\$${productModel.priceAfterDiscount}',
                         style: Theme.of(context).textTheme.labelMedium
                             ?.copyWith(
                               height: 2,

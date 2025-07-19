@@ -33,15 +33,15 @@ class ApiService {
       'Authorization': 'Bearer $token',
     };
     _dio.interceptors.add(DioInterceptor());
-    _dio.interceptors.add(
-      PrettyDioLogger(
-        requestHeader: true,
-        requestBody: true,
-        responseBody: true,
-        responseHeader: false,
-        compact: false,
-      ),
-    );
+    // _dio.interceptors.add(
+    //   PrettyDioLogger(
+    //     requestHeader: true,
+    //     requestBody: true,
+    //     responseBody: true,
+    //     responseHeader: false,
+    //     compact: false,
+    //   ),
+    // );
   }
 
   Future<Response> get(
