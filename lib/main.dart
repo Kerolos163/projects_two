@@ -10,7 +10,6 @@ import 'package:projects_two/Core/utils/account_type.dart';
 import 'package:projects_two/Features/admin/dashboard_screen/view/dashboard_screen.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:projects_two/Features/onboarding/presentation/views/onboarding_screen.dart';
-import 'Features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:provider/provider.dart';
 
 import 'Core/Services/preferences_manager.dart';
@@ -28,7 +27,7 @@ void main() async {
   Stripe.publishableKey =
       "pk_test_51OuEXgP5ftpLBbyFbwXGDOdzbsnclAxoJMoyjGNN5GkdH3pXXxcXYekPORCW1SDKEVU2jwi4HHW7M58eCs1hLimV00wM7aBL4a";
   await PreferencesManager.init();
- // PreferencesManager.clear(); //! for testing ☠️
+  // PreferencesManager.clear(); //! for testing ☠️
   await ScreenUtil.ensureScreenSize();
   await EasyLocalization.ensureInitialized();
   runApp(

@@ -7,7 +7,6 @@ import '../../../../Core/constant/app_strings.dart';
 import 'widgets/actions_row.dart';
 import 'widgets/add_review_bottom_sheet.dart';
 import 'widgets/pricing_info.dart';
-import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../../Core/Services/service_locator.dart';
 import '../../../../Core/api/api_state.dart';

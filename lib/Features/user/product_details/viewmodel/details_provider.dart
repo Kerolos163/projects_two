@@ -4,8 +4,6 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../../../../Core/api/api_service.dart';
 import '../../../../Core/api/api_state.dart';
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Core/api/api_state.dart';
 import 'package:projects_two/Core/models/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
