@@ -4,6 +4,8 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:projects_two/Features/admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
+import 'package:projects_two/Features/user/UserOrders/UserOrderList/view/user_orders_list_screen.dart';
 import '../../../Core/Theme/app_provider.dart';
 import '../../../Core/Services/service_locator.dart';
 import '../../../Core/api/api_end_points.dart';
@@ -260,6 +262,41 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                               ),
+                        SizedBox(height: 14),
+
+                        ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                          ),
+                          onPressed: () {
+                            
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => ChangeNotifierProvider.value(
+                                  value: getIt<OrdersDashboardProvider>(),
+                                  child: const UserOrdersListScreen(),
+                                ),
+                              ),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.shopping_bag,
+                            color: AppColors.white,
+                          ),
+                          label: Text(
+                            "My orders".tr(),
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                        ),
+
                         SizedBox(height: 14),
                       ],
                     ),

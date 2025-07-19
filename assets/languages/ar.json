@@ -180,5 +180,11 @@
   "Rating and reviews": "تقييم ومراجعات",
   "Recently Viewed": "تمت مشاهدته مؤخرًا",
   "Trending Products": "المنتجات الشائعة",
-  "bestSellers": "المنتجات المفضلة"
+  "bestSellers": "المنتجات المفضلة",
+  "newArrivals": "المنتجات الجديدة",
+  "My Orders": "طلباتي",
+  "returnOrder": "ارجاع الطلب",
+  "cancelOrder": "الغاء الطلب",
+  "returnInitiated": "بدأت عملية الإرجاع",
+  "orderCancelled": "تم إلغاء الطلب"
 }

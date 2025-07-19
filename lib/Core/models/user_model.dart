@@ -61,6 +61,7 @@ Map<String, dynamic> toJsonForUpdate() => {
   'lastName': lName,
   'address': address,
   'role': role,
+  'email': email,
 };
 
   @override

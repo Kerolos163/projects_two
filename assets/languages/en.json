@@ -195,5 +195,9 @@
   "Rating and reviews": "Rating and reviews",
   "Recently Viewed": "Recently Viewed",
   "Trending Products": "Trending Products",
-  "bestSellers": "bestSellers"
+  "bestSellers": "bestSellers",
+  "returnOrder": "Return Order",
+  "cancelOrder": "Cancel Order",
+  "returnInitiated": "Return request has been initiated.",
+  "orderCancelled": "Order has been cancelled."
 }
