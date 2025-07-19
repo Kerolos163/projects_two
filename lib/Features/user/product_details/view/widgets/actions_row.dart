@@ -5,15 +5,15 @@ import '../../../../../Core/constant/app_strings.dart';
 import '../../../../../Core/constant/app_colors.dart';
 
 class ActionsRow extends StatelessWidget {
-  const ActionsRow({super.key});
+  Future<void> Function()? addToCartMethod;
+  ActionsRow({super.key, required Future<void> Function()? addToCartMethod});
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         ElevatedButton.icon(
-          onPressed: () {
-          },
+          onPressed: addToCartMethod,
           icon: Icon(Icons.shopping_cart),
           label: Text(
             AppStrings.addToCart.tr(),
