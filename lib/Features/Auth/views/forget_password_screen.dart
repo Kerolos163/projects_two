@@ -79,8 +79,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                                   email: emailController.text.trim(),
                                 );
                                 if (context.mounted) {
-                                  if (authProvider.state ==
-                                      ApiState.success) {
+                                  if (authProvider.state == ApiState.success) {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(

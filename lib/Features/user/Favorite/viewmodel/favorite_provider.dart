@@ -25,7 +25,9 @@ class FavoriteProvider extends ChangeNotifier {
     state = ApiState.loading;
     notifyListeners();
     try {
-      final response = await apiService.get(ApiEndPoints.userFavorites(id: localData.id));
+      final response = await apiService.get(
+        ApiEndPoints.userFavorites(id: localData.id),
+      );
       final jsonData = response.data["data"]["products"] as List;
       favoriteList = jsonData.map((e) => ProductModel.fromJson(e)).toList();
       state = ApiState.success;
@@ -36,7 +38,7 @@ class FavoriteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-    Future<void> removeToFavorite({required String productId}) async {
+  Future<void> removeToFavorite({required String productId}) async {
     state = ApiState.loading;
     notifyListeners();
     try {

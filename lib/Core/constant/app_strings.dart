@@ -196,7 +196,7 @@ class AppStrings {
 
   static var coverImage = 'coverImage';
 
-  static var productAdd='productAdd';
+  static var productAdd = 'productAdd';
 
   static var unknownProduct = "unknownProduct";
 
