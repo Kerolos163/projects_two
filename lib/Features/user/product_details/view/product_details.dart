@@ -55,12 +55,35 @@ class ProductDetails extends StatelessWidget {
                       title: Text(AppStrings.productDetails.tr()),
                       actions: [
                         IconButton(
-                          onPressed: () => detailsProvider.changeFavorite(
-                            productId: product.id,
-                          ),
+                          onPressed: () async {
+                            final isAdded = await detailsProvider
+                                .changeFavorite(productId: product.id);
+                              if (!context.mounted) return;
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text(
+                                  isAdded
+                                      ? 'Added to favorites.'
+                                      : 'Removed from favorites.',
+                                ),
+                                backgroundColor: isAdded
+                                    ? Colors.green
+                                    : Colors.red,
+                                duration: const Duration(seconds: 2),
+                                behavior: SnackBarBehavior.floating,
+                                margin: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                  vertical: 10,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
+                            );
+                          },
                           icon: detailsProvider.isFavorite
-                              ? Icon(Icons.favorite, color: Colors.red)
-                              : Icon(Icons.favorite_border),
+                              ? const Icon(Icons.favorite, color: Colors.red)
+                              : const Icon(Icons.favorite_border),
                         ),
                         SizedBox(width: 10),
                         Container(
