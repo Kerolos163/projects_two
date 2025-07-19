@@ -11,7 +11,6 @@ class UserService {
     try {
       final response = await _apiService.get(_baseUrl);
       final List data = response.data['data']['users'];
-      print("Data fetched: $data");
       return data.map((e) => UserModel.fromJson2(e)).toList();
     } catch (e) {
       throw Exception('Failed to fetch users: $e');

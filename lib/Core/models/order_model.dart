@@ -61,19 +61,23 @@ class OrderModel {
 
 class OrderProduct {
   final String pId;
-  ProductModel? product;
   final int quantity;
+  final String returnStatus;
+  ProductModel? product; 
 
   OrderProduct({
     required this.pId,
     required this.quantity,
+    this.returnStatus = 'none',
     this.product,
   });
 
   factory OrderProduct.fromJson(Map<String, dynamic> json) {
     return OrderProduct(
-      pId: json['pId'],
+      pId: json['pId'] is Map ? json['pId']['_id'] : json['pId'],
       quantity: json['quantity'],
+      returnStatus: json['returnStatus'] ?? 'none',
+      product: json['pId'] is Map ? ProductModel.fromJson(json['pId']) : null,
     );
   }
 
@@ -81,6 +85,7 @@ class OrderProduct {
     return {
       'pId': pId,
       'quantity': quantity,
+      'returnStatus': returnStatus,
     };
   }
 }
