@@ -63,7 +63,6 @@ class ProductModel extends Equatable {
     // categorieModelId: json["id"],
   );
 
-
   Map<String, dynamic> toJson() => {
     "_id": id,
     "title": title,
@@ -119,7 +118,6 @@ class ProductModel extends Equatable {
     List<dynamic>? colors,
     String? imageCover,
     List<dynamic>? images,
-    Category? category,
     List<String>? subCategories,
     String? ratingsAverage,
     int? ratingsQuantity,
@@ -139,33 +137,12 @@ class ProductModel extends Equatable {
       colors: colors ?? this.colors,
       imageCover: imageCover ?? this.imageCover,
       images: images ?? this.images,
-      category: category ?? this.category,
       subCategories: subCategories ?? this.subCategories,
       ratingsAverage: ratingsAverage ?? this.ratingsAverage,
       ratingsQuantity: ratingsQuantity ?? this.ratingsQuantity,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
-      categorieModelId: categorieModelId ?? this.categorieModelId,
+      category: category,
     );
   }
 }
-
-// class Category extends Equatable {
-//   final String id;
-//   final String name;
-//   final String categoryId;
-
-//   const Category({
-//     required this.id,
-//     required this.name,
-//     required this.categoryId,
-//   });
-
-//   factory Category.fromJson(Map<String, dynamic> json) =>
-//       Category(id: json["_id"], name: json["name"]);
-
-//   Map<String, dynamic> toJson() => {"_id": id, "name": name, "id": categoryId};
-
-//   @override
-//   List<Object?> get props => [id, name, categoryId];
-// }
