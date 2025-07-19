@@ -101,12 +101,6 @@ class _HomeScreenState extends State<HomeScreen> {
                             products: homeProvider.bestSellersProducts,
                           ),
                     const SizedBox(height: 20),
-                    ProductsList(
-                      title: "",
-                      appProvider: appProvider,
-                      products: homeProvider.products.take(4).toList(),
-                    ),
-                    const SizedBox(height: 20),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
                       child: ProductContainer(
@@ -116,6 +110,13 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ),
                     const SizedBox(height: 20),
+                    ProductsList(
+                      title: "",
+                      appProvider: appProvider,
+                      products: homeProvider.products.take(4).toList(),
+                    ),
+                    const SizedBox(height: 20),
+
                     ProductsList(
                       title: "",
                       appProvider: appProvider,
