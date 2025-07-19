@@ -42,7 +42,7 @@ final class UnProcessableEntityException extends ServerException {
 
 final class InternalServerErrorException extends ServerException {
   const InternalServerErrorException([message])
-      : super('Internal Server Error');
+    : super('Internal Server Error');
 }
 
 final class NoInternetException extends ServerException {

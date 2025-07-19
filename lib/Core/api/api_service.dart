@@ -15,6 +15,7 @@ import 'status_code.dart';
 class ApiService {
   static final ApiService _singleton = ApiService._internal();
   final Dio _dio = Dio();
+  final Dio dio = Dio();
 
   factory ApiService() {
     return _singleton;
@@ -33,15 +34,15 @@ class ApiService {
       'Authorization': 'Bearer $token',
     };
     _dio.interceptors.add(DioInterceptor());
-    // _dio.interceptors.add(
-    //   PrettyDioLogger(
-    //     requestHeader: true,
-    //     requestBody: true,
-    //     responseBody: true,
-    //     responseHeader: false,
-    //     compact: false,
-    //   ),
-    // );
+    _dio.interceptors.add(
+      PrettyDioLogger(
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: false,
+        compact: false,
+      ),
+    );
   }
 
   Future<Response> get(
@@ -72,6 +73,23 @@ class ApiService {
     } on DioException catch (error) {
       throw _handleDioError(error);
     }
+  }
+
+  Future<Response> postStrip({
+    required body,
+    required String url,
+    required String token,
+    String? contentType,
+  }) async {
+    var response = await dio.post(
+      url,
+      data: body,
+      options: Options(
+        contentType: contentType,
+        headers: {'Authorization': "Bearer $token"},
+      ),
+    );
+    return response;
   }
 
   Future<Response> patch(

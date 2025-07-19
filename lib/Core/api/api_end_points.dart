@@ -12,6 +12,7 @@ final class ApiEndPoints {
   static const String trendingProduct = "api/analytics/trending";
   static const String bestSellers = "api/analytics/best-sellers";
 
+  static const String orders = "api/orders";
   static String getUserbyId({required String id}) => "api/users/$id";
   static String updateUserbyId({required String id}) => "api/users/$id";
   static String uploadImage({required String id}) =>

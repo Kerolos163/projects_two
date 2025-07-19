@@ -63,7 +63,6 @@ class ProductModel extends Equatable {
     // categorieModelId: json["id"],
   );
 
-
   Map<String, dynamic> toJson() => {
     "_id": id,
     "title": title,
@@ -106,24 +105,44 @@ class ProductModel extends Equatable {
     updatedAt,
     // categorieModelId,
   ];
+
+  ProductModel copyWith({
+    String? id,
+    String? title,
+    String? slug,
+    String? description,
+    int? quantity,
+    int? sold,
+    int? price,
+    int? priceAfterDiscount,
+    List<dynamic>? colors,
+    String? imageCover,
+    List<dynamic>? images,
+    List<String>? subCategories,
+    String? ratingsAverage,
+    int? ratingsQuantity,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    String? categorieModelId,
+  }) {
+    return ProductModel(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      slug: slug ?? this.slug,
+      description: description ?? this.description,
+      quantity: quantity ?? this.quantity,
+      sold: sold ?? this.sold,
+      price: price ?? this.price,
+      priceAfterDiscount: priceAfterDiscount ?? this.priceAfterDiscount,
+      colors: colors ?? this.colors,
+      imageCover: imageCover ?? this.imageCover,
+      images: images ?? this.images,
+      subCategories: subCategories ?? this.subCategories,
+      ratingsAverage: ratingsAverage ?? this.ratingsAverage,
+      ratingsQuantity: ratingsQuantity ?? this.ratingsQuantity,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      category: category,
+    );
+  }
 }
-
-// class Category extends Equatable {
-//   final String id;
-//   final String name;
-//   final String categoryId;
-
-//   const Category({
-//     required this.id,
-//     required this.name,
-//     required this.categoryId,
-//   });
-
-//   factory Category.fromJson(Map<String, dynamic> json) =>
-//       Category(id: json["_id"], name: json["name"]);
-
-//   Map<String, dynamic> toJson() => {"_id": id, "name": name, "id": categoryId};
-
-//   @override
-//   List<Object?> get props => [id, name, categoryId];
-// }

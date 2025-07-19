@@ -12,7 +12,8 @@ class ActionsRow extends StatelessWidget {
     return Row(
       children: [
         ElevatedButton.icon(
-          onPressed: () {},
+          onPressed: () {
+          },
           icon: Icon(Icons.shopping_cart),
           label: Text(
             AppStrings.addToCart.tr(),
