@@ -25,16 +25,19 @@ class DetailsProvider extends ChangeNotifier {
   String message = '';
   final List<ProductModel> _cartItems = [];
 
-  void changeFavorite({required String productId}) {
-    isFavorite = !isFavorite;
-    log('isFavorite: $isFavorite');
-    if (isFavorite) {
-      addToFavorite(productId: productId);
-    } else {
-      removeToFavorite(productId: productId);
-    }
-    notifyListeners();
+  Future<bool> changeFavorite({required String productId}) async {
+  isFavorite = !isFavorite;
+  log('isFavorite: $isFavorite');
+
+  if (isFavorite) {
+    await addToFavorite(productId: productId);
+  } else {
+    await removeToFavorite(productId: productId);
   }
+
+  notifyListeners();
+  return isFavorite;
+}
 
   Future<void> isFavorited({required String productId}) async {
     String userInfo = PreferencesManager.getString(AppConstants.userInfo)!;

@@ -55,15 +55,12 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
       () => _textController.forward(),
     );
 
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      Timer(const Duration(seconds: 4), () {
-        final Widget next = _getStartScreen();
-        if (mounted) {
-          Navigator.of(
-            context,
-          ).pushReplacement(MaterialPageRoute(builder: (_) => next));
-        }
-      });
+    Future.delayed(const Duration(seconds: 4), () {
+      if (!mounted) return;
+      final Widget next = _getStartScreen();
+      Navigator.of(
+        context,
+      ).pushReplacement(MaterialPageRoute(builder: (_) => next));
     });
   }
 
