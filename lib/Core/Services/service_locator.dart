@@ -12,11 +12,11 @@ final getIt = GetIt.instance;
 
 class ServiceLocator {
   static void init() {
-    getIt.registerLazySingleton<HomeProvider>(() => HomeProvider());
+    // getIt.registerLazySingleton<HomeProvider>(() => HomeProvider());
     // Register providers
     getIt.registerFactory<AppProvider>(() => AppProvider());
     getIt.registerFactory<AuthProvider>(() => AuthProvider());
-    // getIt.registerFactory<HomeProvider>(() => HomeProvider());
+    getIt.registerFactory<HomeProvider>(() => HomeProvider());
     getIt.registerFactory<ProductProvider>(() => ProductProvider());
     getIt.registerFactory<ProfileProvider>(() => ProfileProvider());
     getIt.registerFactory<DetailsProvider>(() => DetailsProvider());
