@@ -94,7 +94,8 @@ class ProductItem extends StatelessWidget {
                 ),
                 SizedBox(height: 4.h),
                 RatingBarWidget(
-                  initialRating: double.parse(productModel.ratingsAverage),
+                  initialRating:
+                      double.tryParse(productModel.ratingsAverage) ?? 0.0,
                 ),
               ],
             ),

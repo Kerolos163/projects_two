@@ -56,6 +56,8 @@ class ProductModel extends Equatable {
     images: List<dynamic>.from(json["images"].map((x) => x)),
     category: CategoryModel.fromJson(json["category"]),
     subCategories: List<String>.from(json["subCategories"].map((x) => x)),
+    ratingsAverage: json["ratingsAverage"] ?? "",
+    ratingsQuantity: json["ratingsQuantity"],
     ratingsAverage: json["ratingsAverage"]?.toString() ?? '0',
     ratingsQuantity: json["ratingsQuantity"]?? 0,
     createdAt: DateTime.parse(json["createdAt"]),

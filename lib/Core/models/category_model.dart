@@ -10,6 +10,7 @@ class CategoryModel extends Equatable {
   final List<CategoryModel> subcategories;
   final CategoryModel? parent;
 
+
   const CategoryModel({
     required this.id,
     required this.name,
@@ -27,9 +28,14 @@ class CategoryModel extends Equatable {
       name: json['name'] ?? '',
       slug: json['slug'],
       image: json['image'],
-      createdAt: json['createdAt'] != null ? DateTime.tryParse(json['createdAt']) : null,
-      updatedAt: json['updatedAt'] != null ? DateTime.tryParse(json['updatedAt']) : null,
-      subcategories: (json['subcategories'] as List<dynamic>?)
+      createdAt: json['createdAt'] != null
+          ? DateTime.tryParse(json['createdAt'])
+          : null,
+      updatedAt: json['updatedAt'] != null
+          ? DateTime.tryParse(json['updatedAt'])
+          : null,
+      subcategories:
+          (json['subcategories'] as List<dynamic>?)
               ?.map((e) => CategoryModel.fromJson(e))
               .toList() ??
           [],

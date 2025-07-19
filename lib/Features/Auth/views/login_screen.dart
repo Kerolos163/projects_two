@@ -1,19 +1,19 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
 import '../../../Core/Services/service_locator.dart';
-import 'sign_up_screen.dart';
 import '../../../Core/api/api_state.dart';
 import '../../../Core/constant/app_strings.dart';
 import '../../../Core/utils/custom_snak_bar.dart';
-import 'package:provider/provider.dart';
-
 import '../../../Core/widgets/app_text_form_field.dart';
 import '../../../core/widgets/app_text_button.dart';
 import '../../user/layout/view/layout_screen.dart';
 import '../models/login_model.dart';
 import '../viewmodel/auth_provider.dart';
 import 'forget_password_screen.dart';
+import 'sign_up_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});

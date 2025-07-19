@@ -8,6 +8,7 @@ class AppTextFormField extends StatelessWidget {
   final Widget? suffixIcon;
   final bool isObscureText;
   final String? Function(String?)? validator;
+  final int maxLines;
 
   const AppTextFormField({
     super.key,
@@ -17,6 +18,7 @@ class AppTextFormField extends StatelessWidget {
     this.suffixIcon,
     this.isObscureText = false,
     this.validator,
+    this.maxLines = 1,
   });
 
   @override
@@ -25,6 +27,7 @@ class AppTextFormField extends StatelessWidget {
       controller: controller,
       obscureText: isObscureText,
       validator: validator,
+      maxLines: maxLines,
       decoration: InputDecoration(
         hintText: hintText,
         prefixIcon: prefixIcon != null ? Icon(prefixIcon, size: 20.w) : null,
