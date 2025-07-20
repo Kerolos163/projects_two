@@ -203,4 +203,10 @@ class AppStrings {
   static var unknownProduct = "unknownProduct";
 
   static var contactSupport = "contactSupport";
+
+  static var returnOrder = "returnOrder";
+  static var cancelOrder = "cancelOrder";
+  static var returnInitiated = "returnInitiated";
+  static var orderCancelled = "orderCancelled";
+
 }
