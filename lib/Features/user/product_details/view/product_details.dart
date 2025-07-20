@@ -25,7 +25,7 @@ class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key, required this.product});
   @override
   Widget build(BuildContext context) {
-    log("ProductDetails===>: ${product.ratingsAverage}");
+    log("ProductDetails===>: ${product.id}");
     return ChangeNotifierProvider(
       create: (_) => getIt<DetailsProvider>()
         ..isFavorited(productId: product.id)
@@ -85,7 +85,7 @@ class ProductDetails extends StatelessWidget {
                       child: ListView(
                         padding: const EdgeInsets.all(16.0),
                         children: [
-                          CustomSliderWidget(images: product.imageCover),
+                          CustomSliderWidget(images: [product.imageCover, ...product.images]),
                           SizedBox(height: 20),
                           Text(
                             product.title,
