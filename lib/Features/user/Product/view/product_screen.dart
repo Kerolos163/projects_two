@@ -22,105 +22,108 @@ class ProductScreen extends StatelessWidget {
         return provider.state == ApiState.loading
             ? const Center(child: CircularProgressIndicator())
             : SafeArea(
-                child: CustomScrollView(
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: Consumer<AppProvider>(
-                        builder: (context, appProvider, _) {
-                          return Padding(
-                            padding: const EdgeInsets.all(20),
-                            child: HomeHeader(
-                              onChanged: (value) =>
-                                  provider.searchedProductsByText(text: value),
-                              onMenuTap: () => appProvider
-                                  .scaffoldKey
-                                  .currentState
-                                  ?.openDrawer(),
-                              onAvatarTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (_) => const ProfileScreen(),
+                child: RefreshIndicator(
+                  onRefresh: () => provider.getProducts(),
+                  child: CustomScrollView(
+                    slivers: [
+                      SliverToBoxAdapter(
+                        child: Consumer<AppProvider>(
+                          builder: (context, appProvider, _) {
+                            return Padding(
+                              padding: const EdgeInsets.all(20),
+                              child: HomeHeader(
+                                onChanged: (value) =>
+                                    provider.searchedProductsByText(text: value),
+                                onMenuTap: () => appProvider
+                                    .scaffoldKey
+                                    .currentState
+                                    ?.openDrawer(),
+                                onAvatarTap: () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => const ProfileScreen(),
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
-                      ),
-                    ),
-                    SliverToBoxAdapter(
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 8,
-                        ),
-                        child: Text(
-                          "${AppStrings.showingResults.tr()} ${provider.filterName}",
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey[700],
-                              ),
+                            );
+                          },
                         ),
                       ),
-                    ),
-                    SliverPadding(
-                      padding: const EdgeInsets.only(
-                        left: 16,
-                        right: 16,
-                        bottom: 20,
+                      SliverToBoxAdapter(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 8,
+                          ),
+                          child: Text(
+                            "${AppStrings.showingResults.tr()} ${provider.filterName}",
+                            style: Theme.of(context).textTheme.titleMedium
+                                ?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.grey[700],
+                                ),
+                          ),
+                        ),
                       ),
-                      sliver: SliverMasonryGrid.count(
-                        crossAxisCount: 2,
-                        mainAxisSpacing: 16,
-                        crossAxisSpacing: 16,
-                        childCount: provider.searchedProducts.isNotEmpty
-                            ? provider.searchedProducts.length
-                            : provider.subCategoryProducts.isNotEmpty
-                            ? provider.subCategoryProducts.length
-                            : provider.displayedProducts.length,
-                        itemBuilder: (context, index) {
-                          final product = provider.searchedProducts.isNotEmpty
-                              ? provider.searchedProducts[index]
+                      SliverPadding(
+                        padding: const EdgeInsets.only(
+                          left: 16,
+                          right: 16,
+                          bottom: 20,
+                        ),
+                        sliver: SliverMasonryGrid.count(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 16,
+                          crossAxisSpacing: 16,
+                          childCount: provider.searchedProducts.isNotEmpty
+                              ? provider.searchedProducts.length
                               : provider.subCategoryProducts.isNotEmpty
-                              ? provider.subCategoryProducts[index]
-                              : provider.displayedProducts[index];
-                          return AnimationConfiguration.staggeredGrid(
-                            position: index,
-                            duration: const Duration(milliseconds: 160),
-                            columnCount: 2,
-                            child: ScaleAnimation(
-                              child: FadeInAnimation(
-                                child: Consumer<AppProvider>(
-                                  builder: (context, appProvider, child) {
-                                    return GestureDetector(
-                                      onTap: () async {
-                                        appProvider.addRecentlyViewed(
-                                          product: product,
-                                        );
-                                        await Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                ProductDetails(
-                                                  product: product,
-                                                ),
-                                          ),
-                                        );
-                                      },
-                                      child: ProductItem(
-                                        index: index,
-                                        productModel: product,
-                                      ),
-                                    );
-                                  },
+                              ? provider.subCategoryProducts.length
+                              : provider.displayedProducts.length,
+                          itemBuilder: (context, index) {
+                            final product = provider.searchedProducts.isNotEmpty
+                                ? provider.searchedProducts[index]
+                                : provider.subCategoryProducts.isNotEmpty
+                                ? provider.subCategoryProducts[index]
+                                : provider.displayedProducts[index];
+                            return AnimationConfiguration.staggeredGrid(
+                              position: index,
+                              duration: const Duration(milliseconds: 160),
+                              columnCount: 2,
+                              child: ScaleAnimation(
+                                child: FadeInAnimation(
+                                  child: Consumer<AppProvider>(
+                                    builder: (context, appProvider, child) {
+                                      return GestureDetector(
+                                        onTap: () async {
+                                          appProvider.addRecentlyViewed(
+                                            product: product,
+                                          );
+                                          await Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ProductDetails(
+                                                    product: product,
+                                                  ),
+                                            ),
+                                          );
+                                        },
+                                        child: ProductItem(
+                                          index: index,
+                                          productModel: product,
+                                        ),
+                                      );
+                                    },
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               );
       },
