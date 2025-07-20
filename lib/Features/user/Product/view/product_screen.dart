@@ -7,7 +7,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import '../../../../Core/Theme/app_provider.dart';
 import '../../../../Core/api/api_state.dart';
 import '../../../../Core/widgets/home_header.dart';
-import '../../../Profile/view/profile_screen.dart';
 import '../../product_details/view/product_details.dart';
 import '../viewmodel/product_provider.dart';
 import 'widget/product_item.dart';
@@ -32,18 +31,14 @@ class ProductScreen extends StatelessWidget {
                             return Padding(
                               padding: const EdgeInsets.all(20),
                               child: HomeHeader(
-                                onChanged: (value) =>
-                                    provider.searchedProductsByText(text: value),
+                                onChanged: (value) => provider
+                                    .searchedProductsByText(text: value),
                                 onMenuTap: () => appProvider
                                     .scaffoldKey
                                     .currentState
                                     ?.openDrawer(),
-                                onAvatarTap: () => Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (_) => const ProfileScreen(),
-                                  ),
-                                ),
+                                onAvatarTap: () =>
+                                    appProvider.changeIndex(index: 4),
                               ),
                             );
                           },
