@@ -193,6 +193,7 @@ class AppStrings {
   static const String  recentlyViewed = 'Recently Viewed';
   static const String  trendingProduct = 'Trending Products';
   static const String  bestSellers = 'bestSellers';
+  static const String  noReviewsYet = 'noReviewsYet';
 
   static var coverImage = 'coverImage';
 
