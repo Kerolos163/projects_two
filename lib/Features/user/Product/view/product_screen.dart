@@ -64,7 +64,11 @@ class ProductScreen extends StatelessWidget {
                       ),
                     ),
                     SliverPadding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        bottom: 20,
+                      ),
                       sliver: SliverMasonryGrid.count(
                         crossAxisCount: 2,
                         mainAxisSpacing: 16,
