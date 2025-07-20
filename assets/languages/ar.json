@@ -182,5 +182,11 @@
   "Trending Products": "المنتجات الشائعة",
   "bestSellers": "المنتجات المفضلة",
   "Other Products": "منتجات أخرى",
-  "view all": "عرض الكل"
+  "view all": "عرض الكل",
+  "newArrivals": "المنتجات الجديدة",
+  "My Orders": "طلباتي",
+  "returnOrder": "ارجاع الطلب",
+  "cancelOrder": "الغاء الطلب",
+  "returnInitiated": "بدأت عملية الإرجاع",
+  "orderCancelled": "تم إلغاء الطلب"
 }

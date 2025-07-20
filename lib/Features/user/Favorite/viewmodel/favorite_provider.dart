@@ -38,9 +38,10 @@ class FavoriteProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> removeToFavorite({required String productId}) async {
-    state = ApiState.loading;
-    notifyListeners();
+  Future<void> removeFromFavorite({required String productId}) async {
+    favoriteList.removeWhere((item) => item.id == productId);
+    notifyListeners(); 
+
     try {
       final response = await apiService.delete(
         ApiEndPoints.userFavorites(id: localData.id),
@@ -48,8 +49,29 @@ class FavoriteProvider extends ChangeNotifier {
       );
       message = response.data["message"];
       log('message: $message');
-      getFavoriteList();
       state = ApiState.success;
+    } catch (err) {
+      log('error: $err');
+      message = err.toString();
+      state = ApiState.error;
+      await getFavoriteList();
+    }
+
+    notifyListeners();
+  }
+
+  Future<void> addToFavorite({required String productId}) async {
+    // state = ApiState.loading;
+    // notifyListeners();
+    try {
+      final response = await apiService.post(
+        ApiEndPoints.userFavorites(id: localData.id),
+        body: {"productId": productId},
+      );
+      message = response.data["message"];
+      log('message: $message');
+      state = ApiState.success;
+      getFavoriteList();
     } catch (err) {
       log('error: $err');
       message = err.toString();

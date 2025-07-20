@@ -183,13 +183,7 @@ class OrdersDashboardProvider with ChangeNotifier {
 
   Future<List<OrderModel>> _populateOrderDetails(List<OrderModel> orders) async {
     for (var order in orders) {
-      // Load first product details
-      if (order.products.isNotEmpty) {
-        final productId = order.products[0].pId;
-        order.products[0].product = await ProductService().getProduct(productId);
-      }
-
-      // Load customer details
+    
       order.cust = await UserService.getUserById(order.custId);
     }
     return orders;
