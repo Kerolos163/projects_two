@@ -24,4 +24,7 @@ final class ApiEndPoints {
       "/api/reviews/$reviewId";
   static String getSubCategory({required String categoryId}) =>
       "/api/categories/$categoryId/subcategories";
+
+  static String getSortedProducts({required String sortQuery}) =>
+      "$homeProduct?sort=$sortQuery";
 }
