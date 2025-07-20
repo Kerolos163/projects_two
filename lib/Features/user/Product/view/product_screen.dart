@@ -93,11 +93,11 @@ class ProductScreen extends StatelessWidget {
                                 child: Consumer<AppProvider>(
                                   builder: (context, appProvider, child) {
                                     return GestureDetector(
-                                      onTap: () {
+                                      onTap: () async {
                                         appProvider.addRecentlyViewed(
                                           product: product,
                                         );
-                                        Navigator.push(
+                                        await Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>

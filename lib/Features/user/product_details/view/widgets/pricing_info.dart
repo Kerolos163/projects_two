@@ -16,20 +16,22 @@ class PricingInfo extends StatelessWidget {
       children: [
         priceAfterDiscount == 0
             ? const SizedBox()
-            : Text(
-                price.toStringAsFixed(2),
-                style: TextStyle(
-                  color: Color(0xff808488),
-                  decoration: TextDecoration.lineThrough,
-                  fontWeight: FontWeight.w600,
-                ),
+            : Row(
+                children: [
+                  Text(
+                    price.toStringAsFixed(2),
+                    style: TextStyle(
+                      color: Color(0xff808488),
+                      decoration: TextDecoration.lineThrough,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                ],
               ),
-        SizedBox(width: 10),
 
         Text(
-          "${priceAfterDiscount.toString() == "0"
-              ? price.toString()
-              : priceAfterDiscount.toString()}\$",
+          "${priceAfterDiscount.toString() == "0" ? price.toStringAsFixed(2) : priceAfterDiscount.toStringAsFixed(2)}\$",
           style: TextStyle(
             color: Color(0xffFA7189),
             fontWeight: FontWeight.w600,
