@@ -195,18 +195,13 @@ class AppStrings {
   static const String bestSellers = 'bestSellers';
   static const String otherProducts = 'Other Products';
   static const String viewAll = 'view all';
-
+  static const String noReviewsYet = 'noReviewsYet';
   static var coverImage = 'coverImage';
-
   static var productAdd = 'productAdd';
-
   static var unknownProduct = "unknownProduct";
-
   static var contactSupport = "contactSupport";
-
   static var returnOrder = "returnOrder";
   static var cancelOrder = "cancelOrder";
   static var returnInitiated = "returnInitiated";
   static var orderCancelled = "orderCancelled";
-
 }

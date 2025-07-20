@@ -188,5 +188,6 @@
   "returnOrder": "ارجاع الطلب",
   "cancelOrder": "الغاء الطلب",
   "returnInitiated": "بدأت عملية الإرجاع",
-  "orderCancelled": "تم إلغاء الطلب"
+  "orderCancelled": "تم إلغاء الطلب",
+  "noReviewsYet": "لا توجد مراجعات حتى الآن"
 }

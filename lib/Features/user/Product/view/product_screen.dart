@@ -64,7 +64,11 @@ class ProductScreen extends StatelessWidget {
                       ),
                     ),
                     SliverPadding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        bottom: 20,
+                      ),
                       sliver: SliverMasonryGrid.count(
                         crossAxisCount: 2,
                         mainAxisSpacing: 16,
@@ -89,11 +93,11 @@ class ProductScreen extends StatelessWidget {
                                 child: Consumer<AppProvider>(
                                   builder: (context, appProvider, child) {
                                     return GestureDetector(
-                                      onTap: () {
+                                      onTap: () async {
                                         appProvider.addRecentlyViewed(
                                           product: product,
                                         );
-                                        Navigator.push(
+                                        await Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>

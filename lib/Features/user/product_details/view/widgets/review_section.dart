@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import '../../../../Core/constant/app_strings.dart';
-import '../model/review_model.dart';
-import 'widgets/slider_rating.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../../model/review_model.dart';
+import 'slider_rating.dart';
 
 class ReviewSection extends StatelessWidget {
   final double rating;

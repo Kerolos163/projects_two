@@ -386,9 +386,9 @@ packages:
     description:
       name: image_picker_android
       sha256: "6fae381e6af2bbe0365a5e4ce1db3959462fa0c4d234facf070746024bb80c8d"
-      url: "https://pub.flutter-io.cn"
+      url: "https://pub.dev"
     source: hosted
-    version: "0.8.12+24"
+    version: "0.8.12+23"
   image_picker_for_web:
     dependency: transitive
     description:
