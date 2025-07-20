@@ -269,7 +269,7 @@ class ProfileScreen extends StatelessWidget {
                 return const Center(child: CircularProgressIndicator());
               case ApiState.error:
                 WidgetsBinding.instance.addPostFrameCallback((_) {
-                  if (profileProvider.state == ApiState.error) {
+                  if (profileProvider.message == "Invalid token") {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => LoginScreen()),

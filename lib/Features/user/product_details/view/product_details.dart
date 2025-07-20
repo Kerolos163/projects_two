@@ -22,7 +22,10 @@ import 'widgets/product_info.dart';
 class ProductDetails extends StatelessWidget {
   final ProductModel product;
 
-  const ProductDetails({super.key, required this.product});
+    const ProductDetails({super.key, 
+    required this.product
+  });
+
   @override
   Widget build(BuildContext context) {
     log("ProductDetails===>: ${product.id}");
@@ -32,7 +35,7 @@ class ProductDetails extends StatelessWidget {
         ..getProductReviews(productId: product.id),
       builder: (context, child) => Consumer<DetailsProvider>(
         builder: (context, detailsProvider, child) {
-          if (detailsProvider.state == ApiState.error) {
+          if (detailsProvider.message == "Invalid token") {
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               Navigator.pushAndRemoveUntil(
                 context,
