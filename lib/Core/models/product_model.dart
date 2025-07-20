@@ -38,7 +38,7 @@ class ProductModel extends Equatable {
     required this.ratingsQuantity,
     required this.createdAt,
     required this.updatedAt,
-    required this.categorieModelId,
+    this.categorieModelId,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -126,9 +126,7 @@ class ProductModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [
-    id,
-  ];
+  List<Object?> get props => [id];
 }
 
 class Category extends Equatable {
