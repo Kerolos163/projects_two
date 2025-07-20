@@ -7,7 +7,7 @@ import '../../../../../Core/api/api_end_points.dart';
 
 class CustomSliderWidget extends StatefulWidget {
   const CustomSliderWidget({super.key, required this.images});
-  final String images;
+  final List<String> images;
 
   @override
   State<CustomSliderWidget> createState() => _CustomSliderWidgetState();
@@ -26,11 +26,11 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
             Column(
               children: [
                 CarouselSlider(
-                  items: List.generate(5, (_) {
+                  items: List.generate(widget.images.length, (index) {
                     return ClipRRect(
                       borderRadius: BorderRadius.circular(16),
                       child: CachedNetworkImage(
-                        imageUrl: '${ApiEndPoints.baseUrl}${widget.images}',
+                        imageUrl: '${ApiEndPoints.baseUrl}${widget.images[index]}',
                         placeholder: (context, url) =>
                             Center(child: CircularProgressIndicator()),
                         errorWidget: (context, url, error) => Icon(Icons.error),
@@ -44,7 +44,7 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
                     autoPlay: true,
                     autoPlayCurve: Curves.fastOutSlowIn,
                     autoPlayAnimationDuration: Duration(milliseconds: 800),
-                    autoPlayInterval: Duration(seconds: 2),
+                    autoPlayInterval: Duration(seconds: 6),
                     enlargeCenterPage: true,
                     aspectRatio: 2.0,
                     onPageChanged: (index, reason) {
@@ -101,7 +101,7 @@ class _CustomSliderWidgetState extends State<CustomSliderWidget> {
           alignment: Alignment.center,
           child: AnimatedSmoothIndicator(
             activeIndex: myCurrentIndex,
-            count: 5,
+            count: widget.images.length,
             effect: WormEffect(
               dotHeight: 15,
               dotWidth: 15,

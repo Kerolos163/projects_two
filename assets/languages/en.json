@@ -201,5 +201,6 @@
   "returnOrder": "Return Order",
   "cancelOrder": "Cancel Order",
   "returnInitiated": "Return request has been initiated.",
-  "orderCancelled": "Order has been cancelled."
+  "orderCancelled": "Order has been cancelled.",
+  "noReviewsYet": "No reviews yet"
 }

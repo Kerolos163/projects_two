@@ -15,7 +15,7 @@ import '../viewmodel/details_provider.dart';
 import 'widgets/review_list_view.dart';
 import '../../../../Core/widgets/rating_bar_widget.dart';
 import '../../../../Core/models/product_model.dart';
-import 'review_section.dart';
+import 'widgets/review_section.dart';
 import 'widgets/custom_slider.dart';
 import 'widgets/product_info.dart';
 
@@ -25,6 +25,7 @@ class ProductDetails extends StatelessWidget {
   const ProductDetails({super.key, required this.product});
   @override
   Widget build(BuildContext context) {
+    log("ProductDetails===>: ${product.id}");
     return ChangeNotifierProvider(
       create: (_) => getIt<DetailsProvider>()
         ..isFavorited(productId: product.id)
@@ -107,18 +108,18 @@ class ProductDetails extends StatelessWidget {
                       child: ListView(
                         padding: const EdgeInsets.all(16.0),
                         children: [
-                          CustomSliderWidget(images: product.imageCover),
+                          CustomSliderWidget(images: [product.imageCover, ...product.images]),
                           SizedBox(height: 20),
                           Text(
                             product.title,
                             style: Theme.of(context).textTheme.titleLarge,
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 10),
                           PricingInfo(
                             price: product.price,
                             priceAfterDiscount: product.priceAfterDiscount,
                           ),
-                          SizedBox(height: 20),
+                          SizedBox(height: 10),
                           Text(
                             AppStrings.information.tr(),
                             style: Theme.of(context).textTheme.titleLarge,
@@ -133,15 +134,15 @@ class ProductDetails extends StatelessWidget {
                           SizedBox(height: 40),
                           ReviewSection(
                             reviews: detailsProvider.reviews,
-                            rating:
-                                double.tryParse(product.ratingsAverage) ?? 0.0,
+                            rating: detailsProvider.productRating,
                           ),
                           RatingBarWidget(
-                            initialRating:
-                                double.tryParse(product.ratingsAverage) ?? 0.0,
+                            initialRating: detailsProvider.productRating,
                           ),
                           Text(
-                            product.ratingsQuantity.toString(),
+                            detailsProvider.reviews.isEmpty
+                                ? AppStrings.noReviewsYet.tr()
+                                : detailsProvider.reviews.length.toString(),
                             style: TextStyle(
                               color: const Color.fromARGB(255, 110, 108, 108),
                               fontSize: 16,
