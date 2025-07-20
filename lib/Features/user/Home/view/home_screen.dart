@@ -50,15 +50,51 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 20),
-                      child: Text(
-                        AppStrings.allFeatured.tr(),
-                        style: Theme.of(context).textTheme.displayLarge
-                            ?.copyWith(
-                              color: AppColors.black,
-                              fontWeight: FontWeight.w600,
-                            ),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            AppStrings.allFeatured.tr(),
+                            style: Theme.of(context).textTheme.displayLarge
+                                ?.copyWith(
+                                  color: AppColors.black,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                          ),
+                          PopupMenuButton<String>(
+                            icon: Icon(Icons.sort),
+                            onSelected: (value) {
+                              if (value == 'price') {
+                                homeProvider.getSortedProducts('price');
+                              } else if (value == 'rating') {
+                                homeProvider.getSortedProducts(
+                                  'ratingsAverage',
+                                );
+                              } else if (value == 'both') {
+                                homeProvider.getSortedProducts(
+                                  'price,ratingsAverage',
+                                );
+                              }
+                            },
+                            itemBuilder: (context) => [
+                              PopupMenuItem(
+                                value: 'price',
+                                child: Text('Sort by Price'),
+                              ),
+                              PopupMenuItem(
+                                value: 'rating',
+                                child: Text('Sort by Rating'),
+                              ),
+                              PopupMenuItem(
+                                value: 'both',
+                                child: Text('Sort by Price & Rating'),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
+
                     const SizedBox(height: 10),
                     SizedBox(
                       height: 100,
