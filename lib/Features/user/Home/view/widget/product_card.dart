@@ -9,7 +9,12 @@ import '../../../../../Core/widgets/rating_bar_widget.dart';
 
 class ProductCardHome extends StatelessWidget {
   final ProductModel productModel;
-  const ProductCardHome({super.key, required this.productModel});
+  final bool showRatings;
+  const ProductCardHome({
+    super.key,
+    required this.productModel,
+    required this.showRatings,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -93,9 +98,14 @@ class ProductCardHome extends StatelessWidget {
                     ],
                   ),
                   SizedBox(height: 2),
-                  RatingBarWidget(
-                    initialRating: double.tryParse(productModel.ratingsAverage) ?? 0.0
-                  ),
+
+                  showRatings
+                      ? RatingBarWidget(
+                          initialRating:
+                              double.tryParse(productModel.ratingsAverage) ??
+                              0.0,
+                        )
+                      : SizedBox(),
                 ],
               ),
             ),
