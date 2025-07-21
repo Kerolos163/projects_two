@@ -31,15 +31,15 @@ class ProductDetails extends StatelessWidget {
         ..getProductReviews(productId: product.id),
       builder: (context, child) => Consumer<DetailsProvider>(
         builder: (context, detailsProvider, child) {
-          if (detailsProvider.state == ApiState.error) {
-            WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-              Navigator.pushAndRemoveUntil(
-                context,
-                MaterialPageRoute(builder: (context) => const LoginScreen()),
-                (route) => false,
-              );
-            });
-          }
+          // if (detailsProvider.state == ApiState.error) {
+          //   WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+          //     Navigator.pushAndRemoveUntil(
+          //       context,
+          //       MaterialPageRoute(builder: (context) => const LoginScreen()),
+          //       (route) => false,
+          //     );
+          //   });
+          // }
 
           return detailsProvider.state == ApiState.loading
               ? Center(child: CircularProgressIndicator())
@@ -58,7 +58,7 @@ class ProductDetails extends StatelessWidget {
                           onPressed: () async {
                             final isAdded = await detailsProvider
                                 .changeFavorite(productId: product.id);
-                              if (!context.mounted) return;
+                            if (!context.mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -131,7 +131,20 @@ class ProductDetails extends StatelessWidget {
                           SizedBox(height: 20),
                           ActionsRow(
                             addToCartMethod: () async {
-                              detailsProvider.addToCart(product);
+                              try {
+                                await detailsProvider.addToCart(product);
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('add to cart Successful'),
+                                  ),
+                                );
+                              } catch (e) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text('add to cart faild'),
+                                  ),
+                                );
+                              }
                             },
                           ),
                           SizedBox(height: 40),

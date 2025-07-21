@@ -188,5 +188,15 @@
   "returnOrder": "ارجاع الطلب",
   "cancelOrder": "الغاء الطلب",
   "returnInitiated": "بدأت عملية الإرجاع",
-  "orderCancelled": "تم إلغاء الطلب"
+  "orderCancelled": "تم إلغاء الطلب",
+  "total": "الإجمالى",
+  "payment": "الدفع",
+  "Address cannot be empty": "يجب إدخال العنوان",
+  "City cannot be empty": "يجب إدخال المدينة",
+  "Processing...": "...جارى الدفع",
+  "Pay with card": "الدفع بالبطاقة",
+  "Pay COD": "الدفع كاش",
+  "Payment Successful": "عملية دفع ناجحة",
+  "Payment Faild": "فشل فى عملية الدفع",
+  "Your cart is empty": "سلتك فارغة"
 }

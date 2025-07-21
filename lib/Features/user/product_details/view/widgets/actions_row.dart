@@ -6,8 +6,7 @@ import '../../../../../Core/constant/app_colors.dart';
 
 class ActionsRow extends StatelessWidget {
   Future<void> Function()? addToCartMethod;
-  ActionsRow({super.key, required Future<void> Function()? addToCartMethod});
-
+  ActionsRow({super.key, required this.addToCartMethod});
   @override
   Widget build(BuildContext context) {
     return Row(

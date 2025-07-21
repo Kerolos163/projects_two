@@ -36,11 +36,11 @@ class PaymentMethodBottomSheet extends StatelessWidget {
               SizedBox(height: 16.h),
               CustomTextFormField(
                 label: AppStrings.address,
-                placeholder: AppStrings.enterYourAddress,
+                placeholder: AppStrings.enterYourAddress.tr(),
                 controller: cartProvider.address,
                 validator: (input) {
                   if (input == null || input.trim().isEmpty) {
-                    return "Address cannot be empty";
+                    return AppStrings.addressCannotBeEmpty.tr();
                   }
                   return null;
                 },
@@ -53,7 +53,7 @@ class PaymentMethodBottomSheet extends StatelessWidget {
                 controller: cartProvider.city,
                 validator: (input) {
                   if (input == null || input.trim().isEmpty) {
-                    return "City cannot be empty";
+                    return AppStrings.cityCannotBeEmpty.tr();
                   }
                   return null;
                 },
@@ -70,10 +70,10 @@ class PaymentMethodBottomSheet extends StatelessWidget {
                 builder: (context, cartProvider, _) {
                   return PaymentTextButton(
                     buttonText: stripeProvider.state == ApiState.loading
-                        ? "Processing..."
+                        ? AppStrings.processing.tr()
                         : cartProvider.paymentMethodIndex == 0
-                        ? "Pay with card"
-                        : "Pay COD",
+                        ? AppStrings.payWithCard.tr()
+                        : AppStrings.payCOD.tr(),
                     onPressed: stripeProvider.state == ApiState.loading
                         ? null
                         : () async {
@@ -97,8 +97,10 @@ class PaymentMethodBottomSheet extends StatelessWidget {
                                 );
                                 Navigator.pop(context);
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text('Payment Successful'),
+                                  SnackBar(
+                                    content: Text(
+                                      AppStrings.paymentSuccessful.tr(),
+                                    ),
                                   ),
                                 );
                                 await cartProvider.clearCart();
@@ -107,7 +109,7 @@ class PaymentMethodBottomSheet extends StatelessWidget {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   SnackBar(
                                     content: Text(
-                                      'Payment Failed: ${stripeProvider.error}',
+                                      "${AppStrings.paymentFaild.tr()} ${stripeProvider.error}",
                                     ),
                                   ),
                                 );
@@ -118,8 +120,10 @@ class PaymentMethodBottomSheet extends StatelessWidget {
                               );
                               Navigator.pop(context);
                               ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text('Payment Successful'),
+                                SnackBar(
+                                  content: Text(
+                                    AppStrings.paymentSuccessful.tr(),
+                                  ),
                                 ),
                               );
                               await cartProvider.clearCart();

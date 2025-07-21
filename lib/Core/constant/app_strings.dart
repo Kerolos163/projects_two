@@ -195,6 +195,16 @@ class AppStrings {
   static const String bestSellers = 'bestSellers';
   static const String otherProducts = 'Other Products';
   static const String viewAll = 'view all';
+  static const String yourCartIsEmpty = "Your cart is empty";
+  static const String total = "total";
+  static const String payment = "payment";
+  static const String addressCannotBeEmpty = "Address cannot be empty";
+  static const String cityCannotBeEmpty = "City cannot be empty";
+  static const String processing = "Processing...";
+  static const String payWithCard = "Pay with card";
+  static const String payCOD = "Pay COD";
+  static const String paymentSuccessful = 'Payment Successful';
+  static const String paymentFaild = 'Payment Faild';
 
   static var coverImage = 'coverImage';
 
@@ -208,5 +218,4 @@ class AppStrings {
   static var cancelOrder = "cancelOrder";
   static var returnInitiated = "returnInitiated";
   static var orderCancelled = "orderCancelled";
-
 }

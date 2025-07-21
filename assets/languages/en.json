@@ -201,5 +201,15 @@
   "returnOrder": "Return Order",
   "cancelOrder": "Cancel Order",
   "returnInitiated": "Return request has been initiated.",
-  "orderCancelled": "Order has been cancelled."
+  "orderCancelled": "Order has been cancelled.",
+  "total": " total",
+  "payment": "payment",
+  "Address cannot be empty": "Address cannot be empty",
+  "City cannot be empty": "City cannot be empty",
+  "Processing...": "Processing...",
+  "Pay with card": "Pay with card",
+  "Pay COD": "Pay COD",
+  "Payment Successful": "Payment Successful",
+  "Payment Faild": "Payment Faild",
+  "Your cart is empty": "Your cart is empty"
 }

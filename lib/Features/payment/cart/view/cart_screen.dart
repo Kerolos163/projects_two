@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:projects_two/Core/Services/service_locator.dart';
 import 'package:projects_two/Core/Theme/app_provider.dart';
 import 'package:projects_two/Core/constant/app_colors.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
 import 'package:projects_two/Features/payment/cart/logic/stripe_payment_provider.dart';
 import 'package:projects_two/Features/payment/cart/view/widgets/cart_haader.dart';
@@ -25,7 +27,12 @@ class CartScreen extends StatelessWidget {
                 Consumer<AppProvider>(
                   builder: (context, provider, child) {
                     return Padding(
-                      padding: const EdgeInsets.all(20),
+                      padding: EdgeInsets.only(
+                        top: 20.h,
+                        right: 20.w,
+                        left: 20.w,
+                        bottom: 5.h,
+                      ),
                       child: CartHeader(
                         onMenuTap: () =>
                             provider.scaffoldKey.currentState?.openDrawer(),
@@ -54,7 +61,7 @@ class CartScreen extends StatelessWidget {
                                       ),
                                       SizedBox(height: 16),
                                       Text(
-                                        "Your cart is empty",
+                                        AppStrings.yourCartIsEmpty.tr(),
                                         style: TextStyle(
                                           fontSize: 18,
                                           color: AppColors.grey600,
@@ -166,7 +173,7 @@ class CartScreen extends StatelessWidget {
                                         ),
                                       );
                                     },
-                                    child: Text('Payment'),
+                                    child: Text(AppStrings.payment.tr()),
                                   ),
                                 ),
                               ),
