@@ -38,7 +38,7 @@ class ProductScreen extends StatelessWidget {
                                     .currentState
                                     ?.openDrawer(),
                                 onAvatarTap: () =>
-                                    appProvider.changeIndex(index: 4),
+                                    appProvider.changeIndex(index: 3),
                               ),
                             );
                           },

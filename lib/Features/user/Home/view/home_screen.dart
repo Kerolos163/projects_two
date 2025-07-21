@@ -45,7 +45,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onTap: () => appProvider.changeIndex(index: 1),
                         onMenuTap: () =>
                             appProvider.scaffoldKey.currentState?.openDrawer(),
-                        onAvatarTap: () => appProvider.changeIndex(index: 4),
+                        onAvatarTap: () => appProvider.changeIndex(index: 3),
                       ),
                     ),
                     Padding(
