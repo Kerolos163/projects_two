@@ -215,4 +215,7 @@ class AppStrings {
   static var cancelOrder = "cancelOrder";
   static var returnInitiated = "returnInitiated";
   static var orderCancelled = "orderCancelled";
+  static var sortByPrice = "Sort by Price";
+  static var sortByRating = "Sort by Rating";
+  static var sortByPriceAndRating = "Sort by Price & Rating";
 }
