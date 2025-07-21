@@ -1,4 +1,13 @@
 import 'package:get_it/get_it.dart';
+import 'stripe_service.dart';
+import '../../Features/Auth/viewmodel/auth_provider.dart';
+import '../../Features/Profile/viewmodel/profile_provider.dart';
+import '../../Features/payment/cart/logic/cart_provider.dart';
+import '../../Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
+import '../../Features/admin/categories_dashboard/viewmodel/categories_dashboard_provider.dart';
+import '../../Features/admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
+import '../../Features/admin/products_dashboard/viewmodel/products_dashboard_provider.dart';
+import '../../Features/admin/users_dashboard/viewmodel/users_dashboard_provider.dart';
 import 'package:projects_two/Core/Services/stripe_service.dart';
 import 'package:projects_two/Features/Auth/viewmodel/auth_provider.dart';
 import 'package:projects_two/Features/Profile/viewmodel/profile_provider.dart';

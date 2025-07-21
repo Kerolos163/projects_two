@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/analytics_screen/widgets/best_sellers_widget.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/analytics_screen/widgets/monthly_sales_widget.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/analytics_screen/widgets/sales_by_category_widget.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/analytics_screen/widgets/trending_products.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
+import '../widgets/best_sellers_widget.dart';
+import '../widgets/monthly_sales_widget.dart';
+import '../widgets/sales_by_category_widget.dart';
+import '../widgets/trending_products.dart';
+import '../../viewmodel/analytics_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class AnalyticsScreen extends StatefulWidget {

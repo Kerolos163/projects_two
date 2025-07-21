@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/admin/products_dashboard/display_products/widgets/product_card.dart';
+import '../widgets/product_card.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../../../../Core/constant/app_colors.dart';

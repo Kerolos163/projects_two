@@ -78,4 +78,25 @@ class ProductProvider extends ChangeNotifier {
       }
     }
   }
+
+  Future<void> getSortedProducts(String sortQuery) async {
+    displayedProducts = [];
+    state = ApiState.loading;
+    notifyListeners();
+
+    try {
+      final response = await apiService.get(
+        ApiEndPoints.getSortedProducts(sortQuery: sortQuery),
+      );
+      final jsonData = response.data["data"] as List;
+      displayedProducts = jsonData
+          .map((e) => ProductModel.fromJson(e))
+          .toList();
+      state = ApiState.success;
+    } catch (error) {
+      log('error (sorted products): $error');
+      state = ApiState.error;
+    }
+    notifyListeners();
+  }
 }

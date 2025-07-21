@@ -1,6 +1,6 @@
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Core/models/product_model.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/models/monthly_sales_model.dart';
+import '../../../../Core/api/api_service.dart';
+import '../../../../Core/models/product_model.dart';
+import '../models/monthly_sales_model.dart';
 
 class AnalyticsService {
   final ApiService _apiService = ApiService();

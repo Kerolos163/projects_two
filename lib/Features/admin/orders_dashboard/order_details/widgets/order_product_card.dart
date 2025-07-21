@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Core/models/order_model.dart';
+import '../../../../../Core/api/api_end_points.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../../../../../Core/models/order_model.dart';
 
 class OrderProductCard extends StatelessWidget {
   final OrderProduct orderProduct;

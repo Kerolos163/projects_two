@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
+import '../../../../../Core/api/api_end_points.dart';
 
 class ProductImagePreview extends StatelessWidget {
   final String imageUrl;

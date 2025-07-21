@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/analytics_screen/widgets/product_card.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/best_sellers_screen/view/best_sellers_screen.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
+import 'product_card.dart';
+import '../../best_sellers_screen/view/best_sellers_screen.dart';
+import '../../viewmodel/analytics_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class BestSellersWidget extends StatelessWidget {

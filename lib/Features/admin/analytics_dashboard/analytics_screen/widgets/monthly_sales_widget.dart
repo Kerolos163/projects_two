@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/constant/app_colors.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/monthly_sales/views/monthly_sales_screen.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/shared_widgets/chart_widget.dart';
+import '../../../../../Core/constant/app_colors.dart';
+import '../../monthly_sales/views/monthly_sales_screen.dart';
+import '../../shared_widgets/chart_widget.dart';
 import 'package:provider/provider.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
+import '../../viewmodel/analytics_dashboard_provider.dart';
 
 class MonthlySalesWidget extends StatelessWidget {
   const MonthlySalesWidget({super.key});

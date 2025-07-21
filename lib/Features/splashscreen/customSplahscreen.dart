@@ -1,10 +1,11 @@
 import 'dart:async';
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/Auth/views/login_screen.dart';
+import 'package:projects_two/Core/utils/account_type.dart';
 import 'package:projects_two/Features/admin/dashboard_screen/view/dashboard_screen.dart';
-import 'package:projects_two/Features/onboarding/presentation/views/onboarding_screen.dart';
-import 'package:projects_two/Features/user/layout/view/layout_screen.dart';
+import '../Auth/views/login_screen.dart';
+import '../onboarding/presentation/views/onboarding_screen.dart';
+import '../user/layout/view/layout_screen.dart';
 import '../../../Core/utils/app_constants.dart';
 import '../../../Core/Services/preferences_manager.dart';
 
@@ -81,12 +82,19 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
       AppConstants.userInfo,
     );
     if (userInfo == null) return const LoginScreen();
-    if (jsonDecode(userInfo)['role'] == 'admin') {
-      return DashboardScreen();
-    } else {
-      return const LayoutScreen();
+    try {
+      final Map<String, dynamic> userMap = jsonDecode(userInfo);
+      final String role = userMap['role'] ?? 'user';
+
+      if (role == AccountType.admin) {
+        return const DashboardScreen(); // Admin UI
+      } else {
+        return const LayoutScreen(); // Regular user UI
+      }
+    } catch (e) {
+      // Fallback in case of JSON parse error
+      return const LoginScreen();
     }
-  //  return const LayoutScreen();
   }
 
   @override
@@ -109,7 +117,7 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
               child: FadeTransition(
                 opacity: _fadeAnimation,
                 child: Image.asset(
-                  'assets/image/HomeMade_Logo.png',
+                  'assets/image/logo.png',
                   width: 200,
                   height: 200,
                 ),

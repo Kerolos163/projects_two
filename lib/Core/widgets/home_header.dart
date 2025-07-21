@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
+import 'package:projects_two/Features/payment/cart/view/cart_screen.dart';
 import '../Theme/app_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../Theme/app_provider.dart';
 import '../api/api_end_points.dart';
 import '../api/api_state.dart';
 import '../constant/app_colors.dart';
@@ -56,36 +59,86 @@ class _HomeHeaderState extends State<HomeHeader> {
                 child: SVGImage(path: ImagePath.menuIcon),
               ),
             ),
+            Image.asset(
+              "assets/image/home_header.png",
+              width: 200.w,
+              height: 75.h,
+            ),
             Row(
               children: [
-                SVGImage(path: ImagePath.appLogo),
-                const SizedBox(width: 9),
-                Text(
-                  "Stylish",
-                  style: TextStyle(
-                    fontSize: 18.sp,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.logoTitleColor,
-                    fontFamily: "LibreCaslonText",
+                GestureDetector(
+                  onTap: widget.onAvatarTap,
+                  child: Consumer<AppProvider>(
+                    builder: (context, appProvider, child) {
+                      return appProvider.state == ApiState.loading
+                          ? const CircularProgressIndicator()
+                          : CircleAvatar(
+                              backgroundImage: appProvider.image != null
+                                  ? NetworkImage(
+                                      "${ApiEndPoints.baseUrl}uploads/${appProvider.image}",
+                                    )
+                                  : AssetImage(ImagePath.avatar),
+                            );
+                    },
                   ),
                 ),
-              ],
-            ),
-            GestureDetector(
-              onTap: widget.onAvatarTap,
-              child: Consumer<AppProvider>(
-                builder: (context, appProvider, child) {
-                  return appProvider.state == ApiState.loading
-                      ? const CircularProgressIndicator()
-                      : CircleAvatar(
-                          backgroundImage: appProvider.image != null
-                              ? NetworkImage(
-                                  "${ApiEndPoints.baseUrl}uploads/${appProvider.image}",
-                                )
-                              : AssetImage(ImagePath.avatar),
+                SizedBox(width: 15),
+                Stack(
+                  clipBehavior: Clip.none,
+                  children: [
+                    // Cart Icon
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const CartScreen(),
+                          ),
                         );
-                },
-              ),
+                      },
+                      child: SVGImage(
+                        path: ImagePath.shoppingIcon,
+                        color: Theme.of(context).colorScheme.secondary,
+                        width: 30,
+                      ),
+                    ),
+
+                    // Badge
+                    Positioned(
+                      top: -7,
+                      right: -7,
+                      child: Consumer<CartProvider>(
+                        builder: (context, cartProvider, child) {
+                          final count = cartProvider.cartItems.length;
+                          if (count == 0) {
+                            return SizedBox(); // No badge if count is 0
+                          }
+                          return Container(
+                            padding: EdgeInsets.all(2),
+                            decoration: BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                            constraints: BoxConstraints(
+                              minWidth: 18,
+                              minHeight: 18,
+                            ),
+                            child: Text(
+                              count.toString(),
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 12.sp,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ],
         ),

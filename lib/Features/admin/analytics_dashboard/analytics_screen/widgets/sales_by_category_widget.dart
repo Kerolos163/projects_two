@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/constant/app_colors.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/sales_by_category/view/sales_by_category_screen.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/shared_widgets/pie_chart_legend.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/shared_widgets/pie_chart_widget.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
+import '../../../../../Core/constant/app_colors.dart';
+import '../../sales_by_category/view/sales_by_category_screen.dart';
+import '../../shared_widgets/pie_chart_legend.dart';
+import '../../shared_widgets/pie_chart_widget.dart';
+import '../../viewmodel/analytics_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class SalesByCategoryWidget extends StatelessWidget {

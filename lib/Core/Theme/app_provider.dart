@@ -2,20 +2,20 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import '../api/api_service.dart';
-import '../api/api_state.dart';
-import '../models/recently_view_model.dart';
-import '../../Features/user/Product/view/product_screen.dart';
+
 import '../../Features/Profile/view/profile_screen.dart';
+import '../../Features/payment/cart/view/cart_screen.dart';
 import '../../Features/user/Favorite/view/favorite_screen.dart';
 import '../../Features/user/Home/view/home_screen.dart';
-import '../../Features/payment/cart/view/cart_screen.dart';
+import '../../Features/user/Product/view/product_screen.dart';
+import '../Services/preferences_manager.dart';
 import '../api/api_end_points.dart';
+import '../api/api_service.dart';
+import '../api/api_state.dart';
 import '../models/product_model.dart';
+import '../models/recently_view_model.dart';
 import '../models/user_model.dart';
 import '../utils/app_constants.dart';
-
-import '../Services/preferences_manager.dart';
 
 class AppProvider extends ChangeNotifier {
   // Theme Management
@@ -29,7 +29,6 @@ class AppProvider extends ChangeNotifier {
   List<Widget> get screens => [
     HomeScreen(),
     ProductScreen(),
-    CartScreen(),
     FavoriteScreen(),
     ProfileScreen(),
   ];

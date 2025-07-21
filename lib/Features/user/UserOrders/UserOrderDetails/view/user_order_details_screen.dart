@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
-import 'package:projects_two/Core/constant/app_colors.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Core/models/order_model.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_label.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
+import '../../../../../Core/api/api_end_points.dart';
+import '../../../../../Core/constant/app_colors.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../../../../../Core/models/order_model.dart';
+import '../../../../admin/products_dashboard/Shared_Components/Widgets/custom_label.dart';
+import '../../../../admin/products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
 
 class UserOrderDetailsScreen extends StatelessWidget {
   final OrderModel order;

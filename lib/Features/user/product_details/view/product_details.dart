@@ -3,6 +3,10 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:projects_two/Core/constant/image.dart';
+import 'package:projects_two/Core/widgets/svg_img.dart';
+import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
+import 'package:projects_two/Features/payment/cart/view/cart_screen.dart';
 import '../../../../Core/constant/app_strings.dart';
 import 'widgets/actions_row.dart';
 import 'widgets/add_review_bottom_sheet.dart';
@@ -22,7 +26,10 @@ import 'widgets/product_info.dart';
 class ProductDetails extends StatelessWidget {
   final ProductModel product;
 
-  const ProductDetails({super.key, required this.product});
+    const ProductDetails({super.key, 
+    required this.product
+  });
+
   @override
   Widget build(BuildContext context) {
     log("ProductDetails===>: ${product.id}");
@@ -32,7 +39,7 @@ class ProductDetails extends StatelessWidget {
         ..getProductReviews(productId: product.id),
       builder: (context, child) => Consumer<DetailsProvider>(
         builder: (context, detailsProvider, child) {
-          if (detailsProvider.state == ApiState.error) {
+          if (detailsProvider.message == "Invalid token") {
             WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
               Navigator.pushAndRemoveUntil(
                 context,
@@ -59,7 +66,7 @@ class ProductDetails extends StatelessWidget {
                           onPressed: () async {
                             final isAdded = await detailsProvider
                                 .changeFavorite(productId: product.id);
-                              if (!context.mounted) return;
+                            if (!context.mounted) return;
                             ScaffoldMessenger.of(context).showSnackBar(
                               SnackBar(
                                 content: Text(
@@ -87,19 +94,60 @@ class ProductDetails extends StatelessWidget {
                               : const Icon(Icons.favorite_border),
                         ),
                         SizedBox(width: 10),
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal: 7,
-                            vertical: 7,
-                          ),
-                          decoration: BoxDecoration(
-                            color: Color(0xffF2F2F2),
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Icon(
-                            Icons.shopping_cart,
-                            color: Color(0xff323232),
-                          ),
+                        Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            // Cart Icon
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const CartScreen(),
+                                  ),
+                                );
+                              },
+                              child: SVGImage(
+                                path: ImagePath.shoppingIcon,
+                                color: Theme.of(context).colorScheme.secondary,
+                                width: 25,
+                              ),
+                            ),
+
+                            // Badge
+                            Positioned(
+                              top: -7,
+                              right: -7,
+                              child: Consumer<CartProvider>(
+                                builder: (context, cartProvider, child) {
+                                  final count = cartProvider.cartItems.length;
+                                  if (count == 0) {
+                                    return SizedBox(); // No badge if count is 0
+                                  }
+                                  return Container(
+                                    padding: EdgeInsets.all(2),
+                                    decoration: BoxDecoration(
+                                      color: Colors.red,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    constraints: BoxConstraints(
+                                      minWidth: 18,
+                                      minHeight: 18,
+                                    ),
+                                    child: Text(
+                                      count.toString(),
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 12.sp,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(width: 10),
                       ],
@@ -130,7 +178,7 @@ class ProductDetails extends StatelessWidget {
                             categoryName: product.category.name,
                           ),
                           SizedBox(height: 20),
-                          ActionsRow(),
+                          AddToCartButton(product: product),
                           SizedBox(height: 40),
                           ReviewSection(
                             reviews: detailsProvider.reviews,

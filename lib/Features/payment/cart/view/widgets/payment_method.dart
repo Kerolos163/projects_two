@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/payment/cart/view/widgets/payment_method_item.dart';
+import 'payment_method_item.dart';
 
 class PaymentMethods extends StatefulWidget {
   final void Function(int selectedIndex) onChanged;
@@ -13,7 +13,8 @@ class PaymentMethods extends StatefulWidget {
 class _PaymentMethodsState extends State<PaymentMethods> {
   final List<String> paymentMethodsItems = [
     'assets/image/card.svg',
-    'assets/image/paypal.svg',
+    // 'assets/image/paypal.svg',
+    'assets/image/cash.svg',
   ];
 
   int activeIndex = 0;

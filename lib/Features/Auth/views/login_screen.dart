@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/utils/account_type.dart';
-import 'package:projects_two/Features/admin/dashboard_screen/view/dashboard_screen.dart';
+import '../../../Core/utils/account_type.dart';
+import '../../admin/dashboard_screen/view/dashboard_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../Core/Services/service_locator.dart';

@@ -1,12 +1,14 @@
+import 'dart:ui' as ui;
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import '../../../../../Core/constant/app_strings.dart';
-import '../../../../../Core/models/product_model.dart';
+
 import '../../../../../Core/api/api_end_points.dart';
 import '../../../../../Core/constant/app_colors.dart';
-import 'dart:ui' as ui;
+import '../../../../../Core/constant/app_strings.dart';
+import '../../../../../Core/models/product_model.dart';
 
 class FavoriteItem extends StatelessWidget {
   const FavoriteItem({

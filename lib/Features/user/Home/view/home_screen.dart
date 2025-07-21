@@ -78,7 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     appProvider.recentlyViewed.isEmpty
                         ? SizedBox()
                         : ProductsList(
-                          showRatings: false,
+                            showRatings: false,
                             title: AppStrings.recentlyViewed.tr(),
                             appProvider: appProvider,
                             products: appProvider.recentlyViewed
@@ -114,16 +114,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 20),
                     ProductsList(
-                      title: "",
+                      title: AppStrings.discountProducts.tr(),
                       appProvider: appProvider,
-                      products: homeProvider.products.take(4).toList(),
-                    ),
-                    const SizedBox(height: 20),
-
-                    ProductsList(
-                      title: "",
-                      appProvider: appProvider,
-                      products: homeProvider.products.skip(3).toList(),
+                      products: homeProvider.discountProducts,
                     ),
                     const SizedBox(height: 20),
                   ],

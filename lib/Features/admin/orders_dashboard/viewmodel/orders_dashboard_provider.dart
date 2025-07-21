@@ -1,11 +1,11 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/Services/preferences_manager.dart';
-import 'package:projects_two/Core/models/order_model.dart';
-import 'package:projects_two/Core/utils/app_constants.dart';
-import 'package:projects_two/Features/admin/orders_dashboard/service/orders_service.dart';
-import 'package:projects_two/Features/admin/products_dashboard/service/dashboard_products_service.dart';
-import 'package:projects_two/Features/admin/users_dashboard/service/user_service.dart';
+import '../../../../Core/Services/preferences_manager.dart';
+import '../../../../Core/models/order_model.dart';
+import '../../../../Core/utils/app_constants.dart';
+import '../service/orders_service.dart';
+import '../../products_dashboard/service/dashboard_products_service.dart';
+import '../../users_dashboard/service/user_service.dart';
 
 class OrdersDashboardProvider with ChangeNotifier {
   final OrderService _orderService = OrderService();

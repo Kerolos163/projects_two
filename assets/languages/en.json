@@ -202,5 +202,21 @@
   "cancelOrder": "Cancel Order",
   "returnInitiated": "Return request has been initiated.",
   "orderCancelled": "Order has been cancelled.",
-  "noReviewsYet": "No reviews yet"
+  "noReviewsYet": "No reviews yet",
+  "total": " total",
+  "payment": "payment",
+  "Address cannot be empty": "Address cannot be empty",
+  "City cannot be empty": "City cannot be empty",
+  "Processing...": "Processing...",
+  "Pay with card": "Pay with card",
+  "Pay COD": "Pay COD",
+  "Payment Successful": "Payment Successful",
+  "Payment Faild": "Payment Faild",
+  "Your cart is empty": "Your cart is empty",
+  "Sort by Price": "Sort by Price",
+  "Sort by Rating": "Sort by Rating",
+  "Sort by Price & Rating": "Sort by Price & Rating",
+  "Discount Products": "Discount Products",
+  "Added to cart successfully.": "Added to cart successfully.",
+  "My orders": "My orders"
 }

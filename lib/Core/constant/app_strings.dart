@@ -196,6 +196,17 @@ class AppStrings {
   static const String otherProducts = 'Other Products';
   static const String viewAll = 'view all';
   static const String noReviewsYet = 'noReviewsYet';
+  static const String yourCartIsEmpty = "Your cart is empty";
+  static const String total = "total";
+  static const String payment = "payment";
+  static const String addressCannotBeEmpty = "Address cannot be empty";
+  static const String cityCannotBeEmpty = "City cannot be empty";
+  static const String processing = "Processing...";
+  static const String payWithCard = "Pay with card";
+  static const String payCOD = "Pay COD";
+  static const String paymentSuccessful = 'Payment Successful';
+  static const String paymentFaild = 'Payment Faild';
+
   static var coverImage = 'coverImage';
   static var productAdd = 'productAdd';
   static var unknownProduct = "unknownProduct";
@@ -204,6 +215,12 @@ class AppStrings {
   static var cancelOrder = "cancelOrder";
   static var returnInitiated = "returnInitiated";
   static var orderCancelled = "orderCancelled";
+  static var sortByPrice = "Sort by Price";
+  static var sortByRating = "Sort by Rating";
+  static var sortByPriceAndRating = "Sort by Price & Rating";
+  static var myOrders = "My orders";
+  static var discountProducts = "Discount Products";
+  static var addedToCart = "Added to cart successfully.";
   static const String returnPending = "Return Pending";
   static const String returned = "Returned";
 }

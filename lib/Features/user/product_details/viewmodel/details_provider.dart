@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'package:flutter/material.dart';
 import '../../../../Core/api/api_service.dart';
 import '../../../../Core/api/api_state.dart';
-import 'package:projects_two/Core/models/product_model.dart';
+import '../../../../Core/models/product_model.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Core/Services/preferences_manager.dart';
@@ -24,7 +24,7 @@ class DetailsProvider extends ChangeNotifier {
   List<ReviewModel> reviews = [];
   String message = '';
   final List<ProductModel> _cartItems = [];
-
+  List<ProductModel> get cartItems => _cartItems;
   Future<bool> changeFavorite({required String productId}) async {
   isFavorite = !isFavorite;
   log('isFavorite: $isFavorite');
@@ -59,7 +59,8 @@ class DetailsProvider extends ChangeNotifier {
       state = ApiState.success;
     } catch (error) {
       log('error: $error');
-    //  state = ApiState.error;
+      // message = error.toString();
+      state = ApiState.error;
     }
     notifyListeners();
   }
@@ -151,9 +152,7 @@ class DetailsProvider extends ChangeNotifier {
   }
 
   Future<void> addToCart(ProductModel product) async {
-    // ✅ تحميل البيانات المحفوظة من SharedPreferences
     await loadCartFromStorage();
-
     final existingIndex = _cartItems.indexWhere(
       (item) => item.id == product.id,
     );

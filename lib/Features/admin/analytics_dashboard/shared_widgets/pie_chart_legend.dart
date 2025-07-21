@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/utils/colorFromCategory.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
+import '../utils/colorFromCategory.dart';
+import '../viewmodel/analytics_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class PieChartLegend extends StatelessWidget {

@@ -1,6 +1,6 @@
-import 'package:projects_two/Core/api/api_end_points.dart';
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Core/models/user_model.dart';
+import '../../../../Core/api/api_end_points.dart';
+import '../../../../Core/api/api_service.dart';
+import '../../../../Core/models/user_model.dart';
 
 class UserService {
   static final ApiService _apiService = ApiService();

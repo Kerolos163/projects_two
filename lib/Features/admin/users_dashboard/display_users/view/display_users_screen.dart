@@ -1,11 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
-import 'package:projects_two/Core/api/api_state.dart';
-import 'package:projects_two/Core/constant/app_colors.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Features/admin/users_dashboard/user_details/view/user_details_screen.dart';
-import 'package:projects_two/Features/admin/users_dashboard/viewmodel/users_dashboard_provider.dart';
+import '../../../../../Core/api/api_end_points.dart';
+import '../../../../../Core/api/api_state.dart';
+import '../../../../../Core/constant/app_colors.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../../user_details/view/user_details_screen.dart';
+import '../../viewmodel/users_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class DashboardDisplayUsersScreen extends StatelessWidget {

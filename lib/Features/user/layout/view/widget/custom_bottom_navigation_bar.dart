@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../Product/viewmodel/product_provider.dart';
 import 'package:provider/provider.dart';
 
@@ -34,8 +35,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
           label: AppStrings.home.tr(),
         ),
         BottomNavigationBarItem(
-          icon: SVGImage(
-            path: ImagePath.shoppingIcon,
+          icon: Icon(
+            Icons.style_outlined,
+            size: 30.r,
             color: appProvider.currentIndex == 1
                 ? AppColors.primary
                 : Theme.of(context).colorScheme.secondary,
@@ -44,29 +46,22 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: SVGImage(
-            path: ImagePath.shoppingIcon,
-            color: appProvider.currentIndex == 2
-                ? AppColors.primary
-                : Theme.of(context).colorScheme.secondary,
-          ),
-          label: AppStrings.cart.tr(),
-        ),
-        BottomNavigationBarItem(
-          icon: SVGImage(
             path: ImagePath.heartIcon,
-            color: appProvider.currentIndex == 3
+            color: appProvider.currentIndex == 2
                 ? AppColors.primary
                 : Theme.of(context).colorScheme.secondary,
           ),
           label: AppStrings.favorites.tr(),
         ),
         BottomNavigationBarItem(
-          icon: SVGImage(
-            path: ImagePath.settingsIcon,
-            color: appProvider.currentIndex == 4
+          icon: Icon(
+            Icons.person_outline,
+            size: 30.r,
+            color: appProvider.currentIndex == 3
                 ? AppColors.primary
                 : Theme.of(context).colorScheme.secondary,
           ),
+
           label: AppStrings.profile2.tr(),
         ),
       ],

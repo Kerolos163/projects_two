@@ -3,10 +3,10 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Core/models/category_model.dart';
-import 'package:projects_two/Features/admin/categories_dashboard/service/category_service.dart';
-import 'package:projects_two/Features/admin/categories_dashboard/service/subcategory_service.dart';
+import '../../../../Core/constant/app_strings.dart';
+import '../../../../Core/models/category_model.dart';
+import '../service/category_service.dart';
+import '../service/subcategory_service.dart';
 
 class CategoriesDashboardProvider extends ChangeNotifier {
   final formKey = GlobalKey<FormState>();

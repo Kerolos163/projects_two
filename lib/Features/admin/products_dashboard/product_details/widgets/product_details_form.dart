@@ -1,14 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Core/models/product_model.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_label.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/multiple_image_picker.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../../../../../Core/models/product_model.dart';
+import '../../Shared_Components/Widgets/custom_label.dart';
+import '../../Shared_Components/Widgets/custom_textfield.dart';
+import '../../Shared_Components/Widgets/multiple_image_picker.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:projects_two/Features/admin/products_dashboard/product_details/widgets/product_catergory_dropdown.dart';
-import 'package:projects_two/Features/admin/products_dashboard/product_details/widgets/product_image_preview.dart';
-import 'package:projects_two/Features/admin/products_dashboard/viewmodel/products_dashboard_provider.dart';
+import 'product_catergory_dropdown.dart';
+import 'product_image_preview.dart';
+import '../../viewmodel/products_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailsForm extends StatefulWidget {

@@ -3,12 +3,12 @@ import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:projects_two/Core/constant/app_colors.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_label.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/multiple_image_picker.dart';
-import 'package:projects_two/Features/admin/products_dashboard/viewmodel/products_dashboard_provider.dart';
+import '../../../../../Core/constant/app_colors.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../../Shared_Components/Widgets/custom_label.dart';
+import '../../Shared_Components/Widgets/custom_textfield.dart';
+import '../../Shared_Components/Widgets/multiple_image_picker.dart';
+import '../../viewmodel/products_dashboard_provider.dart';
 
 class ProductFormFields extends StatelessWidget {
   const ProductFormFields({super.key});
