@@ -42,7 +42,12 @@ class CategoryDrawerItem extends StatelessWidget {
               onExpansionChanged: (value) {
                 if (subCategory.isEmpty) {
                   appProvider.changeIndex(index: 1);
-                  productProvider.getProducts(filter: item.name);
+                  productProvider.getProducts(
+                    filter: item.name[item.name.length - 1] == 's' 
+                    ? item.name.substring(0, item.name.length - 1) 
+                    :
+                  item.name
+                  );
                   Navigator.pop(context);
                 }
               },
@@ -53,7 +58,9 @@ class CategoryDrawerItem extends StatelessWidget {
                       onTap: () {
                         appProvider.changeIndex(index: 1);
                         productProvider.getProducts(
-                          filter: item.name,
+                          filter: item.name[item.name.length - 1] == 's'
+                              ? item.name.substring(0, item.name.length - 1)
+                              : item.name,
                           subFilterId: e.id,
                         );
                         Navigator.pop(context);

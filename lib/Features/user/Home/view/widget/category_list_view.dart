@@ -31,7 +31,11 @@ class CategoryListView extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   appProvider.changeIndex(index: 1);
-                  productProvider.getProducts(filter: item.name);
+                  productProvider.getProducts(filter: 
+                  item.name[item.name.length - 1] == 's' 
+                    ? item.name.substring(0, item.name.length - 1) 
+                    :
+                  item.name);
                 },
                 child: CategoryItem(islocal: items.isEmpty, item: item),
               );
