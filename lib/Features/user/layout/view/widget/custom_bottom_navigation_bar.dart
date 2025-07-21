@@ -54,8 +54,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
           label: AppStrings.favorites.tr(),
         ),
         BottomNavigationBarItem(
-          icon: SVGImage(
-            path: ImagePath.settingsIcon,
+          icon: Icon(
+            Icons.person_outline,
+            size: 30.r,
             color: appProvider.currentIndex == 3
                 ? AppColors.primary
                 : Theme.of(context).colorScheme.secondary,
