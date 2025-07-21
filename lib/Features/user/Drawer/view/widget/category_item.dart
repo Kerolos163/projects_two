@@ -20,28 +20,35 @@ class CategoryDrawerItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ExpansionTile(
-      shape: Border.all(color: Colors.transparent),
-      collapsedShape: Border.all(color: Colors.transparent),
-      backgroundColor: Colors.transparent,
-      leading: ClipOval(
-        child: CachedNetworkImage(
-          imageUrl: "${ApiEndPoints.baseUrl}${item.image}",
-          errorWidget: (context, url, error) =>
-              const Icon(Icons.error, color: Colors.red),
-          width: 50.r,
-          height: 50.r,
-          fit: BoxFit.cover,
-        ),
-      ),
-      title: Text(item.name),
-      children: subCategory
-          .map(
-            (e) => Consumer<AppProvider>(
-              builder: (context, appProvider, child) {
-                return Consumer<ProductProvider>(
-                  builder: (context, productProvider, child) {
-                    return ListTile(
+    return Consumer<AppProvider>(
+      builder: (context, appProvider, child) {
+        return Consumer<ProductProvider>(
+          builder: (context, productProvider, child) {
+            return ExpansionTile(
+              shape: Border.all(color: Colors.transparent),
+              collapsedShape: Border.all(color: Colors.transparent),
+              backgroundColor: Colors.transparent,
+              leading: ClipOval(
+                child: CachedNetworkImage(
+                  imageUrl: "${ApiEndPoints.baseUrl}${item.image}",
+                  errorWidget: (context, url, error) =>
+                      const Icon(Icons.error, color: Colors.red),
+                  width: 50.r,
+                  height: 50.r,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              title: Text(item.name),
+              onExpansionChanged: (value) {
+                if (subCategory.isEmpty) {
+                  appProvider.changeIndex(index: 1);
+                  productProvider.getProducts(filter: item.name);
+                  Navigator.pop(context);
+                }
+              },
+              children: subCategory
+                  .map(
+                    (e) => ListTile(
                       title: Text(e.name),
                       onTap: () {
                         appProvider.changeIndex(index: 1);
@@ -51,13 +58,13 @@ class CategoryDrawerItem extends StatelessWidget {
                         );
                         Navigator.pop(context);
                       },
-                    );
-                  },
-                );
-              },
-            ),
-          )
-          .toList(),
+                    ),
+                  )
+                  .toList(),
+            );
+          },
+        );
+      },
     );
   }
 }
