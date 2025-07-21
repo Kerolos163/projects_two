@@ -58,6 +58,7 @@ class DetailsProvider extends ChangeNotifier {
       state = ApiState.success;
     } catch (error) {
       log('error: $error');
+      // message = error.toString();
       state = ApiState.error;
     }
     notifyListeners();
