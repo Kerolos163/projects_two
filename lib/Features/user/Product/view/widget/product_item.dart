@@ -18,96 +18,124 @@ class ProductItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer,
-        borderRadius: BorderRadius.circular(16),
-        boxShadow: [
-          BoxShadow(
-            offset: Offset(0, 2),
-            blurRadius: 2,
-            color: AppColors.black.withValues(alpha: .3),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          ClipRRect(
+    return Stack(
+      children: [
+        Container(
+          decoration: BoxDecoration(
+            color: Theme.of(context).colorScheme.primaryContainer,
             borderRadius: BorderRadius.circular(16),
-            child: CachedNetworkImage(
-              imageUrl: '${ApiEndPoints.baseUrl}${productModel.imageCover}',
-              width: .5.sw,
-              height: index % 2 == 0 ? 140.h : 200.h,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => Container(
-                color: Colors.grey[200],
-                child: Center(child: CircularProgressIndicator()),
+            boxShadow: [
+              BoxShadow(
+                offset: Offset(0, 2),
+                blurRadius: 2,
+                color: AppColors.black.withValues(alpha: .3),
               ),
-              errorWidget: (context, url, error) =>
-                  Container(color: Colors.grey[200], child: Icon(Icons.error)),
-            ),
+            ],
           ),
-          Container(
-            width: .5.sw,
-            padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 8.h),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  productModel.title,
-                  style: Theme.of(context).textTheme.titleMedium,
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: CachedNetworkImage(
+                  imageUrl: '${ApiEndPoints.baseUrl}${productModel.imageCover}',
+                  width: .5.sw,
+                  height: index % 2 == 0 ? 140.h : 200.h,
+                  fit: BoxFit.cover,
+                  placeholder: (context, url) => Container(
+                    color: Colors.grey[200],
+                    child: Center(child: CircularProgressIndicator()),
+                  ),
+                  errorWidget: (context, url, error) => Container(
+                    color: Colors.grey[200],
+                    child: Icon(Icons.error),
+                  ),
                 ),
-                SizedBox(height: 4.h),
-                Text(
-                  productModel.description,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.displayMedium?.copyWith(height: 2),
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                SizedBox(height: 4.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.start,
+              ),
+              Container(
+                width: .5.sw,
+                padding: EdgeInsets.symmetric(horizontal: 7.w, vertical: 8.h),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    productModel.priceAfterDiscount == 0
-                        ? const SizedBox()
-                        : Row(
-                            children: [
-                              Text(
-                                productModel.price.toStringAsFixed(2),
-                                style: TextStyle(
-                                  color: Color(0xff808488),
-                                  decoration: TextDecoration.lineThrough,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              SizedBox(width: 10),
-                            ],
-                          ),
                     Text(
-                      "${productModel.priceAfterDiscount.toString() == "0" ? productModel.price.toStringAsFixed(2) : productModel.priceAfterDiscount.toStringAsFixed(2)}\$",
-                      style: TextStyle(
-                        color: Color(0xffFA7189),
-                        fontWeight: FontWeight.w600,
-                        fontSize: 14.sp,
-                      ),
+                      productModel.title,
+                      style: Theme.of(context).textTheme.titleMedium,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 4.h),
+                    Text(
+                      productModel.description,
+                      style: Theme.of(
+                        context,
+                      ).textTheme.displayMedium?.copyWith(height: 2),
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    SizedBox(height: 4.h),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        productModel.priceAfterDiscount == 0
+                            ? const SizedBox()
+                            : Row(
+                                children: [
+                                  Text(
+                                    productModel.price.toStringAsFixed(2),
+                                    style: TextStyle(
+                                      color: Color(0xff808488),
+                                      decoration: TextDecoration.lineThrough,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  ),
+                                  SizedBox(width: 10),
+                                ],
+                              ),
+                        Text(
+                          "${productModel.priceAfterDiscount.toString() == "0" ? productModel.price.toStringAsFixed(2) : productModel.priceAfterDiscount.toStringAsFixed(2)}\$",
+                          style: TextStyle(
+                            color: Color(0xffFA7189),
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14.sp,
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 4.h),
+                    RatingBarWidget(
+                      initialRating:
+                          double.tryParse(productModel.ratingsAverage) ?? 0.0,
                     ),
                   ],
                 ),
-                SizedBox(height: 4.h),
-                RatingBarWidget(
-                  initialRating:
-                      double.tryParse(productModel.ratingsAverage) ?? 0.0,
-                ),
-              ],
-            ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+        productModel.priceAfterDiscount == 0
+            ? const SizedBox()
+            : Positioned(
+                top: 0,
+                right: 0,
+                child: Container(
+                  padding: const EdgeInsets.all(6),
+                  decoration: BoxDecoration(
+                    color: Theme.of(context).colorScheme.primaryContainer,
+                    borderRadius: BorderRadius.only(
+                      topRight: Radius.circular(16),
+                      bottomLeft: Radius.circular(16),
+                    ),
+                  ),
+                  child: Text(
+                    "-${(((productModel.price - productModel.priceAfterDiscount) / productModel.price) * 100).toStringAsFixed(1)} %",
+                    style: Theme.of(
+                      context,
+                    ).textTheme.titleMedium?.copyWith(color: AppColors.black),
+                  ),
+                ),
+              ),
+      ],
     );
   }
 }
