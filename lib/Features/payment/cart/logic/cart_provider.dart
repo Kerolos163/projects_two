@@ -31,6 +31,10 @@ class CartProvider extends ChangeNotifier {
 
   List<ProductModel> get cartItems => _cartItems;
 
+  GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  TextEditingController address = TextEditingController();
+  TextEditingController city = TextEditingController();
+
   Future<void> loadCartData() async {
     await loadCartFromStorage();
   }
@@ -117,6 +121,8 @@ class CartProvider extends ChangeNotifier {
         ApiEndPoints.orders,
         body: {
           "custId": localData.id,
+          "address": address.text,
+          "city": city.text,
           "paymentMethod": paymentMethod,
           "products": products,
         },
