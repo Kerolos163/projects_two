@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:projects_two/Features/Auth/views/login_screen.dart';
+import 'package:projects_two/Features/admin/dashboard_screen/view/dashboard_screen.dart';
 import 'package:projects_two/Features/onboarding/presentation/views/onboarding_screen.dart';
 import 'package:projects_two/Features/user/layout/view/layout_screen.dart';
 import '../../../Core/utils/app_constants.dart';
@@ -79,8 +81,12 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
       AppConstants.userInfo,
     );
     if (userInfo == null) return const LoginScreen();
-
-    return const LayoutScreen();
+    if (jsonDecode(userInfo)['role'] == 'admin') {
+      return DashboardScreen();
+    } else {
+      return const LayoutScreen();
+    }
+  //  return const LayoutScreen();
   }
 
   @override

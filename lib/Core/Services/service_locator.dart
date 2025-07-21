@@ -2,6 +2,7 @@ import 'package:get_it/get_it.dart';
 import 'package:projects_two/Core/Services/stripe_service.dart';
 import 'package:projects_two/Features/Auth/viewmodel/auth_provider.dart';
 import 'package:projects_two/Features/Profile/viewmodel/profile_provider.dart';
+import 'package:projects_two/Features/admin/returns_dashboard/viewmodel/return_dashboard_provider.dart';
 import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
 import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
 import 'package:projects_two/Features/admin/categories_dashboard/viewmodel/categories_dashboard_provider.dart';
@@ -35,6 +36,7 @@ class ServiceLocator {
     getIt.registerLazySingleton<OrdersDashboardProvider>(() => OrdersDashboardProvider());
     getIt.registerLazySingleton<UserDashboardProvider>(() => UserDashboardProvider());
     getIt.registerLazySingleton<AnalyticsDashboardProvider>(() => AnalyticsDashboardProvider());
+    getIt.registerLazySingleton<ReturnsDashboardProvider>(() => ReturnsDashboardProvider());
 
 
 

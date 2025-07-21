@@ -28,6 +28,12 @@ class _DashboardDisplayCategoriesScreenState
               AppStrings.categories.tr(),
               style: Theme.of(context).textTheme.titleLarge,
             ),
+            leading: IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
             centerTitle: true,
             backgroundColor: AppColors.white,
             scrolledUnderElevation: 0,

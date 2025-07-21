@@ -85,8 +85,31 @@ class UserOrderDetailsScreen extends StatelessWidget {
                     product?.title ?? AppStrings.unknownProduct.tr(),
                     style: Theme.of(context).textTheme.titleSmall,
                   ),
-                  subtitle: Text(
-                    '${AppStrings.quantity.tr()}: ${orderProduct.quantity}',
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        '${AppStrings.quantity.tr()}: ${orderProduct.quantity}',
+                      ),
+                      if (orderProduct.returnStatus != null &&
+                          orderProduct.returnStatus != 'none')
+                        Padding(
+                          padding: const EdgeInsets.only(top: 4.0),
+                          child: Chip(
+                            label: Text(
+                              orderProduct.returnStatus == 'pending'
+                                  ? AppStrings.returnPending.tr()
+                                  : AppStrings.returned.tr(),
+                              style: const TextStyle(color: Colors.white),
+                            ),
+                            backgroundColor:
+                                orderProduct.returnStatus == 'pending'
+                                ? Colors.orange
+                                : Colors.green,
+                            visualDensity: VisualDensity.compact,
+                          ),
+                        ),
+                    ],
                   ),
                 ),
               );
@@ -106,7 +129,6 @@ class UserOrderDetailsScreen extends StatelessWidget {
                   ),
                 ),
                 onPressed: () {
-                
                   // ScaffoldMessenger.of(context).showSnackBar(
                   //   SnackBar(content: Text(AppStrings.returnInitiated.tr())),
                   // );

@@ -204,4 +204,6 @@ class AppStrings {
   static var cancelOrder = "cancelOrder";
   static var returnInitiated = "returnInitiated";
   static var orderCancelled = "orderCancelled";
+  static const String returnPending = "Return Pending";
+  static const String returned = "Returned";
 }

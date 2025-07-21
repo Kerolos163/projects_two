@@ -30,7 +30,7 @@ class OrdersDashboardProvider with ChangeNotifier {
 
   Future<void> fetchAllOrders() async {
     _setLoading(true);
-    try {
+   try {
       final fetchedOrders = await _orderService.getAllOrders();
       _orders = await _populateOrderDetails(fetchedOrders);
       _orders = _orders.reversed.toList();
@@ -38,6 +38,7 @@ class OrdersDashboardProvider with ChangeNotifier {
     } catch (e) {
       _setError(e.toString());
     } finally {
+      notifyListeners();
       _setLoading(false);
     }
   }

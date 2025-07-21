@@ -11,6 +11,8 @@ import 'package:projects_two/Features/admin/orders_dashboard/display_orders/view
 import 'package:projects_two/Features/admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
 import 'package:projects_two/Features/admin/products_dashboard/display_products/view/dashboard_display_products_screen.dart';
 import 'package:projects_two/Features/admin/products_dashboard/viewmodel/products_dashboard_provider.dart';
+import 'package:projects_two/Features/admin/returns_dashboard/display_returns/view/display_return_screen.dart';
+import 'package:projects_two/Features/admin/returns_dashboard/viewmodel/return_dashboard_provider.dart';
 import 'package:projects_two/Features/admin/users_dashboard/display_users/view/display_users_screen.dart';
 import 'package:projects_two/Features/admin/users_dashboard/viewmodel/users_dashboard_provider.dart';
 import 'package:provider/provider.dart';
@@ -33,16 +35,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
   late final OrdersDashboardProvider _ordersProvider;
   late final UserDashboardProvider _usersProvider;
   late final AnalyticsDashboardProvider _analyticsProvider;
-
+  late final ReturnsDashboardProvider _returnsProvider;
 
   @override
   void initState() {
     super.initState();
     _productsProvider = getIt<ProductsDashboardProvider>()..fetchAllProducts();
-    _categoriesProvider = getIt<CategoriesDashboardProvider>()..fetchCategoriesAndSubcategories();
+    _categoriesProvider = getIt<CategoriesDashboardProvider>()
+      ..fetchCategoriesAndSubcategories();
     _ordersProvider = getIt<OrdersDashboardProvider>()..fetchAllOrders();
     _usersProvider = getIt<UserDashboardProvider>()..fetchUsers();
     _analyticsProvider = getIt<AnalyticsDashboardProvider>();
+    _returnsProvider = getIt<ReturnsDashboardProvider>()..fetchAllReturns();
   }
 
   @override
@@ -57,6 +61,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            DrawerHeader(
+              decoration: BoxDecoration(color: Theme.of(context).primaryColor),
+              child: Text(
+                'Menu',
+                style: TextStyle(color: Colors.white, fontSize: 24),
+              ),
+            ),
+            ListTile(
+              leading: Icon(Icons.person_outline),
+              title: Text('Profile'),
+              onTap: () {
+                Navigator.pop(context); 
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const ProfileScreen()),
+                );
+              },
+            ),
+         
+          ],
+        ),
+      ),
       body: IndexedStack(
         index: _currentIndex,
         children: [
@@ -77,10 +107,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
             child: const DashboardDisplayOrdersScreen(),
           ),
           ChangeNotifierProvider.value(
+            value: _returnsProvider,
+            child: const DashboardDisplayReturnsScreen(),
+          ),
+          ChangeNotifierProvider.value(
             value: _usersProvider,
             child: const DashboardDisplayUsersScreen(),
           ),
-           ProfileScreen(),
         ],
       ),
       bottomNavigationBar: BottomNavigationBar(
@@ -88,11 +121,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
         selectedItemColor: AppColors.primary,
         unselectedItemColor: AppColors.black,
         type: BottomNavigationBarType.fixed,
-        onTap: (index) => setState(() => _currentIndex = index),
+        onTap: (index) {
+          setState(() {
+            if (_currentIndex == index && index == 3) {
+              _ordersProvider.fetchAllOrders();
+            }
+
+            if (_currentIndex != index && index == 3) {
+              _ordersProvider.fetchAllOrders();
+            }
+
+            _currentIndex = index;
+          });
+        },
         items: [
-            BottomNavigationBarItem(
+          BottomNavigationBarItem(
             icon: const Icon(Icons.analytics),
-            label:"Analytics",
+            label: "Analytics",
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
@@ -123,12 +168,12 @@ class _DashboardScreenState extends State<DashboardScreen> {
             label: AppStrings.orders.tr(),
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.supervised_user_circle_outlined),
-            label: AppStrings.users.tr(),
+            icon: const Icon(Icons.rotate_left_outlined),
+            label: "Returns".tr(),
           ),
           BottomNavigationBarItem(
-            icon: const Icon(Icons.person_2_outlined),
-            label: AppStrings.profile.tr(),
+            icon: const Icon(Icons.supervised_user_circle_outlined),
+            label: AppStrings.users.tr(),
           ),
         ],
       ),

@@ -26,8 +26,8 @@ class CategoryModel extends Equatable {
     return CategoryModel(
       id: json['_id'] ?? '',
       name: json['name'] ?? '',
-      slug: json['slug'],
-      image: json['image'],
+      slug: json['slug'] ?? '',
+      image: json['image']??  '',
       createdAt: json['createdAt'] != null
           ? DateTime.tryParse(json['createdAt'])
           : null,

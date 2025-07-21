@@ -42,6 +42,12 @@ class _DashboardDisplayProductsScreenState
               style: Theme.of(context).textTheme.titleLarge,
             ),
             centerTitle: true,
+            leading: IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                Scaffold.of(context).openDrawer();
+              },
+            ),
             backgroundColor: AppColors.white,
             scrolledUnderElevation: 0,
             automaticallyImplyLeading: false,

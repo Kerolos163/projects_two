@@ -48,6 +48,7 @@ class DetailsProvider extends ChangeNotifier {
       final response = await apiService.get(
         ApiEndPoints.userFavorites(id: localData.id),
       );
+
       final jsonData = response.data["data"]["products"] as List;
       for (var e in jsonData) {
         if (e["_id"] == productId) {
@@ -58,7 +59,7 @@ class DetailsProvider extends ChangeNotifier {
       state = ApiState.success;
     } catch (error) {
       log('error: $error');
-      state = ApiState.error;
+    //  state = ApiState.error;
     }
     notifyListeners();
   }

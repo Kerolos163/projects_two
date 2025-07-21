@@ -42,23 +42,35 @@ class ProductModel extends Equatable {
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
-    id: json["_id"],
-    title: json["title"],
-    slug: json["slug"],
-    description: json["description"],
-    quantity: json["quantity"],
-    sold: json["sold"],
-    price: json["price"],
+    id: json["_id"] ?? '',
+    title: json["title"] ?? '',
+    slug: json["slug"] ?? '',
+    description: json["description"] ?? '',
+    quantity: json["quantity"] ?? 0,
+    sold: json["sold"] ?? 0,
+    price: json["price"] ?? 0,
     priceAfterDiscount: json["priceAfterDiscount"] ?? 0,
-    colors: List<dynamic>.from(json["colors"].map((x) => x)),
-    imageCover: json["imageCover"],
-    images: List<dynamic>.from(json["images"].map((x) => x)),
-    category: Category.fromJson(json["category"]),
-    subCategories: List<String>.from(json["subCategories"].map((x) => x)),
-    ratingsAverage: json["ratingsAverage"] ?? "",
-    ratingsQuantity: json["ratingsQuantity"],
-    createdAt: DateTime.parse(json["createdAt"]),
-    updatedAt: DateTime.parse(json["updatedAt"]),
+    colors: json["colors"] != null
+        ? List<dynamic>.from(json["colors"].map((x) => x))
+        : [],
+    imageCover: json["imageCover"] ?? '',
+    images: json["images"] != null
+        ? List<dynamic>.from(json["images"].map((x) => x))
+        : [],
+    category: json["category"] != null
+        ? Category.fromJson(json["category"])
+        : const Category(id: '', name: '', categoryId: null),
+    subCategories: json["subCategories"] != null
+        ? List<String>.from(json["subCategories"].map((x) => x))
+        : [],
+    ratingsAverage: json["ratingsAverage"]?.toString() ?? '',
+    ratingsQuantity: json["ratingsQuantity"] ?? 0,
+    createdAt: json["createdAt"] != null
+        ? DateTime.parse(json["createdAt"])
+        : DateTime.now(),
+    updatedAt: json["updatedAt"] != null
+        ? DateTime.parse(json["updatedAt"])
+        : DateTime.now(),
     categorieModelId: json["id"],
   );
 

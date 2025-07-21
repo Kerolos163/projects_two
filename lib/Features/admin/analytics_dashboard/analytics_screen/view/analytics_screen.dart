@@ -30,7 +30,19 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
   Widget build(BuildContext context) {
     return Consumer<AnalyticsDashboardProvider>(
       builder: (context, provider, _) => Scaffold(
-        appBar: AppBar(title: Text('Analytics Dashboard', style: Theme.of(context).textTheme.titleLarge), ),
+        appBar: AppBar(
+          title: Text(
+            'Analytics Dashboard',
+            style: Theme.of(context).textTheme.titleLarge,
+          ),
+          centerTitle: true,
+          leading: IconButton(
+            icon: const Icon(Icons.menu),
+            onPressed: () {
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+        ),
         body: provider.isLoading || provider.isTrendingLoading
             ? const Center(child: CircularProgressIndicator())
             : SingleChildScrollView(
