@@ -44,17 +44,8 @@ class CustomBottomNavigationBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: SVGImage(
-            path: ImagePath.shoppingIcon,
-            color: appProvider.currentIndex == 2
-                ? AppColors.primary
-                : Theme.of(context).colorScheme.secondary,
-          ),
-          label: AppStrings.cart.tr(),
-        ),
-        BottomNavigationBarItem(
-          icon: SVGImage(
             path: ImagePath.heartIcon,
-            color: appProvider.currentIndex == 3
+            color: appProvider.currentIndex == 2
                 ? AppColors.primary
                 : Theme.of(context).colorScheme.secondary,
           ),
@@ -63,7 +54,7 @@ class CustomBottomNavigationBar extends StatelessWidget {
         BottomNavigationBarItem(
           icon: SVGImage(
             path: ImagePath.settingsIcon,
-            color: appProvider.currentIndex == 4
+            color: appProvider.currentIndex == 3
                 ? AppColors.primary
                 : Theme.of(context).colorScheme.secondary,
           ),

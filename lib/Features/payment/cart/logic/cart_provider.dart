@@ -33,6 +33,7 @@ class CartProvider extends ChangeNotifier {
 
   Future<void> loadCartData() async {
     await loadCartFromStorage();
+    notifyListeners();
   }
 
   Future<void> loadCartFromStorage() async {
@@ -61,7 +62,7 @@ class CartProvider extends ChangeNotifier {
   }
 
   Future<void> removeFromCart(ProductModel product) async {
-    _cartItems.remove(product);
+    _cartItems.removeWhere((item) => item.id == product.id);
     await saveCartToStorage();
     notifyListeners();
   }
@@ -130,6 +131,24 @@ class CartProvider extends ChangeNotifier {
       state = ApiState.error;
     }
 
+    notifyListeners();
+  }
+
+  Future<void> addToCart(ProductModel product) async {
+    await loadCartFromStorage();
+    final existingIndex = _cartItems.indexWhere(
+      (item) => item.id == product.id,
+    );
+
+    if (existingIndex != -1) {
+      _cartItems[existingIndex] = _cartItems[existingIndex].copyWith(
+        quantity: _cartItems[existingIndex].quantity + 1,
+      );
+    } else {
+      _cartItems.add(product.copyWith(quantity: 1));
+    }
+
+    await saveCartToStorage();
     notifyListeners();
   }
 }

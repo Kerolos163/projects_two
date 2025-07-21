@@ -29,7 +29,6 @@ class AppProvider extends ChangeNotifier {
   List<Widget> get screens => [
     HomeScreen(),
     ProductScreen(),
-    CartScreen(),
     FavoriteScreen(),
     ProfileScreen(),
   ];

@@ -24,7 +24,7 @@ class DetailsProvider extends ChangeNotifier {
   List<ReviewModel> reviews = [];
   String message = '';
   final List<ProductModel> _cartItems = [];
-
+  List<ProductModel> get cartItems => _cartItems;
   Future<bool> changeFavorite({required String productId}) async {
   isFavorite = !isFavorite;
   log('isFavorite: $isFavorite');
@@ -149,9 +149,7 @@ class DetailsProvider extends ChangeNotifier {
   }
 
   Future<void> addToCart(ProductModel product) async {
-    // ✅ تحميل البيانات المحفوظة من SharedPreferences
     await loadCartFromStorage();
-
     final existingIndex = _cartItems.indexWhere(
       (item) => item.id == product.id,
     );

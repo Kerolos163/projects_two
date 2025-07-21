@@ -103,7 +103,7 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
               child: FadeTransition(
                 opacity: _fadeAnimation,
                 child: Image.asset(
-                  'assets/image/HomeMade_Logo.png',
+                  'assets/image/logo.png',
                   width: 200,
                   height: 200,
                 ),

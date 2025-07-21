@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
 import 'package:projects_two/Features/splashscreen/customSplahscreen.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:provider/provider.dart';
@@ -25,18 +26,23 @@ void main() async {
   await ScreenUtil.ensureScreenSize();
   await EasyLocalization.ensureInitialized();
   runApp(
-    EasyLocalization(
-      supportedLocales: [
-        Locale(AppConstants.enCode),
-        Locale(AppConstants.arCode),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => CartProvider()..loadCartData()),
       ],
-      path: 'assets/languages',
-      startLocale: Locale(AppConstants.enCode),
-      child: DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => const MyApp(),
+      child: EasyLocalization(
+        supportedLocales: [
+          Locale(AppConstants.enCode),
+          Locale(AppConstants.arCode),
+        ],
+        path: 'assets/languages',
+        startLocale: Locale(AppConstants.enCode),
+        child: DevicePreview(
+          enabled: !kReleaseMode,
+          builder: (context) => const MyApp(),
+        ),
       ),
-    ),
+    )
   );
 }
 

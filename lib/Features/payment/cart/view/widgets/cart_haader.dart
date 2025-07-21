@@ -3,6 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:projects_two/Core/constant/app_colors.dart';
 import 'package:projects_two/Core/constant/image.dart';
 import 'package:projects_two/Core/widgets/svg_img.dart';
+import 'package:projects_two/Features/user/Home/view/home_screen.dart';
+import 'package:projects_two/Features/user/Home/viewmodel/home_provider.dart';
+import 'package:provider/provider.dart';
 
 class CartHeader extends StatelessWidget {
   const CartHeader({
@@ -20,17 +23,20 @@ class CartHeader extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                color: AppColors.grey50,
-                shape: BoxShape.circle,
-              ),
-              child: GestureDetector(
-                onTap: onMenuTap,
-                child: SVGImage(path: ImagePath.menuIcon),
-              ),
+            IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () {
+                if (Navigator.of(context).canPop()) {
+                  Navigator.pop(context);
+                } else {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => const HomeScreen()),
+                  );
+                }
+              },
             ),
+
             Text(
               "My Cart",
               style: TextStyle(
