@@ -53,7 +53,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
   void dispose() {
     _productsProvider.dispose();
     _categoriesProvider.dispose();
-    _ordersProvider.dispose();
+    // _ordersProvider.dispose();
     _usersProvider.dispose();
     super.dispose();
   }
