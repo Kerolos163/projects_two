@@ -212,5 +212,8 @@
   "Pay COD": "Pay COD",
   "Payment Successful": "Payment Successful",
   "Payment Faild": "Payment Faild",
-  "Your cart is empty": "Your cart is empty"
+  "Your cart is empty": "Your cart is empty",
+  "Sort by Price": "Sort by Price",
+  "Sort by Rating": "Sort by Rating",
+  "Sort by Price & Rating": "Sort by Price & Rating"
 }

@@ -68,7 +68,7 @@ class ProductScreen extends StatelessWidget {
                                     provider.getSortedProducts('price');
                                   } else if (value == 'rating') {
                                     provider.getSortedProducts(
-                                      'ratingsAverage',
+                                      '-ratingsAverage',
                                     );
                                   } else if (value == 'both') {
                                     provider.getSortedProducts(
@@ -79,15 +79,17 @@ class ProductScreen extends StatelessWidget {
                                 itemBuilder: (context) => [
                                   PopupMenuItem(
                                     value: 'price',
-                                    child: Text('Sort by Price'),
+                                    child: Text(AppStrings.sortByPrice.tr()),
                                   ),
                                   PopupMenuItem(
                                     value: 'rating',
-                                    child: Text('Sort by Rating'),
+                                    child: Text(AppStrings.sortByRating.tr()),
                                   ),
                                   PopupMenuItem(
                                     value: 'both',
-                                    child: Text('Sort by Price & Rating'),
+                                    child: Text(
+                                      AppStrings.sortByPriceAndRating.tr(),
+                                    ),
                                   ),
                                 ],
                               ),
