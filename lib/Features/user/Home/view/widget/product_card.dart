@@ -137,7 +137,7 @@ class ProductCardHome extends StatelessWidget {
                     ),
                   ),
                   child: Text(
-                    "${(((productModel.price - productModel.priceAfterDiscount) / productModel.price) * 100).toStringAsFixed(1)} %",
+                    "-${(((productModel.price - productModel.priceAfterDiscount) / productModel.price) * 100).toStringAsFixed(1)} %",
                     style: Theme.of(
                       context,
                     ).textTheme.titleMedium?.copyWith(color: AppColors.black),
