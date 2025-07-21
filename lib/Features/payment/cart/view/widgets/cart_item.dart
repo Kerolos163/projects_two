@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
-import 'package:projects_two/Core/api/api_end_points.dart';
-import 'package:projects_two/Core/constant/app_colors.dart';
-import 'package:projects_two/Core/models/product_model.dart';
+import '../../../../../Core/api/api_end_points.dart';
+import '../../../../../Core/constant/app_colors.dart';
+import '../../../../../Core/models/product_model.dart';
 
 class CartItem extends StatelessWidget {
   const CartItem({

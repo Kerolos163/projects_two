@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../../Drawer/view/custom_drawer_widget.dart';
-import '../../../../Core/Services/service_locator.dart';
-import '../../../../Core/Theme/app_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../Core/Services/service_locator.dart';
+import '../../../../Core/Theme/app_provider.dart';
+import '../../Drawer/view/custom_drawer_widget.dart';
 import '../../Home/viewmodel/home_provider.dart';
 import '../../Product/viewmodel/product_provider.dart';
 import 'widget/custom_bottom_navigation_bar.dart';

@@ -1,7 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
+import '../../../../../Core/api/api_end_points.dart';
 
 class ProductImage extends StatelessWidget {
   const ProductImage({required this.imageUrl});

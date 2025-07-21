@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
-import 'package:projects_two/Core/models/product_model.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/models/monthly_sales_model.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/service/analytics_dashboard_service.dart';
+import '../../../../Core/models/product_model.dart';
+import '../models/monthly_sales_model.dart';
+import '../service/analytics_dashboard_service.dart';
 
 class AnalyticsDashboardProvider extends ChangeNotifier {
   final AnalyticsService _analyticsService = AnalyticsService();

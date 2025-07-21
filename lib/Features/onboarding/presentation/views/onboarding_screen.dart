@@ -2,9 +2,10 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import '../../../../Core/Services/preferences_manager.dart';
-import '../../../../Core/utils/app_constants.dart';
 import '../../../../Core/constant/image.dart';
+import '../../../../Core/utils/app_constants.dart';
 import '../../../Auth/views/login_screen.dart';
 
 class OnboardingScreen extends StatefulWidget {

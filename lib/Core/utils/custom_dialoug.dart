@@ -1,6 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
+import '../constant/app_strings.dart';
 
 void showCustomDialog(BuildContext context, String title, String message, {VoidCallback? onClose}) {
   showDialog(

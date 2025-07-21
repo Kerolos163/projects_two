@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/api/api_state.dart';
-import 'package:projects_two/Core/models/user_model.dart';
-import 'package:projects_two/Features/admin/users_dashboard/service/user_service.dart';
+import '../../../../Core/api/api_state.dart';
+import '../../../../Core/models/user_model.dart';
+import '../service/user_service.dart';
 
 class UserDashboardProvider extends ChangeNotifier {
   List<UserModel> users = [];

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/analytics_screen/widgets/product_card.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/trending_products_screen.dart/view/trending_products_screen.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
+import 'product_card.dart';
+import '../../trending_products_screen.dart/view/trending_products_screen.dart';
+import '../../viewmodel/analytics_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class TrendingProducts extends StatelessWidget {

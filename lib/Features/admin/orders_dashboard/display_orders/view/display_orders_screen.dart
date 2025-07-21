@@ -1,10 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/constant/app_colors.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Features/admin/orders_dashboard/display_orders/widgets/order_status_dropdown.dart';
-import 'package:projects_two/Features/admin/orders_dashboard/display_orders/widgets/order_tile.dart';
-import 'package:projects_two/Features/admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
+import '../../../../../Core/constant/app_colors.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../widgets/order_status_dropdown.dart';
+import '../widgets/order_tile.dart';
+import '../../viewmodel/orders_dashboard_provider.dart';
 
 import 'package:provider/provider.dart';
 

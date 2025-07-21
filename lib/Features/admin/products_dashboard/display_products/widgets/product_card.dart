@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Features/admin/products_dashboard/display_products/widgets/product_image.dart';
-import 'package:projects_two/Features/admin/products_dashboard/display_products/widgets/product_title.dart';
-import 'package:projects_two/Features/admin/products_dashboard/viewmodel/products_dashboard_provider.dart';
+import 'product_image.dart';
+import 'product_title.dart';
+import '../../viewmodel/products_dashboard_provider.dart';
 import 'package:provider/provider.dart';
-import 'package:projects_two/Core/models/product_model.dart';
-import 'package:projects_two/Features/admin/products_dashboard/product_details/view/product_details_screen.dart';
+import '../../../../../Core/models/product_model.dart';
+import '../../product_details/view/product_details_screen.dart';
 
 class ProductCard extends StatelessWidget {
   final ProductModel product;

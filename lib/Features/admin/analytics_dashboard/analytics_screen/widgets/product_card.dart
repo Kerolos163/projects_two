@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
-import 'package:projects_two/Core/models/product_model.dart';
-import 'package:projects_two/Features/admin/products_dashboard/product_details/view/product_details_screen.dart';
+import '../../../../../Core/api/api_end_points.dart';
+import '../../../../../Core/models/product_model.dart';
+import '../../../products_dashboard/product_details/view/product_details_screen.dart';
 
 class AnalyticsProductCard extends StatelessWidget {
   final ProductModel product;

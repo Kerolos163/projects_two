@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Features/admin/products_dashboard/add_product/widgets/products_form_fields.dart';
-import 'package:projects_two/Features/admin/products_dashboard/viewmodel/products_dashboard_provider.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../widgets/products_form_fields.dart';
+import '../../viewmodel/products_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class AddProductScreen extends StatefulWidget {

@@ -5,10 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../../Core/constant/app_colors.dart';
 import '../../../../../Core/constant/app_strings.dart';
-import 'package:projects_two/Features/admin/categories_dashboard/viewmodel/categories_dashboard_provider.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_image_picker.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_label.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
+import '../viewmodel/categories_dashboard_provider.dart';
+import '../../products_dashboard/Shared_Components/Widgets/custom_image_picker.dart';
+import '../../products_dashboard/Shared_Components/Widgets/custom_label.dart';
+import '../../products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
 
 class AddCategoryScreen extends StatefulWidget {
   const AddCategoryScreen({super.key});

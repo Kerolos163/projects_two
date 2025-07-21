@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/constant/app_colors.dart';
-import 'package:projects_two/Core/constant/image.dart';
-import 'package:projects_two/Core/widgets/svg_img.dart';
+import '../../../../../Core/constant/app_colors.dart';
+import '../../../../../Core/constant/image.dart';
+import '../../../../../Core/widgets/svg_img.dart';
 
 class CartHeader extends StatelessWidget {
   const CartHeader({

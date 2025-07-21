@@ -1,8 +1,8 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/Auth/views/login_screen.dart';
-import 'package:projects_two/Features/onboarding/presentation/views/onboarding_screen.dart';
-import 'package:projects_two/Features/user/layout/view/layout_screen.dart';
+import '../Auth/views/login_screen.dart';
+import '../onboarding/presentation/views/onboarding_screen.dart';
+import '../user/layout/view/layout_screen.dart';
 import '../../../Core/utils/app_constants.dart';
 import '../../../Core/Services/preferences_manager.dart';
 

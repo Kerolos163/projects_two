@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Core/models/category_model.dart';
-import 'package:projects_two/Core/models/product_model.dart';
-import 'package:projects_two/Features/admin/categories_dashboard/service/category_service.dart';
-import 'package:projects_two/Features/admin/categories_dashboard/service/subcategory_service.dart';
-import 'package:projects_two/Features/admin/products_dashboard/service/dashboard_products_service.dart';
+import '../../../../Core/constant/app_strings.dart';
+import '../../../../Core/models/category_model.dart';
+import '../../../../Core/models/product_model.dart';
+import '../../categories_dashboard/service/category_service.dart';
+import '../../categories_dashboard/service/subcategory_service.dart';
+import '../service/dashboard_products_service.dart';
 
 class ProductsDashboardProvider extends ChangeNotifier {
   final ProductService _service = ProductService();
