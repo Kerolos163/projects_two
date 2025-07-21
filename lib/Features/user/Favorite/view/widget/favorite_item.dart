@@ -90,32 +90,16 @@ class FavoriteItem extends StatelessWidget {
                               ),
                         ),
                         Spacer(),
-                        Row(
-                          children: [
-                            Text(
-                              "${AppStrings.quant.tr()} ${model.quantity}",
-                              style: Theme.of(context).textTheme.displaySmall
-                                  ?.copyWith(
-                                    color: isEven
-                                        ? AppColors.primary
-                                        : Theme.of(
-                                            context,
-                                          ).colorScheme.primaryContainer,
-                                  ),
-                            ),
-                            Spacer(),
-                            Text(
-                              "${AppStrings.price2.tr()} ${model.price}",
-                              style: Theme.of(context).textTheme.displaySmall
-                                  ?.copyWith(
-                                    color: isEven
-                                        ? AppColors.primary
-                                        : Theme.of(
-                                            context,
-                                          ).colorScheme.primaryContainer,
-                                  ),
-                            ),
-                          ],
+                        Text(
+                          "${AppStrings.price2.tr()} ${model.price}",
+                          style: Theme.of(context).textTheme.displayLarge
+                              ?.copyWith(
+                                color: isEven
+                                    ? AppColors.primary
+                                    : Theme.of(
+                                        context,
+                                      ).colorScheme.primaryContainer,
+                              ),
                         ),
                       ],
                     ),
