@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
-import 'package:projects_two/Features/user/UserOrders/UserOrderDetails/view/user_order_details_screen.dart';
+import '../../../../admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
+import '../../UserOrderDetails/view/user_order_details_screen.dart';
 
 import 'package:provider/provider.dart';
 import 'package:easy_localization/easy_localization.dart';

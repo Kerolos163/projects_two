@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Features/admin/users_dashboard/viewmodel/users_dashboard_provider.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../../viewmodel/users_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class DeleteUserButton extends StatelessWidget {

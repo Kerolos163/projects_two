@@ -1,8 +1,8 @@
 import 'dart:convert';
-import 'package:projects_two/Core/Services/preferences_manager.dart';
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Core/models/order_model.dart';
-import 'package:projects_two/Core/utils/app_constants.dart';
+import '../../../../Core/Services/preferences_manager.dart';
+import '../../../../Core/api/api_service.dart';
+import '../../../../Core/models/order_model.dart';
+import '../../../../Core/utils/app_constants.dart';
 
 class OrderService {
   final ApiService _apiService = ApiService();

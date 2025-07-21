@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Core/constant/image.dart';
-import 'package:projects_two/Features/admin/users_dashboard/user_details/widgets/delete_user_button.dart';
-import 'package:projects_two/Features/admin/users_dashboard/user_details/widgets/role_drop_down.dart';
-import 'package:projects_two/Features/admin/users_dashboard/user_details/widgets/user_avatar.dart';
-import 'package:projects_two/Features/admin/users_dashboard/user_details/widgets/user_info_text_field.dart';
-import 'package:projects_two/Core/models/user_model.dart';
-import 'package:projects_two/Features/admin/users_dashboard/viewmodel/users_dashboard_provider.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../../../../../Core/constant/image.dart';
+import '../widgets/delete_user_button.dart';
+import '../widgets/role_drop_down.dart';
+import '../widgets/user_avatar.dart';
+import '../widgets/user_info_text_field.dart';
+import '../../../../../Core/models/user_model.dart';
+import '../../viewmodel/users_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 

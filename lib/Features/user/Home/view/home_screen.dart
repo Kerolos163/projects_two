@@ -11,7 +11,12 @@ import 'package:provider/provider.dart';
 
 import '../../../../Core/Theme/app_provider.dart';
 import '../../../../Core/constant/app_colors.dart';
+import '../../../../Core/constant/app_strings.dart';
 import '../../../../Core/widgets/home_header.dart';
+import '../viewmodel/home_provider.dart';
+import 'widget/category_list_view.dart';
+import 'widget/container_products.dart';
+import 'widget/products_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

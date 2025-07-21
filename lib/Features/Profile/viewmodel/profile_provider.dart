@@ -25,6 +25,7 @@ class ProfileProvider extends ChangeNotifier {
   ShowImage showImage = ShowImage.def;
   late UserModel userModel;
   late UserModel localData;
+  String message = "";
 
   late TextEditingController firstNameController;
   late TextEditingController lastNameController;
@@ -53,6 +54,7 @@ class ProfileProvider extends ChangeNotifier {
       state = ApiState.success;
     } catch (error) {
       log('error: $error');
+      message = error.toString();
       state = ApiState.error;
     }
     notifyListeners();
@@ -93,6 +95,7 @@ class ProfileProvider extends ChangeNotifier {
       state = ApiState.success;
     } catch (error) {
       log('error: $error');
+      message = error.toString();
       state = ApiState.error;
     }
     notifyListeners();
@@ -133,6 +136,7 @@ class ProfileProvider extends ChangeNotifier {
       state = ApiState.success;
     } catch (error) {
       log('error: $error');
+      message = error.toString();
       state = ApiState.error;
     }
     notifyListeners();

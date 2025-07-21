@@ -1,10 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import '../../../../Core/Theme/app_provider.dart';
 import '../../../../Core/constant/app_strings.dart';
 import 'widget/category_drawer_list_view.dart';
 import 'widget/drawer_header.dart';
-import 'package:provider/provider.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});

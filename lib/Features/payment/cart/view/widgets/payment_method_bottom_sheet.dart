@@ -1,15 +1,15 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/api/api_state.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
-import 'package:projects_two/Core/constant/payment_methods.dart';
-import 'package:projects_two/Core/widgets/custom_text_form_field.dart';
-import 'package:projects_two/Features/payment/cart/data/model/payment_intent_input_model.dart';
-import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
-import 'package:projects_two/Features/payment/cart/logic/stripe_payment_provider.dart';
-import 'package:projects_two/Features/payment/cart/view/widgets/payment_method.dart';
-import 'package:projects_two/Features/payment/cart/view/widgets/payment_text_button.dart';
+import '../../../../../Core/api/api_state.dart';
+import '../../../../../Core/constant/app_strings.dart';
+import '../../../../../Core/constant/payment_methods.dart';
+import '../../../../../Core/widgets/custom_text_form_field.dart';
+import '../../data/model/payment_intent_input_model.dart';
+import '../../logic/cart_provider.dart';
+import '../../logic/stripe_payment_provider.dart';
+import 'payment_method.dart';
+import 'payment_text_button.dart';
 import 'package:provider/provider.dart';
 
 class PaymentMethodBottomSheet extends StatelessWidget {

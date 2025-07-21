@@ -1,7 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/admin/categories_dashboard/Category_Details/View/category_details_screen.dart';
-import 'package:projects_two/Features/admin/categories_dashboard/add_category/add_category_screen.dart';
+import '../../Category_Details/View/category_details_screen.dart';
+import '../../add_category/add_category_screen.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../../Core/constant/app_colors.dart';

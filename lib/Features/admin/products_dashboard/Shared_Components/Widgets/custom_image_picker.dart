@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:projects_two/Core/constant/app_colors.dart';
+import '../../../../../Core/constant/app_colors.dart';
 
 
 class CustomImagePicker extends StatefulWidget {

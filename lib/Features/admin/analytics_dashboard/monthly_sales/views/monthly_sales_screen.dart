@@ -1,8 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/models/monthly_sales_model.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/shared_widgets/chart_widget.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
+import '../../models/monthly_sales_model.dart';
+import '../../shared_widgets/chart_widget.dart';
+import '../../viewmodel/analytics_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class MonthlySalesScreen extends StatefulWidget {

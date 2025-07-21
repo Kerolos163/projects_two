@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/models/monthly_sales_model.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/utils/colorFromCategory.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
+import '../models/monthly_sales_model.dart';
+import '../utils/colorFromCategory.dart';
+import '../viewmodel/analytics_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 

@@ -6,6 +6,9 @@ import 'package:projects_two/Core/widgets/svg_img.dart';
 import 'package:projects_two/Features/user/Home/view/home_screen.dart';
 import 'package:projects_two/Features/user/Home/viewmodel/home_provider.dart';
 import 'package:provider/provider.dart';
+import '../../../../../Core/constant/app_colors.dart';
+import '../../../../../Core/constant/image.dart';
+import '../../../../../Core/widgets/svg_img.dart';
 
 class CartHeader extends StatelessWidget {
   const CartHeader({

@@ -1,7 +1,7 @@
 
 
-import 'package:projects_two/Core/models/product_model.dart';
-import 'package:projects_two/Core/models/user_model.dart';
+import 'product_model.dart';
+import 'user_model.dart';
 
 class OrderModel {
    int? oId;

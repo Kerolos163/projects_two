@@ -1,12 +1,12 @@
 import 'dart:io';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
-import 'package:projects_two/Core/models/category_model.dart';
-import 'package:projects_two/Features/admin/categories_dashboard/viewmodel/categories_dashboard_provider.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_image_picker.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_label.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
+import '../../../../../Core/api/api_end_points.dart';
+import '../../../../../Core/models/category_model.dart';
+import '../../viewmodel/categories_dashboard_provider.dart';
+import '../../../products_dashboard/Shared_Components/Widgets/custom_image_picker.dart';
+import '../../../products_dashboard/Shared_Components/Widgets/custom_label.dart';
+import '../../../products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
 
 import 'package:provider/provider.dart';
 

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_label.dart';
-import 'package:projects_two/Features/admin/products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
+import '../../../products_dashboard/Shared_Components/Widgets/custom_label.dart';
+import '../../../products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
 
 class UserInfoTextField extends StatelessWidget {
   final String label;

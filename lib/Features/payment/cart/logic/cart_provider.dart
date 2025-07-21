@@ -2,11 +2,11 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/Services/preferences_manager.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Core/models/user_model.dart';
-import 'package:projects_two/Core/utils/app_constants.dart';
+import '../../../../Core/Services/preferences_manager.dart';
+import '../../../../Core/api/api_end_points.dart';
+import '../../../../Core/api/api_service.dart';
+import '../../../../Core/models/user_model.dart';
+import '../../../../Core/utils/app_constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../../Core/api/api_state.dart';

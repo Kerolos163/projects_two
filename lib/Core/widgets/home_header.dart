@@ -5,6 +5,7 @@ import 'package:projects_two/Features/payment/cart/view/cart_screen.dart';
 import '../Theme/app_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../Theme/app_provider.dart';
 import '../api/api_end_points.dart';
 import '../api/api_state.dart';
 import '../constant/app_colors.dart';

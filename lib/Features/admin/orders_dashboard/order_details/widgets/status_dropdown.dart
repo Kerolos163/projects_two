@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:projects_two/Core/constant/app_colors.dart';
-import 'package:projects_two/Core/constant/app_strings.dart';
+import '../../../../../Core/constant/app_colors.dart';
+import '../../../../../Core/constant/app_strings.dart';
 
 class StatusDropdown extends StatelessWidget {
   final String? value;

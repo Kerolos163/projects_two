@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/Services/stripe_service.dart';
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Core/api/api_state.dart';
-import 'package:projects_two/Features/payment/cart/data/model/payment_intent_input_model.dart';
+import '../../../../Core/Services/stripe_service.dart';
+import '../../../../Core/api/api_service.dart';
+import '../../../../Core/api/api_state.dart';
+import '../data/model/payment_intent_input_model.dart';
 
 class StripePaymentProvider extends ChangeNotifier {
   ApiService apiService = ApiService();

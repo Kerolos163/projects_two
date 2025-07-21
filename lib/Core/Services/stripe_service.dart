@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_stripe/flutter_stripe.dart';
 
-import 'package:projects_two/Core/api/api_service.dart';
-import 'package:projects_two/Features/payment/cart/data/model/payment_intent_input_model.dart';
-import 'package:projects_two/Features/payment/cart/data/model/payment_intent_model/payment_intent_model.dart';
+import '../api/api_service.dart';
+import '../../Features/payment/cart/data/model/payment_intent_input_model.dart';
+import '../../Features/payment/cart/data/model/payment_intent_model/payment_intent_model.dart';
 
 import '../constant/secure_keys.dart';
 

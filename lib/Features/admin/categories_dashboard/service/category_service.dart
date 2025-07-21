@@ -3,8 +3,8 @@ import 'package:dio/dio.dart';
 import 'package:http_parser/http_parser.dart';
 import 'package:mime/mime.dart';
 import 'package:path/path.dart';
-import 'package:projects_two/Core/api/api_end_points.dart';
-import 'package:projects_two/Core/api/api_service.dart';
+import '../../../../Core/api/api_end_points.dart';
+import '../../../../Core/api/api_service.dart';
 
 class CategoryService {
   final ApiService _api = ApiService();

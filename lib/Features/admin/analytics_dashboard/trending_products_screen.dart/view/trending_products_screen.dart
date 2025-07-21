@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/shared_widgets/large_product_card.dart';
-import 'package:projects_two/Features/admin/analytics_dashboard/viewmodel/analytics_dashboard_provider.dart';
+import '../../shared_widgets/large_product_card.dart';
+import '../../viewmodel/analytics_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 
 class TrendingProductsScreen extends StatefulWidget {
