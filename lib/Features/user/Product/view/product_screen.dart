@@ -50,13 +50,48 @@ class ProductScreen extends StatelessWidget {
                             horizontal: 16,
                             vertical: 8,
                           ),
-                          child: Text(
-                            "${AppStrings.showingResults.tr()} ${provider.filterName}",
-                            style: Theme.of(context).textTheme.titleMedium
-                                ?.copyWith(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.grey[700],
-                                ),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Text(
+                                "${AppStrings.showingResults.tr()} ${provider.filterName}",
+                                style: Theme.of(context).textTheme.titleMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.grey[700],
+                                    ),
+                              ),
+                              PopupMenuButton<String>(
+                                icon: Icon(Icons.sort),
+                                onSelected: (value) {
+                                  if (value == 'price') {
+                                    provider.getSortedProducts('price');
+                                  } else if (value == 'rating') {
+                                    provider.getSortedProducts(
+                                      'ratingsAverage',
+                                    );
+                                  } else if (value == 'both') {
+                                    provider.getSortedProducts(
+                                      'price,ratingsAverage',
+                                    );
+                                  }
+                                },
+                                itemBuilder: (context) => [
+                                  PopupMenuItem(
+                                    value: 'price',
+                                    child: Text('Sort by Price'),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'rating',
+                                    child: Text('Sort by Rating'),
+                                  ),
+                                  PopupMenuItem(
+                                    value: 'both',
+                                    child: Text('Sort by Price & Rating'),
+                                  ),
+                                ],
+                              ),
+                            ],
                           ),
                         ),
                       ),
