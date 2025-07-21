@@ -1,7 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:projects_two/Core/Services/service_locator.dart';
-import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
 import '../../../../Core/constant/app_strings.dart';
 import 'widget/category_list_view.dart';
 import 'widget/container_products.dart';
@@ -11,12 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../../../Core/Theme/app_provider.dart';
 import '../../../../Core/constant/app_colors.dart';
-import '../../../../Core/constant/app_strings.dart';
 import '../../../../Core/widgets/home_header.dart';
-import '../viewmodel/home_provider.dart';
-import 'widget/category_list_view.dart';
-import 'widget/container_products.dart';
-import 'widget/products_list.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -47,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(20),
-                      child:HomeHeader(
+                      child: HomeHeader(
                         readOnly: true,
                         onTap: () => appProvider.changeIndex(index: 1),
                         onMenuTap: () =>
@@ -121,16 +114,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 20),
                     ProductsList(
-                      title: "",
+                      title: AppStrings.discountProducts.tr(),
                       appProvider: appProvider,
-                      products: homeProvider.products.take(4).toList(),
-                    ),
-                    const SizedBox(height: 20),
-
-                    ProductsList(
-                      title: "",
-                      appProvider: appProvider,
-                      products: homeProvider.products.skip(3).toList(),
+                      products: homeProvider.discountProducts,
                     ),
                     const SizedBox(height: 20),
                   ],

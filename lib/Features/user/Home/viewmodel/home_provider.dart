@@ -13,7 +13,7 @@ class HomeProvider extends ChangeNotifier {
   ApiState state = ApiState.initial;
   ApiService apiService = ApiService();
   List<CategoryModel> categories = [];
-  List<ProductModel> products = [];
+  List<ProductModel> discountProducts = [];
   List<ProductModel> trandingProducts = [];
   List<ProductModel> bestSellersProducts = [];
   Map<String, List<SubcategoryModel>> subCategoryMap = {};
@@ -52,14 +52,18 @@ class HomeProvider extends ChangeNotifier {
   }
 
   Future<void> getProducts() async {
-    products = [];
+    discountProducts = [];
     state = ApiState.loading;
     notifyListeners();
 
     try {
       final response = await apiService.get(ApiEndPoints.homeProduct);
       final jsonData = response.data["data"] as List;
-      products = jsonData.map((e) => ProductModel.fromJson(e)).toList();
+      discountProducts = jsonData
+          .map((e) => ProductModel.fromJson(e))
+          .toList()
+          .where((product) => product.priceAfterDiscount > 0)
+          .toList();
       state = ApiState.success;
     } catch (error) {
       log('error: $error');
@@ -118,5 +122,4 @@ class HomeProvider extends ChangeNotifier {
     }
     notifyListeners();
   }
-  
 }

@@ -219,4 +219,5 @@ class AppStrings {
   static var sortByRating = "Sort by Rating";
   static var sortByPriceAndRating = "Sort by Price & Rating";
   static var myOrders = "My orders";
+  static var discountProducts = "Discount Products";
 }
