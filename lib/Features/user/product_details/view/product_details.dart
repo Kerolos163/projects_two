@@ -178,7 +178,7 @@ class ProductDetails extends StatelessWidget {
                             categoryName: product.category.name,
                           ),
                           SizedBox(height: 20),
-                          ActionsRow(product: product),
+                          AddToCartButton(product: product),
                           SizedBox(height: 40),
                           ReviewSection(
                             reviews: detailsProvider.reviews,

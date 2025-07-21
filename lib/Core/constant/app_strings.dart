@@ -220,4 +220,5 @@ class AppStrings {
   static var sortByPriceAndRating = "Sort by Price & Rating";
   static var myOrders = "My orders";
   static var discountProducts = "Discount Products";
+  static var addedToCart = "Added to cart successfully.";
 }
