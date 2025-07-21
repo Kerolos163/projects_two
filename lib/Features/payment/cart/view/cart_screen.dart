@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:projects_two/Core/Services/service_locator.dart';
 import 'package:projects_two/Core/Theme/app_provider.dart';
 import 'package:projects_two/Core/constant/app_colors.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
 import 'package:projects_two/Features/payment/cart/logic/stripe_payment_provider.dart';
 import 'package:projects_two/Features/payment/cart/view/widgets/cart_haader.dart';

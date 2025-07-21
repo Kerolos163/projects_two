@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-
-import '../../../../../Core/constant/app_colors.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class PricingInfo extends StatelessWidget {
-  const PricingInfo({super.key, required this.price, required this.priceAfterDiscount});
+  const PricingInfo({
+    super.key,
+    required this.price,
+    required this.priceAfterDiscount,
+  });
   final int price;
   final int priceAfterDiscount;
 
@@ -11,28 +14,28 @@ class PricingInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        priceAfterDiscount == 0
+            ? const SizedBox()
+            : Row(
+                children: [
+                  Text(
+                    price.toStringAsFixed(2),
+                    style: TextStyle(
+                      color: Color(0xff808488),
+                      decoration: TextDecoration.lineThrough,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+                  SizedBox(width: 10),
+                ],
+              ),
+
         Text(
-          price.toStringAsFixed(2),
-          style: TextStyle(
-            color: Color(0xff808488),
-            decoration: TextDecoration.lineThrough,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        SizedBox(width: 10),
-        Text(
-          price.toString(),
-          style: TextStyle(
-            color: AppColors.textPrimary,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        SizedBox(width: 10),
-        Text(
-          priceAfterDiscount.toString(),
+          "${priceAfterDiscount.toString() == "0" ? price.toStringAsFixed(2) : priceAfterDiscount.toStringAsFixed(2)}\$",
           style: TextStyle(
             color: Color(0xffFA7189),
             fontWeight: FontWeight.w600,
+            fontSize: 20.sp,
           ),
         ),
       ],

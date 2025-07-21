@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
 class PaymentMethodItem extends StatelessWidget {
@@ -13,8 +14,8 @@ class PaymentMethodItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return AnimatedContainer(
       duration: const Duration(milliseconds: 300),
-      width: 103,
-      height: 62,
+      width: 101.w,
+      height: 62.h,
       decoration: ShapeDecoration(
         shape: RoundedRectangleBorder(
           side: BorderSide(

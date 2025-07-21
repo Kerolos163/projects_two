@@ -112,6 +112,7 @@ class DetailsProvider extends ChangeNotifier {
       );
       final jsonData = response.data["data"] as List;
       reviews = jsonData.map((e) => ReviewModel.fromJson(e)).toList();
+      calculatingRating();
       state = ApiState.success;
     } catch (err) {
       log('error: $err');
@@ -196,5 +197,18 @@ class DetailsProvider extends ChangeNotifier {
       return true;
     }
     return false;
+  }
+
+  //? Calculate the rating for Product
+  double productRating = 0.0;
+  void calculatingRating() {
+    productRating = 0.0;
+    double result = 0;
+    for (var review in reviews) {
+      result += double.tryParse(review.ratings) ?? 0;
+    }
+    if (reviews.isNotEmpty) {
+      productRating = result / reviews.length;
+    }
   }
 }
