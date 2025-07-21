@@ -9,7 +9,12 @@ import '../../../../../Core/widgets/rating_bar_widget.dart';
 
 class ProductCardHome extends StatelessWidget {
   final ProductModel productModel;
-  const ProductCardHome({super.key, required this.productModel});
+  final bool showRatings;
+  const ProductCardHome({
+    super.key,
+    required this.productModel,
+    required this.showRatings,
+  });
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -64,16 +69,43 @@ class ProductCardHome extends StatelessWidget {
                     ).textTheme.displayMedium?.copyWith(height: 1.4),
                   ),
                   Spacer(),
-                  Text(
-                    "${productModel.price}\$",
-                    style: Theme.of(
-                      context,
-                    ).textTheme.labelMedium?.copyWith(height: 2),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      productModel.priceAfterDiscount == 0
+                          ? const SizedBox()
+                          : Row(
+                              children: [
+                                Text(
+                                  productModel.price.toStringAsFixed(2),
+                                  style: TextStyle(
+                                    color: Color(0xff808488),
+                                    decoration: TextDecoration.lineThrough,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                                SizedBox(width: 10),
+                              ],
+                            ),
+                      Text(
+                        "${productModel.priceAfterDiscount.toString() == "0" ? productModel.price.toStringAsFixed(2) : productModel.priceAfterDiscount.toStringAsFixed(2)}\$",
+                        style: TextStyle(
+                          color: Color(0xffFA7189),
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14.sp,
+                        ),
+                      ),
+                    ],
                   ),
                   SizedBox(height: 2),
-                  RatingBarWidget(
-                    initialRating: double.tryParse(productModel.ratingsAverage) ?? 0.0
-                  ),
+
+                  showRatings
+                      ? RatingBarWidget(
+                          initialRating:
+                              double.tryParse(productModel.ratingsAverage) ??
+                              0.0,
+                        )
+                      : SizedBox(),
                 ],
               ),
             ),

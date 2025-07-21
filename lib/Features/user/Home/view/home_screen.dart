@@ -78,6 +78,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     appProvider.recentlyViewed.isEmpty
                         ? SizedBox()
                         : ProductsList(
+                            showRatings: false,
                             title: AppStrings.recentlyViewed.tr(),
                             appProvider: appProvider,
                             products: appProvider.recentlyViewed

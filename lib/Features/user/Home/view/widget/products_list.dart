@@ -14,11 +14,13 @@ class ProductsList extends StatelessWidget {
   final List<ProductModel> products;
   final AppProvider appProvider;
   final String title;
+  final bool showRatings;
   const ProductsList({
     super.key,
     required this.products,
     required this.appProvider,
     required this.title,
+    this.showRatings = true,
   });
   @override
   Widget build(BuildContext context) {
@@ -32,10 +34,7 @@ class ProductsList extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                title,
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
+              Text(title, style: Theme.of(context).textTheme.titleLarge),
               SizedBox(height: 8),
               Expanded(
                 child: GridView.builder(
@@ -61,6 +60,7 @@ class ProductsList extends StatelessWidget {
                         );
                       },
                       child: ProductCardHome(
+                        showRatings: showRatings,
                         productModel: products.isEmpty
                             ? fakeProduct[index]
                             : products[index],

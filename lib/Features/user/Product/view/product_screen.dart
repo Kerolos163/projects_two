@@ -53,18 +53,55 @@ class ProductScreen extends StatelessWidget {
                           horizontal: 16,
                           vertical: 8,
                         ),
-                        child: Text(
-                          "${AppStrings.showingResults.tr()} ${provider.filterName}",
-                          style: Theme.of(context).textTheme.titleMedium
-                              ?.copyWith(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.grey[700],
-                              ),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              "${AppStrings.showingResults.tr()} ${provider.filterName}",
+                              style: Theme.of(context).textTheme.titleMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.grey[700],
+                                  ),
+                            ),
+                            PopupMenuButton<String>(
+                              icon: Icon(Icons.sort),
+                              onSelected: (value) {
+                                if (value == 'price') {
+                                  provider.getSortedProducts('price');
+                                } else if (value == 'rating') {
+                                  provider.getSortedProducts('ratingsAverage');
+                                } else if (value == 'both') {
+                                  provider.getSortedProducts(
+                                    'price,ratingsAverage',
+                                  );
+                                }
+                              },
+                              itemBuilder: (context) => [
+                                PopupMenuItem(
+                                  value: 'price',
+                                  child: Text('Sort by Price'),
+                                ),
+                                PopupMenuItem(
+                                  value: 'rating',
+                                  child: Text('Sort by Rating'),
+                                ),
+                                PopupMenuItem(
+                                  value: 'both',
+                                  child: Text('Sort by Price & Rating'),
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
                     ),
                     SliverPadding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      padding: const EdgeInsets.only(
+                        left: 16,
+                        right: 16,
+                        bottom: 20,
+                      ),
                       sliver: SliverMasonryGrid.count(
                         crossAxisCount: 2,
                         mainAxisSpacing: 16,
@@ -89,11 +126,11 @@ class ProductScreen extends StatelessWidget {
                                 child: Consumer<AppProvider>(
                                   builder: (context, appProvider, child) {
                                     return GestureDetector(
-                                      onTap: () {
+                                      onTap: () async {
                                         appProvider.addRecentlyViewed(
                                           product: product,
                                         );
-                                        Navigator.push(
+                                        await Navigator.push(
                                           context,
                                           MaterialPageRoute(
                                             builder: (context) =>

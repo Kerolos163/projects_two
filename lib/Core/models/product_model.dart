@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-import 'package:projects_two/Core/models/category_model.dart';
 
 class ProductModel extends Equatable {
   final String id;
@@ -13,13 +12,13 @@ class ProductModel extends Equatable {
   final List<dynamic> colors;
   final String imageCover;
   final List<dynamic> images;
-  final CategoryModel category;
+  final Category category;
   final List<String> subCategories;
   final String ratingsAverage;
   final int ratingsQuantity;
   final DateTime createdAt;
   final DateTime updatedAt;
-  // final String categorieModelId;
+  final String? categorieModelId;
 
   const ProductModel({
     required this.id,
@@ -39,7 +38,7 @@ class ProductModel extends Equatable {
     required this.ratingsQuantity,
     required this.createdAt,
     required this.updatedAt,
-    // required this.categorieModelId,
+    this.categorieModelId,
   });
 
   factory ProductModel.fromJson(Map<String, dynamic> json) => ProductModel(
@@ -54,13 +53,13 @@ class ProductModel extends Equatable {
     colors: List<dynamic>.from(json["colors"].map((x) => x)),
     imageCover: json["imageCover"],
     images: List<dynamic>.from(json["images"].map((x) => x)),
-    category: CategoryModel.fromJson(json["category"]),
+    category: Category.fromJson(json["category"]),
     subCategories: List<String>.from(json["subCategories"].map((x) => x)),
     ratingsAverage: json["ratingsAverage"] ?? "",
     ratingsQuantity: json["ratingsQuantity"],
     createdAt: DateTime.parse(json["createdAt"]),
     updatedAt: DateTime.parse(json["updatedAt"]),
-    // categorieModelId: json["id"],
+    categorieModelId: json["id"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -81,30 +80,8 @@ class ProductModel extends Equatable {
     "ratingsQuantity": ratingsQuantity,
     "createdAt": createdAt.toIso8601String(),
     "updatedAt": updatedAt.toIso8601String(),
-    // "id": categorieModelId,
+    "id": categorieModelId,
   };
-
-  @override
-  List<Object?> get props => [
-    id,
-    title,
-    slug,
-    description,
-    quantity,
-    sold,
-    price,
-    priceAfterDiscount,
-    colors,
-    imageCover,
-    images,
-    category,
-    subCategories,
-    ratingsAverage,
-    ratingsQuantity,
-    createdAt,
-    updatedAt,
-    // categorieModelId,
-  ];
 
   ProductModel copyWith({
     String? id,
@@ -118,6 +95,7 @@ class ProductModel extends Equatable {
     List<dynamic>? colors,
     String? imageCover,
     List<dynamic>? images,
+    Category? category,
     List<String>? subCategories,
     String? ratingsAverage,
     int? ratingsQuantity,
@@ -137,12 +115,44 @@ class ProductModel extends Equatable {
       colors: colors ?? this.colors,
       imageCover: imageCover ?? this.imageCover,
       images: images ?? this.images,
+      category: category ?? this.category,
       subCategories: subCategories ?? this.subCategories,
       ratingsAverage: ratingsAverage ?? this.ratingsAverage,
       ratingsQuantity: ratingsQuantity ?? this.ratingsQuantity,
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
-      category: category,
+      categorieModelId: categorieModelId ?? this.categorieModelId,
     );
   }
+
+  @override
+  List<Object?> get props => [id];
+}
+
+class Category extends Equatable {
+  final String id;
+  final String name;
+  final String? categoryId;
+
+  const Category({
+    required this.id,
+    required this.name,
+    required this.categoryId,
+  });
+
+  factory Category.fromJson(Map<String, dynamic> json) =>
+      Category(id: json["_id"], name: json["name"], categoryId: json["id"]);
+
+  Map<String, dynamic> toJson() => {"_id": id, "name": name, "id": categoryId};
+
+  Category copyWith({String? id, String? name, String? categoryId}) {
+    return Category(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      categoryId: categoryId ?? this.categoryId,
+    );
+  }
+
+  @override
+  List<Object?> get props => [id, name, categoryId];
 }
