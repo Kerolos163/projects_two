@@ -26,9 +26,12 @@ class CartScreen extends StatelessWidget {
                 return Padding(
                   padding: const EdgeInsets.all(20),
                   child: CartHeader(
-                    onMenuTap: () =>
-                        provider.scaffoldKey.currentState?.openDrawer(),
-                    onAvatarTap: () => provider.changeIndex(index: 4),
+                    onAvatarTap: () {
+                      provider.changeIndex(index: 3); // Set bottom nav index
+                      Navigator.pop(
+                        context,
+                      ); // Go back to the screen with bottom nav
+                    },
                   ),
                 );
               },
@@ -37,7 +40,7 @@ class CartScreen extends StatelessWidget {
               child: Consumer<CartProvider>(
                 builder: (context, provider, child) {
                   return Padding(
-                    padding: const EdgeInsets.all(20),
+                    padding:const EdgeInsets.symmetric(horizontal: 14),
                     child: provider.cartItems.isEmpty
                         ? SizedBox(
                             height: 300.h,
@@ -86,7 +89,7 @@ class CartScreen extends StatelessWidget {
                 },
               ),
             ),
-    
+
             Consumer<CartProvider>(
               builder: (context, provider, child) =>
                   provider.cartItems.isNotEmpty
@@ -158,8 +161,7 @@ class CartScreen extends StatelessWidget {
                                               StripePaymentProvider(),
                                         ),
                                       ],
-                                      child:
-                                          const PaymentMethodBottomSheet(),
+                                      child: const PaymentMethodBottomSheet(),
                                     ),
                                   );
                                 },
