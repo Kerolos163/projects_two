@@ -72,7 +72,7 @@ class PaymentMethodBottomSheet extends StatelessWidget {
                       input.trim().isEmpty) {
                     return null;
                   }
-                  // print(input);
+                  print(input);
 
                   return "invalid copon";
                 },
