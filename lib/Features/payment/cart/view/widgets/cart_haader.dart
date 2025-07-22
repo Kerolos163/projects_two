@@ -1,8 +1,10 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:projects_two/Core/Theme/app_provider.dart';
 import 'package:projects_two/Core/api/api_end_points.dart';
 import 'package:projects_two/Core/api/api_state.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import 'package:projects_two/Core/constant/image.dart';
 import 'package:projects_two/Features/user/Home/view/home_screen.dart';
 import 'package:provider/provider.dart';
@@ -31,7 +33,7 @@ class CartHeader extends StatelessWidget {
           },
         ),
         Text(
-          "My Cart",
+          AppStrings.cart.tr(),
           style: TextStyle(
             fontSize: 18.sp,
             fontWeight: FontWeight.w700,
