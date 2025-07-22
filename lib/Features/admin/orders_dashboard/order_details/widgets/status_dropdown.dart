@@ -14,7 +14,8 @@ class StatusDropdown extends StatelessWidget {
     "shipping",
     "rejected",
     "refunded",
-    "pending"
+    "pending",
+    "cancelled",
   ];
 
   @override

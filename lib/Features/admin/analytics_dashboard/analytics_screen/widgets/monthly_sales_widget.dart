@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import '../../../../../Core/constant/app_colors.dart';
 import '../../monthly_sales/views/monthly_sales_screen.dart';
 import '../../shared_widgets/chart_widget.dart';
@@ -19,7 +21,7 @@ class MonthlySalesWidget extends StatelessWidget {
         if (provider.monthlySales.isEmpty) {
           return Center(
             child: Text(
-              'No monthly sales data found.',
+              AppStrings.noMonthlySales.tr(),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: Theme.of(context).colorScheme.onSurface,
               ),
@@ -39,7 +41,7 @@ class MonthlySalesWidget extends StatelessWidget {
                     vertical: 8,
                   ),
                   child: Text(
-                    'Monthly Sales',
+                    AppStrings.monthlySales.tr(),
                     style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.onBackground,

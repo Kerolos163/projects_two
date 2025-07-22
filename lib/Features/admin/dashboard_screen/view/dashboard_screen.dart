@@ -68,13 +68,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
             DrawerHeader(
               decoration: BoxDecoration(color: Theme.of(context).primaryColor),
               child: Text(
-                'Menu',
+               AppStrings.menu.tr(),
                 style: TextStyle(color: Colors.white, fontSize: 24),
               ),
             ),
             ListTile(
               leading: Icon(Icons.person_outline),
-              title: Text('Profile'),
+              title: Text(AppStrings.profile.tr()),
               onTap: () {
                 Navigator.pop(context); 
                 Navigator.push(
@@ -137,7 +137,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
         items: [
           BottomNavigationBarItem(
             icon: const Icon(Icons.analytics),
-            label: "Analytics",
+            label: AppStrings.Analytics.tr(),
           ),
           BottomNavigationBarItem(
             icon: SvgPicture.asset(
@@ -169,7 +169,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.rotate_left_outlined),
-            label: "Returns".tr(),
+            label: AppStrings.returns.tr(),
           ),
           BottomNavigationBarItem(
             icon: const Icon(Icons.supervised_user_circle_outlined),

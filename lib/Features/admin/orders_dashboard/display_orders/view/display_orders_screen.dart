@@ -77,7 +77,7 @@ class _DashboardDisplayOrdersScreenState
                 child: filteredOrders.isEmpty
                     ? Center(
                         child: Text(
-                          "No orders available for this status.",
+                         AppStrings.noOrdersForStatus.tr(),
                           style: Theme.of(context).textTheme.bodySmall,
                         ),
                       )

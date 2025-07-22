@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import '../models/monthly_sales_model.dart';
 import '../utils/colorFromCategory.dart';
 import '../viewmodel/analytics_dashboard_provider.dart';
@@ -19,7 +21,7 @@ class PieChartWidget extends StatelessWidget {
         if (provider.salesByCategory.isEmpty) {
           return Center(
             child: Text(
-              'No sales data available.',
+              AppStrings.noSalesData.tr(),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: Theme.of(context).colorScheme.onSurface,
               ),
@@ -29,7 +31,7 @@ class PieChartWidget extends StatelessWidget {
 
         return SfCircularChart(
           title: ChartTitle(
-            text: 'Sales Distribution',
+            text: AppStrings.salesDistribution.tr(),
             textStyle: const TextStyle(fontSize: 18),
           ),
           legend: Legend(

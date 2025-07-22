@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import '../../shared_widgets/large_product_card.dart';
 import '../../viewmodel/analytics_dashboard_provider.dart';
 import 'package:provider/provider.dart';
@@ -9,7 +11,7 @@ class BestSellersScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Best Sellers')),
+      appBar: AppBar(title:  Text(AppStrings.bestSellers.tr())),
       body: Consumer<AnalyticsDashboardProvider>(
         builder: (context, provider, _) {
           if (provider.isLoading) {
@@ -19,7 +21,7 @@ class BestSellersScreen extends StatelessWidget {
           if (provider.bestSellers.isEmpty) {
             return Center(
               child: Text(
-                'No best sellers found.',
+                AppStrings.noBestSellersAvaliable.tr(),
                 style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                   color: Theme.of(context).colorScheme.onSurface,
                 ),

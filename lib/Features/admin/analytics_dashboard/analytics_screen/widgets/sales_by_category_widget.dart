@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import '../../../../../Core/constant/app_colors.dart';
 import '../../sales_by_category/view/sales_by_category_screen.dart';
 import '../../shared_widgets/pie_chart_legend.dart';
@@ -20,7 +22,7 @@ class SalesByCategoryWidget extends StatelessWidget {
         if (provider.salesByCategory.isEmpty) {
           return Center(
             child: Text(
-              'No sales data available.',
+             AppStrings.noSalesData.tr(),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                 color: Theme.of(context).colorScheme.onSurface,
               ),
@@ -36,7 +38,7 @@ class SalesByCategoryWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Sales by Category',
+                   AppStrings.salesByCat.tr(),
                     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                   IconButton(

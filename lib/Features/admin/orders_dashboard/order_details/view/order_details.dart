@@ -7,7 +7,6 @@ import '../../viewmodel/orders_dashboard_provider.dart';
 import '../../../products_dashboard/Shared_Components/Widgets/custom_label.dart';
 import '../../../products_dashboard/Shared_Components/Widgets/custom_textfield.dart';
 import 'package:provider/provider.dart';
-
 import '../widgets/order_product_card.dart';
 
 class OrderDetailsScreen extends StatefulWidget {
@@ -21,7 +20,6 @@ class OrderDetailsScreen extends StatefulWidget {
 
 class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
   final _formKey = GlobalKey<FormState>();
-
   late TextEditingController orderIdController;
   late TextEditingController customerIdController;
   late TextEditingController customerNameController;
@@ -45,6 +43,36 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
     dateController = TextEditingController(
         text: widget.order.date?.toLocal().toString().split('.').first);
     selectedStatus = widget.order.status;
+  }
+
+  double calculateTotal() {
+    double total = 0;
+    for (var orderProduct in widget.order.products) {
+      final product = orderProduct.product;
+      if (product != null && product.price != null) {
+        total += product.price! * orderProduct.quantity;
+      }
+    }
+    return total;
+  }
+
+  double calculateDiscountedTotal(double total) {
+    if (widget.order.copon == null || widget.order.copon == "non") return total;
+    
+    final coupon = widget.order.copon!.toLowerCase();
+    double discountPercentage = 0;
+    
+    if (coupon.contains('cpn5')) {
+      discountPercentage = 0.05;
+    } else if (coupon.contains('cpn10')) {
+      discountPercentage = 0.10;
+    } else if (coupon.contains('cpn15')) {
+      discountPercentage = 0.15;
+    } else if (coupon.contains('cpn20')) {
+      discountPercentage = 0.20;
+    }
+    
+    return total * (1 - discountPercentage);
   }
 
   void _submitStatusUpdate() async {
@@ -82,6 +110,10 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final total = calculateTotal();
+    final discountedTotal = calculateDiscountedTotal(total);
+    final hasDiscount = widget.order.copon != null && widget.order.copon != "non";
+
     return Scaffold(
       appBar: AppBar(title: Text(AppStrings.orderDetails.tr())),
       body: Padding(
@@ -109,6 +141,58 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
               StatusDropdown(
                 value: selectedStatus,
                 onChanged: (val) => setState(() => selectedStatus = val),
+              ),
+
+              // Price Summary Section
+              const SizedBox(height: 24),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    AppStrings.totalPrice.tr(),
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    '${total.toStringAsFixed(2)} ${AppStrings.currency.tr()}',
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  
+                  if (hasDiscount) ...[
+                    const SizedBox(height: 8),
+                    Text(
+                      AppStrings.couponApplied.tr(),
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
+                    Text(
+                      '${widget.order.copon}',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.blue,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      AppStrings.discountedPrice.tr(),
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    Text(
+                      '${discountedTotal.toStringAsFixed(2)} ${AppStrings.currency.tr()}',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.green,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      '${AppStrings.youSaved.tr()} ${(total - discountedTotal).toStringAsFixed(2)} ${AppStrings.currency.tr()}',
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        color: Colors.green,
+                      ),
+                    ),
+                  ],
+                ],
               ),
 
               const SizedBox(height: 24),

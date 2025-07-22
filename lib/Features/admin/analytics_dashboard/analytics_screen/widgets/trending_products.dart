@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import 'product_card.dart';
 import '../../trending_products_screen.dart/view/trending_products_screen.dart';
 import '../../viewmodel/analytics_dashboard_provider.dart';
@@ -20,7 +22,7 @@ class TrendingProducts extends StatelessWidget {
         if (provider.trendingProducts.isEmpty) {
           return Center(
             child: Text(
-              'No Trending products found.',
+              AppStrings.noTrendingProducts.tr(),
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: theme.colorScheme.onSurface,
               ),
@@ -42,7 +44,7 @@ class TrendingProducts extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
               Text(
-                'Trending Products',
+                AppStrings.trendingProducts.tr(),
                 style: theme.textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                   color: theme.colorScheme.onBackground,
@@ -110,7 +112,7 @@ class TrendingProducts extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  'View All',
+                                 AppStrings.viewAll.tr(),
                                   style: theme.textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,

@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import '../widgets/best_sellers_widget.dart';
 import '../widgets/monthly_sales_widget.dart';
 import '../widgets/sales_by_category_widget.dart';
@@ -32,7 +34,7 @@ class _AnalyticsScreenState extends State<AnalyticsScreen> {
       builder: (context, provider, _) => Scaffold(
         appBar: AppBar(
           title: Text(
-            'Analytics Dashboard',
+           AppStrings.AnalyticsDashboard.tr(),
             style: Theme.of(context).textTheme.titleLarge,
           ),
           centerTitle: true,

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import '../../shared_widgets/large_product_card.dart';
 import '../../viewmodel/analytics_dashboard_provider.dart';
 import 'package:provider/provider.dart';
@@ -8,7 +10,8 @@ class TrendingProductsScreen extends StatefulWidget {
   const TrendingProductsScreen({super.key});
 
   @override
-  State<TrendingProductsScreen> createState() => _TrendingProductsScreenState();
+  State<TrendingProductsScreen> createState() =>
+      _TrendingProductsScreenState();
 }
 
 class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
@@ -73,11 +76,10 @@ class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
       onPopInvoked: (didPop) {
         if (didPop) {
           context.read<AnalyticsDashboardProvider>().fetchTrendingProducts();
-          
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Trending Products')),
+        appBar: AppBar(title: Text(AppStrings.trendingProducts.tr())),
         body: Column(
           children: [
             // Date Range Selector
@@ -89,7 +91,7 @@ class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Select Date Range',
+                      AppStrings.selectDateRange.tr(),
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.bold,
                       ),
@@ -102,7 +104,7 @@ class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
                             icon: const Icon(Icons.calendar_today),
                             label: Text(
                               _startDate == null
-                                  ? 'Select Start Date'
+                                  ? AppStrings.selectStartDate.tr()
                                   : _dateFormat.format(_startDate!),
                             ),
                             onPressed: () => _selectStartDate(context),
@@ -114,7 +116,7 @@ class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
                             icon: const Icon(Icons.calendar_today),
                             label: Text(
                               _endDate == null
-                                  ? 'Select End Date'
+                                  ? AppStrings.selectEndDate.tr()
                                   : _dateFormat.format(_endDate!),
                             ),
                             onPressed: _startDate == null
@@ -129,7 +131,7 @@ class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
                       width: double.infinity,
                       child: FilledButton.icon(
                         icon: const Icon(Icons.search),
-                        label: const Text('Get Trending Products'),
+                        label: Text(AppStrings.getTrendingProducts.tr()),
                         onPressed: _startDate == null || _endDate == null
                             ? null
                             : _fetchTrendingProducts,
@@ -138,7 +140,12 @@ class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
                     if (_startDate != null && _endDate != null) ...[
                       const SizedBox(height: 8),
                       Text(
-                        'Showing data from ${_dateFormat.format(_startDate!)} to ${_dateFormat.format(_endDate!)}',
+                        AppStrings.showingDataFromTo.tr(
+                          args: [
+                            _dateFormat.format(_startDate!),
+                            _dateFormat.format(_endDate!)
+                          ],
+                        ),
                         style: theme.textTheme.bodySmall?.copyWith(
                           color: colorScheme.onSurface.withOpacity(0.6),
                         ),
@@ -160,8 +167,8 @@ class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
                     return Center(
                       child: Text(
                         _startDate == null || _endDate == null
-                            ? 'Please select a date range'
-                            : 'No trending products found for selected dates',
+                            ? AppStrings.pleaseSelectDateRange.tr()
+                            : AppStrings.noTrendingProducts.tr(),
                         style: theme.textTheme.bodyLarge?.copyWith(
                           color: colorScheme.onSurface,
                         ),

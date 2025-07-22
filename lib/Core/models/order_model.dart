@@ -12,6 +12,9 @@ class OrderModel {
   final DateTime? date;
   final String status;
   final String? id;
+   String? address;
+   String? city;
+   String? copon;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
@@ -24,6 +27,9 @@ class OrderModel {
     this.date,
     this.status = 'pending',
     this.id,
+    this.address,
+    this.city,
+    this.copon,
     this.createdAt,
     this.updatedAt,
   });
@@ -39,6 +45,9 @@ class OrderModel {
       date: json['date'] != null ? DateTime.parse(json['date']) : null,
       status: json['status'] ?? 'pending',
       id: json['_id'],
+      address: json['address'],
+      city: json['city'],
+      copon: json['copon'],
       createdAt: json['createdAt'] != null ? DateTime.parse(json['createdAt']) : null,
       updatedAt: json['updatedAt'] != null ? DateTime.parse(json['updatedAt']) : null,
     );

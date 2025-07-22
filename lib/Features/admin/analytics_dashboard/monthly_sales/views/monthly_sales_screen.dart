@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import '../../models/monthly_sales_model.dart';
 import '../../shared_widgets/chart_widget.dart';
 import '../../viewmodel/analytics_dashboard_provider.dart';
@@ -43,7 +44,7 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
         }
       },
       child: Scaffold(
-        appBar: AppBar(title: const Text('Monthly Sales').tr()),
+        appBar: AppBar(title:  Text(AppStrings.monthlySales.tr())),
         body: Consumer<AnalyticsDashboardProvider>(
           builder: (context, provider, _) {
             if (provider.isLoading) {
@@ -62,20 +63,18 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text('Filter by:').tr(),
+                          Text(AppStrings.filter.tr()),
                           const SizedBox(height: 12),
                           Row(
                             children: [
-                              // Year Dropdown with "All time" option
                               Flexible(
-                                // Changed from Expanded to Flexible
                                 flex: 1,
                                 child: DropdownButtonFormField<int?>(
                                   isExpanded:
                                       true, // Added to handle text overflow
                                   value: _selectedYear,
                                   decoration: InputDecoration(
-                                    labelText: 'Year'.tr(),
+                                    labelText: AppStrings.year.tr(),
                                     border: const OutlineInputBorder(),
                                     contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 12,
@@ -84,7 +83,7 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
                                   items: [
                                     DropdownMenuItem<int?>(
                                       value: null,
-                                      child: const Text('All time').tr(),
+                                      child:  Text(AppStrings.allTime.tr()),
                                     ),
                                     ...List.generate(
                                       _currentDate.year - 2025 + 1,
@@ -125,7 +124,7 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
                                       true, // Added to handle text overflow
                                   value: _selectedMonth,
                                   decoration: InputDecoration(
-                                    labelText: 'Month'.tr(),
+                                    labelText: AppStrings.month.tr(),
                                     border: const OutlineInputBorder(),
                                     contentPadding: const EdgeInsets.symmetric(
                                       horizontal: 12,
@@ -136,9 +135,9 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
                                       : [
                                           DropdownMenuItem<int?>(
                                             value: null,
-                                            child: const Text(
-                                              'All months',
-                                            ).tr(),
+                                            child:  Text(
+                                              AppStrings.allMonths.tr()
+                                            )
                                           ),
                                           ...List.generate(
                                             _selectedYear == _currentDate.year
@@ -165,9 +164,9 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
                                             _selectedMonth = value;
                                           });
                                         },
-                                  disabledHint: const Text(
-                                    'Select a year first',
-                                  ).tr(),
+                                  disabledHint:  Text(
+                                   AppStrings.selectAYearFirst.tr()
+                                  ),
                                 ),
                               ),
                             ],
@@ -177,7 +176,7 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: _fetchData,
-                              child: const Text('Apply Filters').tr(),
+                              child:  Text(AppStrings.applyFilters.tr()),
                             ),
                           ),
                         ],
@@ -190,7 +189,7 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
                   if (provider.monthlySales.isEmpty)
                     Center(
                       child: Text(
-                        'No monthly sales data found.'.tr(),
+                        AppStrings.noMonthlySales.tr(),
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                           color: Theme.of(context).colorScheme.onSurface,
                         ),
@@ -206,10 +205,10 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
                               children: [
                                 Text(
                                   _selectedYear == null
-                                      ? 'All Time Sales'.tr()
+                                      ? AppStrings.allTimeSales.tr()
                                       : _selectedMonth == null
-                                      ? '${_selectedYear} Sales'.tr()
-                                      : '${DateFormat('MMMM yyyy').format(DateTime(_selectedYear!, _selectedMonth!))} Sales'
+                                      ? '${_selectedYear} ${AppStrings.sales.tr()}'
+                                      : '${DateFormat('MMMM yyyy').format(DateTime(_selectedYear!, _selectedMonth!))} ${AppStrings.sales.tr()}'
                                             .tr(),
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
@@ -227,7 +226,7 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  'Detailed Data'.tr(),
+                                 AppStrings.detailedData.tr(),
                                   style: Theme.of(context).textTheme.titleLarge,
                                 ),
                                 const SizedBox(height: 16),
@@ -275,7 +274,7 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
       ),
       cells: [
         DataCell(Text(
-          'Total'.tr(),
+        AppStrings.total.tr(),
           style: const TextStyle(fontWeight: FontWeight.bold),
         )),
         DataCell(Text(
@@ -297,20 +296,20 @@ class _MonthlySalesScreenState extends State<MonthlySalesScreen> {
       columns: [
         DataColumn(
           label: Text(
-            'Month'.tr(),
+            AppStrings.month.tr(),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
         ),
         DataColumn(
           label: Text(
-            'Sales'.tr(),
+            AppStrings.sales.tr(),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           numeric: true,
         ),
         DataColumn(
           label: Text(
-            'Revenue'.tr(),
+           AppStrings.revenue.tr(),
             style: Theme.of(context).textTheme.bodyMedium,
           ),
           numeric: true,

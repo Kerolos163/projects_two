@@ -223,4 +223,68 @@ class AppStrings {
   static var addedToCart = "Added to cart successfully.";
   static const String returnPending = "Return Pending";
   static const String returned = "Returned";
+
+  static var totalPrice  = "TotalPrice";
+
+  static var currency ="Currency";
+
+  static var couponApplied = "Coupon Applied";
+
+  static var discountedPrice = "DiscountedPrice";
+
+  static var youSaved ="youSaved";
+
+  static var AnalyticsDashboard = "AnalyticsDashboard";
+
+  static var noBestSellersAvaliable = "noBestSellersAvaliable";
+
+  static var noMonthlySales = "noMonthlySales";
+
+  static var monthlySales = "monthlySales";
+
+  static var salesByCat = "salesByCat";
+
+  static var noSalesData="noSalesData";
+
+  static var noTrendingProducts = "noTrendingProducts";
+
+  static var trendingProducts = "trendingProducts";
+
+  static var year ="year";
+
+  static var allTime = "allTime";
+
+  static var month = "month";
+
+  static var allMonths = "allMonths";
+
+  static var selectAYearFirst = "selectAYearFirst";
+
+  static var applyFilters = "applyFilters";
+
+  static var allTimeSales = "allTimeSales";
+
+  static var sales = "sales";
+
+  static var detailedData  = "detailedData";  
+
+  static var revenue = "revenue";
+
+  static var noSalesForCategory = "noSalesForCategory";
+
+  static var salesDistribution= "salesDistribution";
+   static const String selectDateRange = 'select_date_range';
+  static const String selectStartDate = 'select_start_date';
+  static const String selectEndDate = 'select_end_date';
+  static const String getTrendingProducts = 'get_trending_products';
+  static const String pleaseSelectDateRange = 'please_select_date_range';
+  static const String showingDataFromTo = 'showing_data_from_to';
+
+  static var menu = "menu";
+
+  static var Analytics = "analytics";
+
+  static var returns = "returns";
+
+  static var noOrdersForStatus = "noOrdersForStatus";
 }

@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import '../../../../Core/api/api_end_points.dart';
 import '../../../../Core/models/product_model.dart';
 import '../../products_dashboard/product_details/view/product_details_screen.dart';
@@ -60,7 +62,7 @@ class LargeProductCard extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: Text(
-                    isBestSeller ? 'Best Seller' : 'Trending',
+                    isBestSeller ? AppStrings.bestSellers.tr(): AppStrings.trendingProduct.tr(),
                     style: textTheme.labelSmall?.copyWith(
                       color: colorScheme.onPrimary,
                       fontWeight: FontWeight.bold,

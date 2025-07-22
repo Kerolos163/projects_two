@@ -36,6 +36,8 @@ class StatusBadge extends StatelessWidget {
         return Colors.red;
       case 'refunded':
         return Colors.orange;
+      case 'cancelled':
+        return Colors.redAccent;
       case 'pending':
       default:
         return Colors.grey;

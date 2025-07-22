@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 import 'product_card.dart';
 import '../../best_sellers_screen/view/best_sellers_screen.dart';
 import '../../viewmodel/analytics_dashboard_provider.dart';
@@ -20,7 +22,7 @@ class BestSellersWidget extends StatelessWidget {
         if (provider.bestSellers.isEmpty) {
           return Center(
             child: Text(
-              'No best sellers found.',
+              AppStrings.noBestSellersAvaliable.tr(),
               style: theme.textTheme.bodyLarge?.copyWith(
                 color: theme.colorScheme.onSurface,
               ),
@@ -42,7 +44,7 @@ class BestSellersWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    'Best Sellers',
+                   AppStrings.bestSellers.tr(),
                     style: theme.textTheme.headlineSmall?.copyWith(
                       fontWeight: FontWeight.bold,
                       color: theme.colorScheme.onBackground,
@@ -110,7 +112,7 @@ class BestSellersWidget extends StatelessWidget {
                                 ),
                                 const SizedBox(height: 8),
                                 Text(
-                                  'View All',
+                                  AppStrings.viewAll.tr(),
                                   style: theme.textTheme.bodyLarge?.copyWith(
                                     fontWeight: FontWeight.bold,
                                     color: Colors.black,
