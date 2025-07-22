@@ -184,7 +184,6 @@
   "Other Products": "منتجات أخرى",
   "view all": "عرض الكل",
   "newArrivals": "المنتجات الجديدة",
-  "My Orders": "طلباتي",
   "returnOrder": "ارجاع الطلب",
   "cancelOrder": "الغاء الطلب",
   "returnInitiated": "بدأت عملية الإرجاع",
@@ -205,5 +204,6 @@
   "Sort by Price & Rating": "رتب حسب السعر والتقييم",
   "Discount Products": "المنتجات المخفضة",
   "Added to cart successfully.": "تمت الإضافة إلى السلة بنجاح",
-  "My orders": "طلباتي"
+  "My orders": "طلباتي",
+  "okay": "حسنا"
 }

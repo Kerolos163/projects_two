@@ -117,7 +117,7 @@ class CartScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Total',
+                                AppStrings.orderTotal.tr(),
                                 style: TextStyle(
                                   fontSize: 14,
                                   color: AppColors.grey600,
@@ -137,38 +137,42 @@ class CartScreen extends StatelessWidget {
                               ),
                             ],
                           ),
-                          Expanded(
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 24),
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  showModalBottomSheet(
-                                    isScrollControlled: true,
-                                    shape: const RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(16),
-                                        topRight: Radius.circular(16),
+                          Padding(
+                            padding: EdgeInsets.only(left: 24),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.only(
+                                      topLeft: Radius.circular(16),
+                                      topRight: Radius.circular(16),
+                                    ),
+                                  ),
+                                  context: context,
+                                  builder: (_) => MultiProvider(
+                                    providers: [
+                                      ChangeNotifierProvider.value(
+                                        value: Provider.of<CartProvider>(
+                                          context,
+                                          listen: false,
+                                        ),
                                       ),
-                                    ),
-                                    context: context,
-                                    builder: (_) => MultiProvider(
-                                      providers: [
-                                        ChangeNotifierProvider.value(
-                                          value: Provider.of<CartProvider>(
-                                            context,
-                                            listen: false,
-                                          ),
-                                        ),
-                                        ChangeNotifierProvider(
-                                          create: (_) =>
-                                              StripePaymentProvider(),
-                                        ),
-                                      ],
-                                      child: const PaymentMethodBottomSheet(),
-                                    ),
-                                  );
-                                },
-                                child: Text('Payment'),
+                                      ChangeNotifierProvider(
+                                        create: (_) =>
+                                            StripePaymentProvider(),
+                                      ),
+                                    ],
+                                    child: const PaymentMethodBottomSheet(),
+                                  ),
+                                );
+                              },
+                              child: Text(
+                                AppStrings.buyNow.tr(),
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  color: AppColors.white,
+                                ),
                               ),
                             ),
                           ),
