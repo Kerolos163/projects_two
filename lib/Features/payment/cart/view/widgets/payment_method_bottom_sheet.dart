@@ -59,6 +59,25 @@ class PaymentMethodBottomSheet extends StatelessWidget {
                 },
               ),
 
+              CustomTextFormField(
+                label: "Copon (Optional)",
+                placeholder: "Enter your copon",
+                controller: cartProvider.copon,
+                validator: (input) {
+                  if (input == "cpn10" ||
+                      input == "cpn15" ||
+                      input == "cpn20" ||
+                      input == "cpn5" ||
+                      input == null ||
+                      input.trim().isEmpty) {
+                    return null;
+                  }
+                  // print(input);
+
+                  return "invalid copon";
+                },
+              ),
+
               const SizedBox(height: 16),
               PaymentMethods(
                 onChanged: (int selectedIndex) {
@@ -81,7 +100,7 @@ class PaymentMethodBottomSheet extends StatelessWidget {
                                 .validate()) {
                               return; // ⛔ Don't proceed if form is invalid
                             }
-                            final amount = (cartProvider.totalPrice * 100)
+                            final amount = (cartProvider.finalPrice * 100)
                                 .toInt();
                             final inputModel = PaymentIntentInputModel(
                               amount: amount,
