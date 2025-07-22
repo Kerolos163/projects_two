@@ -206,7 +206,7 @@ class AppStrings {
   static const String payCOD = "Pay COD";
   static const String paymentSuccessful = 'Payment Successful';
   static const String paymentFaild = 'Payment Faild';
-
+  static const String okay = 'okay';
   static var coverImage = 'coverImage';
   static var productAdd = 'productAdd';
   static var unknownProduct = "unknownProduct";

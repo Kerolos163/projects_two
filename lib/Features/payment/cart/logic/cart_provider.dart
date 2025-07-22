@@ -34,6 +34,14 @@ class CartProvider extends ChangeNotifier {
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
   TextEditingController address = TextEditingController();
   TextEditingController city = TextEditingController();
+  TextEditingController copon = TextEditingController();
+
+  Map<String, double> couponDiscounts = {
+    "cpn5": 0.05,
+    "cpn10": 0.10,
+    "cpn15": 0.15,
+    "cpn20": 0.20,
+  };
 
   Future<void> loadCartData() async {
     await loadCartFromStorage();
@@ -81,6 +89,15 @@ class CartProvider extends ChangeNotifier {
   double get totalPrice =>
       _cartItems.fold(0, (sum, item) => sum + (item.price * item.quantity));
 
+  double get finalPrice {
+    if (copon.text.isEmpty) {
+      return totalPrice;
+    }
+    String enteredCoupon = copon.text.trim().toLowerCase();
+    double discountRate = couponDiscounts[enteredCoupon] ?? 0.0;
+    return totalPrice * (1 - discountRate);
+  }
+
   void increaseQuantity(ProductModel product) {
     final index = _cartItems.indexWhere((item) => item.id == product.id);
     if (index != -1) {
@@ -126,6 +143,8 @@ class CartProvider extends ChangeNotifier {
           "city": city.text,
           "paymentMethod": paymentMethod,
           "products": products,
+          "copon": copon.text.isNotEmpty ? copon.text : "non",
+          "price": finalPrice,
         },
       );
 

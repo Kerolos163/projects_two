@@ -3,10 +3,6 @@ import 'dart:developer';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:projects_two/Core/constant/image.dart';
-import 'package:projects_two/Core/widgets/svg_img.dart';
-import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
-import 'package:projects_two/Features/payment/cart/view/cart_screen.dart';
 import '../../../../Core/constant/app_strings.dart';
 import 'widgets/actions_row.dart';
 import 'widgets/add_review_bottom_sheet.dart';
@@ -90,66 +86,9 @@ class ProductDetails extends StatelessWidget {
                             );
                           },
                           icon: detailsProvider.isFavorite
-                              ? const Icon(Icons.favorite, color: Colors.red)
-                              : const Icon(Icons.favorite_border),
+                              ? const Icon(Icons.favorite, color: Colors.red ,size: 30,)
+                              : const Icon(Icons.favorite_border , size: 30,),
                         ),
-                        SizedBox(width: 10),
-                        Stack(
-                          clipBehavior: Clip.none,
-                          children: [
-                            // Cart Icon
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => const CartScreen(),
-                                  ),
-                                );
-                              },
-                              child: SVGImage(
-                                path: ImagePath.shoppingIcon,
-                                color: Theme.of(context).colorScheme.secondary,
-                                width: 25,
-                              ),
-                            ),
-
-                            // Badge
-                            Positioned(
-                              top: -7,
-                              right: -7,
-                              child: Consumer<CartProvider>(
-                                builder: (context, cartProvider, child) {
-                                  final count = cartProvider.cartItems.length;
-                                  if (count == 0) {
-                                    return SizedBox(); // No badge if count is 0
-                                  }
-                                  return Container(
-                                    padding: EdgeInsets.all(2),
-                                    decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      shape: BoxShape.circle,
-                                    ),
-                                    constraints: BoxConstraints(
-                                      minWidth: 18,
-                                      minHeight: 18,
-                                    ),
-                                    child: Text(
-                                      count.toString(),
-                                      style: TextStyle(
-                                        color: Colors.white,
-                                        fontSize: 12.sp,
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
-                        SizedBox(width: 10),
                       ],
                     ),
                     body: SafeArea(
