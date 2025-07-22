@@ -40,7 +40,7 @@ class CartScreen extends StatelessWidget {
               child: Consumer<CartProvider>(
                 builder: (context, provider, child) {
                   return Padding(
-                    padding:const EdgeInsets.symmetric(horizontal: 14),
+                    padding: const EdgeInsets.symmetric(horizontal: 14),
                     child: provider.cartItems.isEmpty
                         ? SizedBox(
                             height: 300.h,
@@ -141,6 +141,7 @@ class CartScreen extends StatelessWidget {
                               child: ElevatedButton(
                                 onPressed: () {
                                   showModalBottomSheet(
+                                    isScrollControlled: true,
                                     shape: const RoundedRectangleBorder(
                                       borderRadius: BorderRadius.only(
                                         topLeft: Radius.circular(16),
