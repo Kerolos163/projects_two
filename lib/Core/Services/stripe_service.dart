@@ -34,17 +34,27 @@ class StripeService {
     );
   }
 
-  Future displayPaymentSheet() async {
-    await Stripe.instance.presentPaymentSheet();
+  Future<bool> displayPaymentSheet() async {
+    try {
+      await Stripe.instance.presentPaymentSheet();
+      return true; // Payment succeeded
+    } catch (e) {
+      if (e is StripeException) {
+        print('Stripe Exception: ${e.error.localizedMessage}');
+      } else {
+        print('Unknown error: $e');
+      }
+      return false; // Payment failed or cancelled
+    }
   }
 
-  Future makePayment({
+  Future<bool> makePayment({
     required PaymentIntentInputModel paymentIntentInputModel,
   }) async {
     var paymentIntentModel = await createPaymentIntent(paymentIntentInputModel);
     await initPaymentSheet(
       paymentIntentClientSecret: paymentIntentModel.clientSecret!,
     );
-    await displayPaymentSheet();
+    return await displayPaymentSheet();
   }
 }
