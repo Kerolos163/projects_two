@@ -82,8 +82,6 @@ class ProductProvider extends ChangeNotifier {
   Future<void> getSortedProducts(String sortQuery) async {
     displayedProducts = [];
     state = ApiState.loading;
-    notifyListeners();
-
     try {
       final response = await apiService.get(
         ApiEndPoints.getSortedProducts(sortQuery: sortQuery),

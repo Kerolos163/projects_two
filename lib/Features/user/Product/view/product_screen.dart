@@ -61,17 +61,18 @@ class ProductScreen extends StatelessWidget {
                                       color: Colors.grey[700],
                                     ),
                               ),
-                              PopupMenuButton<String>(
+                              PopupMenuButton(
                                 icon: Icon(Icons.sort),
-                                onSelected: (value) {
+                                onSelected: (value) async {
+                                  if (!context.mounted) return;
                                   if (value == 'price') {
-                                    provider.getSortedProducts('price');
+                                    await provider.getSortedProducts('price');
                                   } else if (value == 'rating') {
-                                    provider.getSortedProducts(
+                                    await provider.getSortedProducts(
                                       '-ratingsAverage',
                                     );
                                   } else if (value == 'both') {
-                                    provider.getSortedProducts(
+                                    await provider.getSortedProducts(
                                       'price,ratingsAverage',
                                     );
                                   }
