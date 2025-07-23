@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:projects_two/Features/user/ReturnOrders/view/return_orders_screen.dart';
 import 'package:projects_two/Features/admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
 import 'package:provider/provider.dart';
 import '../../../../../Core/api/api_end_points.dart';
@@ -211,6 +212,45 @@ class UserOrderDetailsScreen extends StatelessWidget {
 
                 const SizedBox(height: 32),
 
+            if (order.status.toLowerCase() == "fulfilled" &&
+                order.date != null &&
+                DateTime.now().difference(order.date!).inDays <= 14)
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: AppColors.primary,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ReturnOrderScreen(order: order)));
+                },
+                child: Text(
+                  AppStrings.returnOrder.tr(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              )
+            else if (order.status.toLowerCase() == "pending")
+              ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.redAccent,
+                  padding: const EdgeInsets.symmetric(vertical: 14),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                ),
+                onPressed: () {
+                  // // TODO: Add your cancel logic here
+                  // ScaffoldMessenger.of(context).showSnackBar(
+                  //   SnackBar(content: Text(AppStrings.orderCancelled.tr())),
+                  // );
+                },
+                child: Text(
+                  AppStrings.cancelOrder.tr(),
+                  style: const TextStyle(color: Colors.white),
+                ),
+              ),
                 if (order.status.toLowerCase() == "fulfilled" &&
                     order.date != null &&
                     DateTime.now().difference(order.date!).inDays <= 14)

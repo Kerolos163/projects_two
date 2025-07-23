@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:projects_two/Features/user/Myreturns/view/myreturns_screen.dart' hide UserOrdersListScreen;
 import 'package:projects_two/Core/utils/custom_snak_bar.dart';
 import '../../../Core/utils/account_type.dart';
 import '../../admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
@@ -66,7 +67,7 @@ class ProfileScreen extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => const LoginScreen(),
                       ),
-                      (route) => false,
+                          (route) => false,
                     );
                   },
                   icon: const Icon(Icons.logout, color: AppColors.red),
@@ -143,6 +144,138 @@ class ProfileScreen extends StatelessWidget {
                           ),
                           SizedBox(height: 20),
 
+                        CustomTextFormField(
+                          label: AppStrings.firstName.tr(),
+                          onChanged: (value) {
+                            if (profileProvider.userModel.fName != value) {
+                              profileProvider.setUpdateValue(true);
+                            } else {
+                              profileProvider.setUpdateValue(false);
+                            }
+                          },
+                          placeholder: AppStrings.enterYourFirstName.tr(),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppStrings.firstNameError.tr();
+                            }
+                            return null;
+                          },
+                          controller: profileProvider.firstNameController,
+                        ),
+                        CustomTextFormField(
+                          label: AppStrings.lastName.tr(),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppStrings.lastNameError.tr();
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            if (profileProvider.userModel.lName != value) {
+                              profileProvider.setUpdateValue(true);
+                            } else {
+                              profileProvider.setUpdateValue(false);
+                            }
+                          },
+                          placeholder: AppStrings.enterYourLastName.tr(),
+                          controller: profileProvider.lastNameController,
+                        ),
+                        CustomTextFormField(
+                          label: AppStrings.address.tr(),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppStrings.addressError.tr();
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            if (profileProvider.userModel.address != value) {
+                              profileProvider.setUpdateValue(true);
+                            } else {
+                              profileProvider.setUpdateValue(false);
+                            }
+                          },
+                          placeholder: AppStrings.enterYourAddress.tr(),
+                          controller: profileProvider.addressController,
+                        ),
+                        CustomTextFormField(
+                          label: AppStrings.emailAddress.tr(),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return AppStrings.emailEmpty.tr();
+                            }
+                            return null;
+                          },
+                          onChanged: (value) {
+                            if (profileProvider.userModel.email != value) {
+                              profileProvider.setUpdateValue(true);
+                            } else {
+                              profileProvider.setUpdateValue(false);
+                            }
+                          },
+                          controller: profileProvider.emailController,
+                          placeholder: AppStrings.enterYourEmail.tr(),
+                        ),
+                        CustomTextFormField(
+                          validator:
+                          profileProvider.passwordController.text.isEmpty
+                              ? null
+                              : (value) {
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.length < 6) {
+                              return AppStrings.passwordError.tr();
+                            }
+                            return null;
+                          },
+                          label: AppStrings.password.tr(),
+                          onChanged: (value) {
+                            if (profileProvider
+                                .passwordController
+                                .text
+                                .isNotEmpty) {
+                              profileProvider.setUpdateValue(true);
+                            } else {
+                              profileProvider.setUpdateValue(false);
+                            }
+                          },
+                          placeholder: AppStrings.enterYourPassword.tr(),
+                          obscureText: true,
+                          controller: profileProvider.passwordController,
+                        ),
+                        SizedBox(height: 24.h),
+                        profileProvider.state == ApiState.update
+                            ? const Center(child: CircularProgressIndicator())
+                            : ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          onPressed: profileProvider.update
+                              ? () async {
+                            if (profileProvider
+                                .formKey
+                                .currentState!
+                                .validate()) {
+                              if (profileProvider.showImage ==
+                                  ShowImage.local) {
+                                await profileProvider.uploadImage();
+                              }
+                              await profileProvider.updateUser();
+                            }
+                          }
+                              : null,
+                          child: Text(
+                            AppStrings.save.tr(),
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 14),
                           CustomTextFormField(
                             label: AppStrings.firstName.tr(),
                             onChanged: (value) {
@@ -277,6 +410,101 @@ class ProfileScreen extends StatelessWidget {
                                 ),
                           SizedBox(height: 14),
 
+                        profileProvider.userModel.role == AccountType.user
+                            ? Column(
+                          children: [
+                            ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primary,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 14,
+                                    horizontal: 60
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChangeNotifierProvider.value(
+                                      value: getIt<OrdersDashboardProvider>(),
+                                      child:  UserOrdersListScreen(),
+                                    ),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.shopping_bag,
+                                color: AppColors.white,
+                              ),
+                              label: Text(
+                                AppStrings.myOrders.tr(),
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                            ),
+                            SizedBox(height: 14),
+                            ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primary,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 14,
+                                    horizontal: 55
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChangeNotifierProvider.value(
+                                      value: getIt<OrdersDashboardProvider>(),
+                                      child: UserReturnScreen(),
+                                    ),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.assignment_return,
+                                color: AppColors.white,
+                              ),
+                              label: Text(
+                                AppStrings.myreturns.tr(),
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
+                            : SizedBox(),
+
+                        SizedBox(height: 14),
+                      ],
+                    ),
+                  ),
+                );
+              case ApiState.update:
+                return const Center(child: CircularProgressIndicator());
+              case ApiState.error:
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  if (profileProvider.message == "Invalid token") {
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => LoginScreen()),
+                          (route) => false,
+                    );
+                  }
+                });
+                return SizedBox();
+            }
                           profileProvider.userModel.role == AccountType.user
                               ? ElevatedButton.icon(
                                   style: ElevatedButton.styleFrom(

@@ -3,10 +3,10 @@ import 'package:projects_two/Core/models/product_model.dart';
 
 class ReturnModel {
   String? id;
-  OrderModel? order;
+  final OrderModel? order;
   List<ProductModel>? products;
   String? status;
-  
+
 
   ReturnModel({
     this.id,
@@ -28,6 +28,42 @@ class ReturnModel {
   //   );
   // }
   
+  // factory ReturnModel.fromJson(Map<String, dynamic> json) {
+  //   return ReturnModel(
+  //     id: json['_id'],
+  //     order: OrderModel.fromJson(json['orderId']),
+  //     products: (json['products'] as List?)
+  //         ?.map((p) {
+  //       final productJson = p['pId'];
+  //       if (productJson is Map<String, dynamic>) {
+  //         return ProductModel.fromJson(productJson);
+  //       } else {
+  //         // If only a String id is provided, create a minimal ProductModel with that id
+  //         return ProductModel(
+  //           id: productJson.toString(),
+  //           title: '',
+  //           slug: '',
+  //           description: '',
+  //           quantity: 0,
+  //           sold: 0,
+  //           price: 0,
+  //           priceAfterDiscount: 0,
+  //           colors: [],
+  //           imageCover: '',
+  //           images: [],
+  //           category: const Category(id: '', name: '', categoryId: null),
+  //           subCategories: [],
+  //           ratingsAverage: '',
+  //           ratingsQuantity: 0,
+  //           createdAt: DateTime.now(),
+  //           updatedAt: DateTime.now(),
+  //         );
+  //       }
+  //     }).toList(),
+  //
+  //     status: json['status'] ?? 'pending',
+  //   );
+  // }
   factory ReturnModel.fromJson(Map<String, dynamic> json) {
   final order = OrderModel.fromJson(json['orderId']);
 
@@ -50,5 +86,45 @@ class ReturnModel {
     status: json['status'] ?? 'pending',
   );
 }
+
+    final parsedId = json['_id']?.toString().trim();
+    print('✅ Parsing ReturnModel with _id: $parsedId');
+    return ReturnModel(
+      id: json['_id']?.toString().trim(),
+
+
+      order: json['orderId'] != null ? OrderModel.fromJson(json['orderId']) : null,
+      products: (json['products'] as List<dynamic>?)
+          ?.map((p) {
+        final productJson = p['pId'];
+        if (productJson is Map<String, dynamic>) {
+          return ProductModel.fromJson(productJson);
+        } else {
+          return ProductModel(
+            id: productJson.toString(),
+            title: '',
+            slug: '',
+            description: '',
+            quantity: 0,
+            sold: 0,
+            price: 0,
+            priceAfterDiscount: 0,
+            colors: [],
+            imageCover: '',
+            images: [],
+            category: const Category(id: '', name: '', categoryId: null),
+            subCategories: [],
+            ratingsAverage: '',
+            ratingsQuantity: 0,
+            createdAt: DateTime.now(),
+            updatedAt: DateTime.now(),
+          );
+        }
+      })
+          .toList(),
+      status: json['status'] ?? 'pending',
+    );
+  }
+
 
 }
