@@ -67,6 +67,9 @@ class ProductProvider extends ChangeNotifier {
         searchedProducts.add(item);
       }
     }
+    if (text == "") {
+      searchedProducts = [];
+    }
     state = ApiState.success;
     notifyListeners();
   }
