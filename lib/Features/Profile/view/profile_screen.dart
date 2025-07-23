@@ -1,5 +1,4 @@
 import 'dart:developer';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -13,7 +12,6 @@ import '../../../Core/Theme/app_provider.dart';
 import '../../../Core/Services/service_locator.dart';
 import '../../../Core/api/api_end_points.dart';
 import 'package:provider/provider.dart';
-
 import '../../../Core/Services/preferences_manager.dart';
 import '../../../Core/api/api_state.dart';
 import '../../../Core/constant/app_colors.dart';
@@ -44,7 +42,7 @@ class ProfileScreen extends StatelessWidget {
             },
             child: Text(
               context.locale.languageCode.toUpperCase(),
-              style: TextStyle(
+              style: const TextStyle(
                 color: AppColors.primary,
                 fontWeight: FontWeight.bold,
               ),
@@ -64,10 +62,8 @@ class ProfileScreen extends StatelessWidget {
                     appProvider.currentIndex = 0;
                     Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(
-                        builder: (context) => const LoginScreen(),
-                      ),
-                          (route) => false,
+                      MaterialPageRoute(builder: (context) => const LoginScreen()),
+                      (route) => false,
                     );
                   },
                   icon: const Icon(Icons.logout, color: AppColors.red),
@@ -79,30 +75,28 @@ class ProfileScreen extends StatelessWidget {
         body: Consumer<ProfileProvider>(
           builder: (context, profileProvider, child) {
             if (profileProvider.message == "Invalid token") {
-              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 Navigator.pushAndRemoveUntil(
                   context,
                   MaterialPageRoute(builder: (context) => const LoginScreen()),
                   (route) => false,
                 );
               });
+              return const SizedBox();
             } else if (profileProvider.state == ApiState.error) {
-              WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+              WidgetsBinding.instance.addPostFrameCallback((_) {
                 customSnackBar(context, profileProvider.message);
               });
             }
 
             return profileProvider.state == ApiState.loading
-                ? Center(child: CircularProgressIndicator())
+                ? const Center(child: CircularProgressIndicator())
                 : RefreshIndicator(
                     onRefresh: () => profileProvider.getUserInfo(),
                     child: Form(
                       key: profileProvider.formKey,
                       child: ListView(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 20,
-                          vertical: 10,
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
                         children: [
                           Center(
                             child: Stack(
@@ -125,11 +119,7 @@ class ProfileScreen extends StatelessWidget {
                                       child: CircleAvatar(
                                         radius: 14.r,
                                         backgroundColor: AppColors.primary,
-                                        child: Icon(
-                                          Icons.edit,
-                                          size: 16.sp,
-                                          color: AppColors.white,
-                                        ),
+                                        child: Icon(Icons.edit, size: 16.sp, color: AppColors.white),
                                       ),
                                     ),
                                   ),
@@ -143,236 +133,65 @@ class ProfileScreen extends StatelessWidget {
                             style: Theme.of(context).textTheme.headlineLarge,
                           ),
                           SizedBox(height: 20),
-
-                        CustomTextFormField(
-                          label: AppStrings.firstName.tr(),
-                          onChanged: (value) {
-                            if (profileProvider.userModel.fName != value) {
-                              profileProvider.setUpdateValue(true);
-                            } else {
-                              profileProvider.setUpdateValue(false);
-                            }
-                          },
-                          placeholder: AppStrings.enterYourFirstName.tr(),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppStrings.firstNameError.tr();
-                            }
-                            return null;
-                          },
-                          controller: profileProvider.firstNameController,
-                        ),
-                        CustomTextFormField(
-                          label: AppStrings.lastName.tr(),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppStrings.lastNameError.tr();
-                            }
-                            return null;
-                          },
-                          onChanged: (value) {
-                            if (profileProvider.userModel.lName != value) {
-                              profileProvider.setUpdateValue(true);
-                            } else {
-                              profileProvider.setUpdateValue(false);
-                            }
-                          },
-                          placeholder: AppStrings.enterYourLastName.tr(),
-                          controller: profileProvider.lastNameController,
-                        ),
-                        CustomTextFormField(
-                          label: AppStrings.address.tr(),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppStrings.addressError.tr();
-                            }
-                            return null;
-                          },
-                          onChanged: (value) {
-                            if (profileProvider.userModel.address != value) {
-                              profileProvider.setUpdateValue(true);
-                            } else {
-                              profileProvider.setUpdateValue(false);
-                            }
-                          },
-                          placeholder: AppStrings.enterYourAddress.tr(),
-                          controller: profileProvider.addressController,
-                        ),
-                        CustomTextFormField(
-                          label: AppStrings.emailAddress.tr(),
-                          validator: (value) {
-                            if (value == null || value.isEmpty) {
-                              return AppStrings.emailEmpty.tr();
-                            }
-                            return null;
-                          },
-                          onChanged: (value) {
-                            if (profileProvider.userModel.email != value) {
-                              profileProvider.setUpdateValue(true);
-                            } else {
-                              profileProvider.setUpdateValue(false);
-                            }
-                          },
-                          controller: profileProvider.emailController,
-                          placeholder: AppStrings.enterYourEmail.tr(),
-                        ),
-                        CustomTextFormField(
-                          validator:
-                          profileProvider.passwordController.text.isEmpty
-                              ? null
-                              : (value) {
-                            if (value == null ||
-                                value.isEmpty ||
-                                value.length < 6) {
-                              return AppStrings.passwordError.tr();
-                            }
-                            return null;
-                          },
-                          label: AppStrings.password.tr(),
-                          onChanged: (value) {
-                            if (profileProvider
-                                .passwordController
-                                .text
-                                .isNotEmpty) {
-                              profileProvider.setUpdateValue(true);
-                            } else {
-                              profileProvider.setUpdateValue(false);
-                            }
-                          },
-                          placeholder: AppStrings.enterYourPassword.tr(),
-                          obscureText: true,
-                          controller: profileProvider.passwordController,
-                        ),
-                        SizedBox(height: 24.h),
-                        profileProvider.state == ApiState.update
-                            ? const Center(child: CircularProgressIndicator())
-                            : ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: AppColors.primary,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                          ),
-                          onPressed: profileProvider.update
-                              ? () async {
-                            if (profileProvider
-                                .formKey
-                                .currentState!
-                                .validate()) {
-                              if (profileProvider.showImage ==
-                                  ShowImage.local) {
-                                await profileProvider.uploadImage();
-                              }
-                              await profileProvider.updateUser();
-                            }
-                          }
-                              : null,
-                          child: Text(
-                            AppStrings.save.tr(),
-                            style: TextStyle(
-                              color: AppColors.white,
-                              fontSize: 16.sp,
-                            ),
-                          ),
-                        ),
-                        SizedBox(height: 14),
                           CustomTextFormField(
                             label: AppStrings.firstName.tr(),
                             onChanged: (value) {
-                              if (profileProvider.userModel.fName != value) {
-                                profileProvider.setUpdateValue(true);
-                              } else {
-                                profileProvider.setUpdateValue(false);
-                              }
+                              profileProvider.setUpdateValue(profileProvider.userModel.fName != value);
                             },
                             placeholder: AppStrings.enterYourFirstName.tr(),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return AppStrings.firstNameError.tr();
-                              }
-                              return null;
-                            },
+                            validator: (value) => value == null || value.isEmpty
+                                ? AppStrings.firstNameError.tr()
+                                : null,
                             controller: profileProvider.firstNameController,
                           ),
                           CustomTextFormField(
                             label: AppStrings.lastName.tr(),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return AppStrings.lastNameError.tr();
-                              }
-                              return null;
-                            },
                             onChanged: (value) {
-                              if (profileProvider.userModel.lName != value) {
-                                profileProvider.setUpdateValue(true);
-                              } else {
-                                profileProvider.setUpdateValue(false);
-                              }
+                              profileProvider.setUpdateValue(profileProvider.userModel.lName != value);
                             },
                             placeholder: AppStrings.enterYourLastName.tr(),
+                            validator: (value) => value == null || value.isEmpty
+                                ? AppStrings.lastNameError.tr()
+                                : null,
                             controller: profileProvider.lastNameController,
                           ),
                           CustomTextFormField(
                             label: AppStrings.address.tr(),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return AppStrings.addressError.tr();
-                              }
-                              return null;
-                            },
                             onChanged: (value) {
-                              if (profileProvider.userModel.address != value) {
-                                profileProvider.setUpdateValue(true);
-                              } else {
-                                profileProvider.setUpdateValue(false);
-                              }
+                              profileProvider.setUpdateValue(profileProvider.userModel.address != value);
                             },
                             placeholder: AppStrings.enterYourAddress.tr(),
+                            validator: (value) => value == null || value.isEmpty
+                                ? AppStrings.addressError.tr()
+                                : null,
                             controller: profileProvider.addressController,
                           ),
                           CustomTextFormField(
                             label: AppStrings.emailAddress.tr(),
-                            validator: (value) {
-                              if (value == null || value.isEmpty) {
-                                return AppStrings.emailEmpty.tr();
-                              }
-                              return null;
-                            },
                             onChanged: (value) {
-                              if (profileProvider.userModel.email != value) {
-                                profileProvider.setUpdateValue(true);
-                              } else {
-                                profileProvider.setUpdateValue(false);
-                              }
+                              profileProvider.setUpdateValue(profileProvider.userModel.email != value);
                             },
-                            controller: profileProvider.emailController,
                             placeholder: AppStrings.enterYourEmail.tr(),
+                            validator: (value) => value == null || value.isEmpty
+                                ? AppStrings.emailEmpty.tr()
+                                : null,
+                            controller: profileProvider.emailController,
                           ),
                           CustomTextFormField(
-                            validator:
-                                profileProvider.passwordController.text.isEmpty
+                            label: AppStrings.password.tr(),
+                            onChanged: (value) {
+                              profileProvider.setUpdateValue(profileProvider.passwordController.text.isNotEmpty);
+                            },
+                            placeholder: AppStrings.enterYourPassword.tr(),
+                            obscureText: true,
+                            validator: profileProvider.passwordController.text.isEmpty
                                 ? null
                                 : (value) {
-                                    if (value == null ||
-                                        value.isEmpty ||
-                                        value.length < 6) {
+                                    if (value == null || value.isEmpty || value.length < 6) {
                                       return AppStrings.passwordError.tr();
                                     }
                                     return null;
                                   },
-                            label: AppStrings.password.tr(),
-                            onChanged: (value) {
-                              if (profileProvider
-                                  .passwordController
-                                  .text
-                                  .isNotEmpty) {
-                                profileProvider.setUpdateValue(true);
-                              } else {
-                                profileProvider.setUpdateValue(false);
-                              }
-                            },
-                            placeholder: AppStrings.enterYourPassword.tr(),
-                            obscureText: true,
                             controller: profileProvider.passwordController,
                           ),
                           SizedBox(height: 24.h),
@@ -387,14 +206,9 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                   onPressed: profileProvider.update
                                       ? () async {
-                                          if (profileProvider
-                                              .formKey
-                                              .currentState!
-                                              .validate()) {
-                                            if (profileProvider.showImage ==
-                                                ShowImage.local) {
-                                              await profileProvider
-                                                  .uploadImage();
+                                          if (profileProvider.formKey.currentState!.validate()) {
+                                            if (profileProvider.showImage == ShowImage.local) {
+                                              await profileProvider.uploadImage();
                                             }
                                             await profileProvider.updateUser();
                                           }
@@ -409,133 +223,29 @@ class ProfileScreen extends StatelessWidget {
                                   ),
                                 ),
                           SizedBox(height: 14),
-
-                        profileProvider.userModel.role == AccountType.user
-                            ? Column(
-                          children: [
-                            ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.primary,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 14,
-                                    horizontal: 60
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ChangeNotifierProvider.value(
-                                      value: getIt<OrdersDashboardProvider>(),
-                                      child:  UserOrdersListScreen(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              icon: const Icon(
-                                Icons.shopping_bag,
-                                color: AppColors.white,
-                              ),
-                              label: Text(
-                                AppStrings.myOrders.tr(),
-                                style: TextStyle(
-                                  color: AppColors.white,
-                                  fontSize: 16.sp,
-                                ),
-                              ),
-                            ),
-                            SizedBox(height: 14),
-                            ElevatedButton.icon(
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: AppColors.primary,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 14,
-                                    horizontal: 55
-                                ),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => ChangeNotifierProvider.value(
-                                      value: getIt<OrdersDashboardProvider>(),
-                                      child: UserReturnScreen(),
-                                    ),
-                                  ),
-                                );
-                              },
-                              icon: const Icon(
-                                Icons.assignment_return,
-                                color: AppColors.white,
-                              ),
-                              label: Text(
-                                AppStrings.myreturns.tr(),
-                                style: TextStyle(
-                                  color: AppColors.white,
-                                  fontSize: 16.sp,
-                                ),
-                              ),
-                            ),
-                          ],
-                        )
-                            : SizedBox(),
-
-                        SizedBox(height: 14),
-                      ],
-                    ),
-                  ),
-                );
-              case ApiState.update:
-                return const Center(child: CircularProgressIndicator());
-              case ApiState.error:
-                WidgetsBinding.instance.addPostFrameCallback((_) {
-                  if (profileProvider.message == "Invalid token") {
-                    Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => LoginScreen()),
-                          (route) => false,
-                    );
-                  }
-                });
-                return SizedBox();
-            }
-                          profileProvider.userModel.role == AccountType.user
-                              ? ElevatedButton.icon(
+                          if (profileProvider.userModel.role == AccountType.user)
+                            Column(
+                              children: [
+                                ElevatedButton.icon(
                                   style: ElevatedButton.styleFrom(
                                     backgroundColor: AppColors.primary,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(8),
                                     ),
-                                    padding: const EdgeInsets.symmetric(
-                                      vertical: 14,
-                                    ),
+                                    padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 60),
                                   ),
                                   onPressed: () {
                                     Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                        builder: (context) =>
-                                            ChangeNotifierProvider.value(
-                                              value:
-                                                  getIt<
-                                                    OrdersDashboardProvider
-                                                  >(),
-                                              child:
-                                                  const UserOrdersListScreen(),
-                                            ),
+                                        builder: (context) => ChangeNotifierProvider.value(
+                                          value: getIt<OrdersDashboardProvider>(),
+                                          child: const UserOrdersListScreen(),
+                                        ),
                                       ),
                                     );
                                   },
-                                  icon: const Icon(
-                                    Icons.shopping_bag,
-                                    color: AppColors.white,
-                                  ),
+                                  icon: const Icon(Icons.shopping_bag, color: AppColors.white),
                                   label: Text(
                                     AppStrings.myOrders.tr(),
                                     style: TextStyle(
@@ -543,8 +253,38 @@ class ProfileScreen extends StatelessWidget {
                                       fontSize: 16.sp,
                                     ),
                                   ),
-                                )
-                              : SizedBox(),
+                                ),
+                                SizedBox(height: 14),
+                                ElevatedButton.icon(
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: AppColors.primary,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(vertical: 14, horizontal: 55),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => ChangeNotifierProvider.value(
+                                          value: getIt<OrdersDashboardProvider>(),
+                                          child: const UserReturnScreen(),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  icon: const Icon(Icons.assignment_return, color: AppColors.white),
+                                  label: Text(
+                                    AppStrings.myreturns.tr(),
+                                    style: TextStyle(
+                                      color: AppColors.white,
+                                      fontSize: 16.sp,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           SizedBox(height: 14),
                         ],
                       ),
@@ -565,7 +305,7 @@ class ProfileScreen extends StatelessWidget {
         "${ApiEndPoints.baseUrl}uploads/${profileProvider.userModel.avatar}",
       );
     }
-    return AssetImage("assets/image/profile.png");
+    return const AssetImage("assets/image/profile.png");
   }
 
   _pickImage({
@@ -575,35 +315,32 @@ class ProfileScreen extends StatelessWidget {
     return showDialog(
       context: context,
       builder: (context) => SimpleDialog(
-        title: Text(
-          AppStrings.chooseImage.tr(),
-          style: Theme.of(context).textTheme.titleMedium,
-        ),
+        title: Text(AppStrings.chooseImage.tr(), style: Theme.of(context).textTheme.titleMedium),
         children: [
           SimpleDialogOption(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             onPressed: () {
               provider.pickImage(ImageSource.camera);
               Navigator.pop(context);
             },
             child: Row(
               children: [
-                Icon(Icons.camera_alt),
-                SizedBox(width: 8),
+                const Icon(Icons.camera_alt),
+                const SizedBox(width: 8),
                 Text(AppStrings.camera.tr()),
               ],
             ),
           ),
           SimpleDialogOption(
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             onPressed: () {
               provider.pickImage(ImageSource.gallery);
               Navigator.pop(context);
             },
             child: Row(
               children: [
-                Icon(Icons.photo_library),
-                SizedBox(width: 8),
+                const Icon(Icons.photo_library),
+                const SizedBox(width: 8),
                 Text(AppStrings.gallery.tr()),
               ],
             ),
