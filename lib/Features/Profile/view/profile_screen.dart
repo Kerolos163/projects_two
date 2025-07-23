@@ -91,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
               });
             }
 
-            return profileProvider.state == ApiState.loading
+            return profileProvider.state == ApiState.loading || profileProvider.state == ApiState.error
                 ? Center(child: CircularProgressIndicator())
                 : RefreshIndicator(
                     onRefresh: () => profileProvider.getUserInfo(),
