@@ -22,6 +22,7 @@ class _DashboardDisplayReturnsScreenState
     'pending',
     'fulfilled',
     'rejected',
+    "cancelled"
   ];
 
   @override

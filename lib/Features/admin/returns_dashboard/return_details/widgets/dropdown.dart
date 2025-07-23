@@ -14,7 +14,7 @@ class ReturnStatusDropdown extends StatelessWidget {
   });
 
   static const statuses = [
-    "pending", "fulfilled", "rejected"
+    "pending", "fulfilled", "rejected","cancelled"
   ];
 
   @override
