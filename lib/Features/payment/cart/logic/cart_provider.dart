@@ -2,15 +2,15 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
 import '../../../../Core/Services/preferences_manager.dart';
 import '../../../../Core/api/api_end_points.dart';
 import '../../../../Core/api/api_service.dart';
-import '../../../../Core/models/user_model.dart';
-import '../../../../Core/utils/app_constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-
 import '../../../../Core/api/api_state.dart';
 import '../../../../Core/models/product_model.dart';
+import '../../../../Core/models/user_model.dart';
+import '../../../../Core/utils/app_constants.dart';
 
 class CartProvider extends ChangeNotifier {
   int _paymentMethodIndex = 0;
@@ -19,7 +19,7 @@ class CartProvider extends ChangeNotifier {
 
   set paymentMethodIndex(int index) {
     _paymentMethodIndex = index;
-    notifyListeners(); // 👈 without this, Consumer won't rebuild
+    notifyListeners();
   }
 
   ApiState state = ApiState.initial;
@@ -48,29 +48,50 @@ class CartProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<String?> _getUserCartKey() async {
+    final userInfo = PreferencesManager.getString(AppConstants.userInfo);
+    if (userInfo == null) return null;
+
+    final user = UserModel.fromJson(jsonDecode(userInfo));
+    return 'cart_${user.id}';
+  }
+
   Future<void> loadCartFromStorage() async {
     state = ApiState.loading;
     notifyListeners();
 
     try {
       final prefs = await SharedPreferences.getInstance();
-      final cartString = prefs.getString('user_cart');
+      final key = await _getUserCartKey();
+      if (key == null) {
+        state = ApiState.error;
+        return;
+      }
+
+      final cartString = prefs.getString(key);
       if (cartString != null) {
         final List decoded = jsonDecode(cartString);
         _cartItems.clear();
         _cartItems.addAll(decoded.map((item) => ProductModel.fromJson(item)));
-        state = ApiState.success;
+      } else {
+        _cartItems.clear();
       }
+
+      state = ApiState.success;
     } catch (e) {
       state = ApiState.error;
     }
+
     notifyListeners();
   }
 
   Future<void> saveCartToStorage() async {
     final prefs = await SharedPreferences.getInstance();
+    final key = await _getUserCartKey();
+    if (key == null) return;
+
     final cartJson = _cartItems.map((product) => product.toJson()).toList();
-    await prefs.setString('user_cart', jsonEncode(cartJson));
+    await prefs.setString(key, jsonEncode(cartJson));
   }
 
   Future<void> removeFromCart(ProductModel product) async {
@@ -82,7 +103,10 @@ class CartProvider extends ChangeNotifier {
   Future<void> clearCart() async {
     _cartItems.clear();
     final prefs = await SharedPreferences.getInstance();
-    await prefs.remove('user_cart');
+    final key = await _getUserCartKey();
+    if (key != null) {
+      await prefs.remove(key);
+    }
     notifyListeners();
   }
 
@@ -117,7 +141,6 @@ class CartProvider extends ChangeNotifier {
           quantity: _cartItems[index].quantity - 1,
         );
       } else {
-        // Remove if quantity would become 0
         _cartItems.removeAt(index);
       }
       saveCartToStorage();
@@ -135,6 +158,7 @@ class CartProvider extends ChangeNotifier {
           .toList();
       String userInfo = PreferencesManager.getString(AppConstants.userInfo)!;
       localData = UserModel.fromJson(jsonDecode(userInfo));
+
       final response = await apiService.post(
         ApiEndPoints.orders,
         body: {
@@ -172,7 +196,6 @@ class CartProvider extends ChangeNotifier {
     } else {
       _cartItems.add(product.copyWith(quantity: 1));
     }
-
     await saveCartToStorage();
     notifyListeners();
   }

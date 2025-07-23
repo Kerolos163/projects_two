@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:lottie/lottie.dart' show Lottie;
 import '../../../../Core/Services/service_locator.dart';
 import '../../../../Core/Theme/app_provider.dart';
 import '../../../../Core/constant/app_colors.dart';
@@ -82,8 +83,57 @@ class CartScreen extends StatelessWidget {
                               onDecrease: () {
                                 provider.decreaseQuantity(product);
                               },
-                              onRemove: () {
-                                provider.removeFromCart(product);
+                              onRemove: () async {
+                                final shouldRemove = await showDialog<bool>(
+                                  context: context,
+                                  builder: (context) => AlertDialog(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(16),
+                                    ),
+                                    title: Text(
+                                      AppStrings.removeCartTitle.tr(),
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    content: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                        Lottie.asset(
+                                          'assets/image/deleteLast.json',
+                                          width: 150,
+                                          height: 150,
+                                          repeat: true,
+                                        ),
+                                        const SizedBox(height: 16),
+                                        Text(
+                                          AppStrings.removeCartMessage.tr(),
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(fontSize: 16),
+                                        ),
+                                      ],
+                                    ),
+                                    actions: [
+                                      TextButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(false),
+                                        child: Text(AppStrings.cancel.tr()),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () =>
+                                            Navigator.of(context).pop(true),
+                                        style: ElevatedButton.styleFrom(
+                                          backgroundColor: Colors.red,
+                                        ),
+                                        child: Text(AppStrings.remove.tr()),
+                                      ),
+                                    ],
+                                  ),
+                                );
+
+                                if (shouldRemove == true) {
+                                  provider.removeFromCart(product);
+                                }
                               },
                             );
                           },
@@ -159,8 +209,7 @@ class CartScreen extends StatelessWidget {
                                         ),
                                       ),
                                       ChangeNotifierProvider(
-                                        create: (_) =>
-                                            StripePaymentProvider(),
+                                        create: (_) => StripePaymentProvider(),
                                       ),
                                     ],
                                     child: const PaymentMethodBottomSheet(),

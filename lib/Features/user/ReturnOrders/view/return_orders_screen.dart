@@ -69,7 +69,9 @@ class _ReturnOrderScreenState extends State<ReturnOrderScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final products = widget.order.products;
+   final products = widget.order.products
+    .where((p) => p.returnStatus == 'none')
+    .toList();
     return Scaffold(
       appBar: AppBar(
         title: Text(AppStrings.selectProductsToReturn.tr()),

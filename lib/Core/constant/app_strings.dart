@@ -207,6 +207,15 @@ class AppStrings {
   static const String paymentSuccessful = 'Payment Successful';
   static const String paymentFaild = 'Payment Faild';
   static const String okay = 'okay';
+  static const String confirmCancel = 'confirmCancel';
+  static const String yesCancel = 'yesCancel';
+  static const String addedToFavorites = 'added_to_favorites';
+  static const String removedFromFavorites = 'removed_from_favorites';
+  static const String removeFromFavorites = 'remove_title';
+  static const String removeFromFavoritesTitle = 'remove_message';
+  static const String remove = 'remove';
+  static const String removeCartTitle = 'Remove from Cart';
+  static const String removeCartMessage = 'remove_cart_message';
   static var coverImage = 'coverImage';
   static var productAdd = 'productAdd';
   static var unknownProduct = "unknownProduct";
@@ -226,7 +235,7 @@ class AppStrings {
   static const String submitreturn="Submit Return";
   static const String selectProductsToReturn="Select Products To Return";
   static const String noProductsToReturn="No Products To Return";
-  static const String myreturns="My Returns";
+  static const String myreturns="myreturns";
   static const String returns="Returns";
   static const String Return="Return";
   static const String cancelreturns='Cancel Returns';
