@@ -83,7 +83,10 @@ class ProductProvider extends ChangeNotifier {
   }
 
   Future<void> getSortedProducts(String sortQuery) async {
+    searchedProducts = [];
+    subCategoryProducts = [];
     displayedProducts = [];
+    _filterName = "All Products";
     state = ApiState.loading;
     try {
       final response = await apiService.get(
