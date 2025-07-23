@@ -28,7 +28,7 @@ void main() async {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => CartProvider()..loadCartData()),
+        ChangeNotifierProvider(create: (_) => CartProvider()),
       ],
       child: EasyLocalization(
         supportedLocales: [

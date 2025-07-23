@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:projects_two/Core/utils/account_type.dart';
 import 'package:projects_two/Features/admin/dashboard_screen/view/dashboard_screen.dart';
+import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
+import 'package:provider/provider.dart';
 import '../Auth/views/login_screen.dart';
 import '../onboarding/presentation/views/onboarding_screen.dart';
 import '../user/layout/view/layout_screen.dart';
@@ -58,16 +60,16 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
       () => _textController.forward(),
     );
 
-    Future.delayed(const Duration(seconds: 4), () {
+    Future.delayed(const Duration(seconds: 4), () async{
       if (!mounted) return;
-      final Widget next = _getStartScreen();
+      final Widget next = await _getStartScreen();
       Navigator.of(
         context,
       ).pushReplacement(MaterialPageRoute(builder: (_) => next));
     });
   }
 
-  Widget _getStartScreen() {
+  Future<Widget> _getStartScreen() async{
     final bool? isFirstTime = PreferencesManager.getBool(
       AppConstants.firstTime,
     );
@@ -85,7 +87,9 @@ class _CustomSplashScreenState extends State<CustomSplashScreen>
     try {
       final Map<String, dynamic> userMap = jsonDecode(userInfo);
       final String role = userMap['role'] ?? 'user';
-
+      if (role != AccountType.admin) {
+        await Provider.of<CartProvider>(context, listen: false).loadCartData();
+      }
       if (role == AccountType.admin) {
         return const DashboardScreen(); // Admin UI
       } else {
