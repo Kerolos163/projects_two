@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:projects_two/Features/payment/cart/logic/cart_provider.dart';
 import '../../../Core/utils/account_type.dart';
 import '../../admin/dashboard_screen/view/dashboard_screen.dart';
 import 'package:provider/provider.dart';
@@ -165,6 +166,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
                 if (context.mounted) {
                   if (provider.state == ApiState.success) {
+                    await Provider.of<CartProvider>(context, listen: false)
+                    .loadCartData();
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(

@@ -1,5 +1,7 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:projects_two/Core/constant/app_strings.dart';
 
 Future<bool?> showDeleteConfirmationDialog(BuildContext context) {
   return showDialog<bool>(
@@ -10,8 +12,8 @@ Future<bool?> showDeleteConfirmationDialog(BuildContext context) {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(16),
         ),
-        title: const Text(
-          'Remove Favorite',
+        title: Text(
+          AppStrings.removeFromFavorites.tr(),
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
         content: Column(
@@ -24,8 +26,8 @@ Future<bool?> showDeleteConfirmationDialog(BuildContext context) {
               repeat: true,
             ),
             const SizedBox(height: 16),
-            const Text(
-              'Are you sure you want to remove this item from your favorites?',
+            Text(
+              AppStrings.removeFromFavoritesTitle.tr(),
               textAlign: TextAlign.center,
               style: TextStyle(fontSize: 16),
             ),
@@ -34,12 +36,12 @@ Future<bool?> showDeleteConfirmationDialog(BuildContext context) {
         actions: [
           TextButton(
             onPressed: () => Navigator.of(context).pop(false),
-            child: const Text('Cancel'),
+            child: Text(AppStrings.cancel.tr()),
           ),
           ElevatedButton(
             onPressed: () => Navigator.of(context).pop(true),
             style: ElevatedButton.styleFrom(backgroundColor: Colors.red),
-            child: const Text('Remove'),
+            child: Text(AppStrings.remove.tr()),
           ),
         ],
       );

@@ -1,5 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:lottie/lottie.dart';
 import 'package:projects_two/Features/user/ReturnOrders/view/return_orders_screen.dart';
 import 'package:projects_two/Features/admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
 import 'package:provider/provider.dart';
@@ -266,17 +267,90 @@ class UserOrderDetailsScreen extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    onPressed: () {
-                      provider.updateOrderStatus(
-                        orderId: order.oId!,
-                        newStatus: "cancelled",
-                        email: order.cust!.email,
+                    onPressed: () async {
+                      final bool? confirm = await showDialog<bool>(
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (context) => AlertDialog(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(16),
+                          ),
+                          content: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Lottie.asset(
+                                'assets/image/Caution.json', 
+                                width: 200,
+                                height: 200,
+                                repeat: true,
+                              ),
+                              const SizedBox(height: 16),
+                              Text(
+                                AppStrings.confirmCancel
+                                    .tr(), 
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 18,
+                                  color: Colors.red,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ],
+                          ),
+                          actionsAlignment: MainAxisAlignment.spaceEvenly,
+                          actions: [
+                            TextButton(
+                              onPressed: () => Navigator.of(context).pop(false),
+                              child: Text(
+                                AppStrings.no.tr(), // لا
+                                style: const TextStyle(fontSize: 16),
+                              ),
+                            ),
+                            ElevatedButton(
+                              onPressed: () => Navigator.of(context).pop(true),
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.redAccent,
+                              ),
+                              child: Text(
+                                AppStrings.yesCancel.tr(), 
+                                style: const TextStyle(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                       );
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(content: Text(AppStrings.orderCancelled.tr())),
-                      );
-                      provider.fetchOrdersForCurrentUser();
-                      Navigator.pop(context);
+
+                      if (confirm == true) {
+                        provider.updateOrderStatus(
+                          orderId: order.oId!,
+                          newStatus: "cancelled",
+                          email: order.cust!.email,
+                        );
+
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text(AppStrings.orderCancelled.tr()),
+                            backgroundColor: Colors.red,
+                            duration: const Duration(seconds: 3),
+                            behavior: SnackBarBehavior.floating,
+                            margin: const EdgeInsets.symmetric(
+                              horizontal: 20,
+                              vertical: 10,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12),
+                            ),
+                          ),
+                        );
+
+                        provider.fetchOrdersForCurrentUser();
+                        Navigator.pop(
+                          context,
+                        );
+                      }
                     },
                     child: Text(
                       AppStrings.cancelOrder.tr(),

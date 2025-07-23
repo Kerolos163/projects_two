@@ -67,8 +67,8 @@ class ProductDetails extends StatelessWidget {
                               SnackBar(
                                 content: Text(
                                   isAdded
-                                      ? 'Added to favorites.'
-                                      : 'Removed from favorites.',
+                                      ? AppStrings.addedToFavorites.tr()
+                                      : AppStrings.removedFromFavorites.tr(),
                                 ),
                                 backgroundColor: isAdded
                                     ? Colors.green
