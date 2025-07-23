@@ -223,4 +223,17 @@ class AppStrings {
   static var addedToCart = "Added to cart successfully.";
   static const String returnPending = "Return Pending";
   static const String returned = "Returned";
+  static const String submitreturn="Submit Return";
+  static const String selectProductsToReturn="Select Products To Return";
+  static const String noProductsToReturn="No Products To Return";
+  static const String myreturns="My Returns";
+  static const String returns="Returns";
+  static const String Return="Return";
+  static const String cancelreturns='Cancel Returns';
+  static const String cancelconfirm="Confirm Cancelling Return?";
+  static const String confirmationtext="Are you Sure You Want To Cancel The return?";
+  static const String no="No" ;
+  static const String successcancelation="The return has been cancelled successfully.";
+  static const String returnsubmitted="Return Submitted Successfully";
+  static const String conditionreturn="Please select at least one product to return.";
 }

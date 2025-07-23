@@ -205,5 +205,19 @@
   "Sort by Price & Rating": "رتب حسب السعر والتقييم",
   "Discount Products": "المنتجات المخفضة",
   "Added to cart successfully.": "تمت الإضافة إلى السلة بنجاح",
-  "My orders": "طلباتي"
+  "My orders": "طلباتي",
+  "submitreturn": "تقديم الإرجاع",
+  "noProductsToReturn": "لا يوجد منتجات للاسترجاع",
+  "selectProductsToReturn": "اختر من المنتجات للاسترجاع",
+  "myreturns": "مرتجعاتي",
+  "returns": "مرتجعات",
+  "returned": "تم الارجاع",
+  "Return": "ارجاع",
+  "cancelreturns": "الغاء ارجاع الطلب",
+  "cancelconfirm": "تقديم الغاء طلب الارجاع؟",
+  "confirmationtext": "هل أنت متأكد أنك تريد إلغاء الإرجاع؟",
+  "no": "لا",
+  "successcancellation": "تم إلغاء الإرجاع بنجاح.",
+  "returnsubmitted": "تم ارجاع الطلب بنجاح",
+  "conditionreturn": "يرجى اختيار منتج واحد على الأقل للإرجاع."
 }

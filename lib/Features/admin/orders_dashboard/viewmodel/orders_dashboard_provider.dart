@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import '../../../../Core/Services/preferences_manager.dart';
 import '../../../../Core/models/order_model.dart';
+import '../../../../Core/models/return_model.dart';
 import '../../../../Core/utils/app_constants.dart';
 import '../service/orders_service.dart';
 import '../../products_dashboard/service/dashboard_products_service.dart';
@@ -17,6 +18,24 @@ class OrdersDashboardProvider with ChangeNotifier {
   List<OrderModel> get orders => _orders;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
+  List<ReturnModel> _userReturns = [];
+  List<ReturnModel> get userReturns => _userReturns;
+
+  Future<void> fetchReturnsForCurrentUser() async {
+    _setLoading(true);
+    try {
+      final userInfo = PreferencesManager.getString(AppConstants.userInfo);
+      if (userInfo == null) throw Exception("User not logged in");
+
+      final userId = jsonDecode(userInfo)['id'];
+      _userReturns = await _orderService.getReturnsByUserId(userId);
+      _setError(null);
+    } catch (e) {
+      _setError(e.toString());
+    } finally {
+      _setLoading(false);
+    }
+  }
 
   void _setLoading(bool value) {
     _isLoading = value;
@@ -189,4 +208,5 @@ class OrdersDashboardProvider with ChangeNotifier {
     }
     return orders;
   }
+
 }

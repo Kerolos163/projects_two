@@ -218,5 +218,19 @@
   "Sort by Price & Rating": "Sort by Price & Rating",
   "Discount Products": "Discount Products",
   "Added to cart successfully.": "Added to cart successfully.",
-  "My orders": "My orders"
+  "My orders": "My orders",
+  "submitreturn": "Submit Return",
+  "noProductsToReturn": "No Products To Return",
+  "selectProductsToReturn": "Select Products To Return",
+  "myreturns": "My Returns",
+  "returns": "Returns",
+  "returned": "Returned",
+  "Return": "Return",
+  "cancelreturns": "Cancel Returns",
+  "cancelconfirm": "Confirm Cancelling Return ?",
+  "confirmationtext": "Are you Sure You Want To Cancel The return?",
+  "no":"No",
+  "successcancellation": "The return has been cancelled successfully.",
+  "returnsubmitted": "Return Submitted Successfully.",
+  "conditionreturn": "Please select at least one product to return."
 }

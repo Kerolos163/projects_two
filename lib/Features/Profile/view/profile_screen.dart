@@ -4,6 +4,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:projects_two/Features/user/Myreturns/view/myreturns_screen.dart' hide UserOrdersListScreen;
 import '../../../Core/utils/account_type.dart';
 import '../../admin/orders_dashboard/viewmodel/orders_dashboard_provider.dart';
 import '../../user/UserOrders/UserOrderList/view/user_orders_list_screen.dart';
@@ -65,7 +66,7 @@ class ProfileScreen extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) => const LoginScreen(),
                       ),
-                      (route) => false,
+                          (route) => false,
                     );
                   },
                   icon: const Icon(Icons.logout, color: AppColors.red),
@@ -206,16 +207,16 @@ class ProfileScreen extends StatelessWidget {
                         ),
                         CustomTextFormField(
                           validator:
-                              profileProvider.passwordController.text.isEmpty
+                          profileProvider.passwordController.text.isEmpty
                               ? null
                               : (value) {
-                                  if (value == null ||
-                                      value.isEmpty ||
-                                      value.length < 6) {
-                                    return AppStrings.passwordError.tr();
-                                  }
-                                  return null;
-                                },
+                            if (value == null ||
+                                value.isEmpty ||
+                                value.length < 6) {
+                              return AppStrings.passwordError.tr();
+                            }
+                            return null;
+                          },
                           label: AppStrings.password.tr(),
                           onChanged: (value) {
                             if (profileProvider
@@ -235,75 +236,112 @@ class ProfileScreen extends StatelessWidget {
                         profileProvider.state == ApiState.update
                             ? const Center(child: CircularProgressIndicator())
                             : ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.primary,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                                onPressed: profileProvider.update
-                                    ? () async {
-                                        if (profileProvider
-                                            .formKey
-                                            .currentState!
-                                            .validate()) {
-                                          if (profileProvider.showImage ==
-                                              ShowImage.local) {
-                                            await profileProvider.uploadImage();
-                                          }
-                                          await profileProvider.updateUser();
-                                        }
-                                      }
-                                    : null,
-                                child: Text(
-                                  AppStrings.save.tr(),
-                                  style: TextStyle(
-                                    color: AppColors.white,
-                                    fontSize: 16.sp,
-                                  ),
-                                ),
-                              ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                          ),
+                          onPressed: profileProvider.update
+                              ? () async {
+                            if (profileProvider
+                                .formKey
+                                .currentState!
+                                .validate()) {
+                              if (profileProvider.showImage ==
+                                  ShowImage.local) {
+                                await profileProvider.uploadImage();
+                              }
+                              await profileProvider.updateUser();
+                            }
+                          }
+                              : null,
+                          child: Text(
+                            AppStrings.save.tr(),
+                            style: TextStyle(
+                              color: AppColors.white,
+                              fontSize: 16.sp,
+                            ),
+                          ),
+                        ),
                         SizedBox(height: 14),
 
                         profileProvider.userModel.role == AccountType.user
-                            ? ElevatedButton.icon(
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: AppColors.primary,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  padding: const EdgeInsets.symmetric(
+                            ? Column(
+                          children: [
+                            ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primary,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                padding: const EdgeInsets.symmetric(
                                     vertical: 14,
-                                  ),
+                                    horizontal: 60
                                 ),
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) =>
-                                          ChangeNotifierProvider.value(
-                                            value:
-                                                getIt<
-                                                  OrdersDashboardProvider
-                                                >(),
-                                            child: const UserOrdersListScreen(),
-                                          ),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChangeNotifierProvider.value(
+                                      value: getIt<OrdersDashboardProvider>(),
+                                      child:  UserOrdersListScreen(),
                                     ),
-                                  );
-                                },
-                                icon: const Icon(
-                                  Icons.shopping_bag,
-                                  color: AppColors.white,
-                                ),
-                                label: Text(
-                                  AppStrings.myOrders.tr(),
-                                  style: TextStyle(
-                                    color: AppColors.white,
-                                    fontSize: 16.sp,
                                   ),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.shopping_bag,
+                                color: AppColors.white,
+                              ),
+                              label: Text(
+                                AppStrings.myOrders.tr(),
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 16.sp,
                                 ),
-                              )
+                              ),
+                            ),
+                            SizedBox(height: 14),
+                            ElevatedButton.icon(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: AppColors.primary,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                ),
+                                padding: const EdgeInsets.symmetric(
+                                    vertical: 14,
+                                    horizontal: 55
+                                ),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => ChangeNotifierProvider.value(
+                                      value: getIt<OrdersDashboardProvider>(),
+                                      child: UserReturnScreen(),
+                                    ),
+                                  ),
+                                );
+                              },
+                              icon: const Icon(
+                                Icons.assignment_return,
+                                color: AppColors.white,
+                              ),
+                              label: Text(
+                                AppStrings.myreturns.tr(),
+                                style: TextStyle(
+                                  color: AppColors.white,
+                                  fontSize: 16.sp,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )
                             : SizedBox(),
+
                         SizedBox(height: 14),
                       ],
                     ),
@@ -317,7 +355,7 @@ class ProfileScreen extends StatelessWidget {
                     Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => LoginScreen()),
-                      (route) => false,
+                          (route) => false,
                     );
                   }
                 });
