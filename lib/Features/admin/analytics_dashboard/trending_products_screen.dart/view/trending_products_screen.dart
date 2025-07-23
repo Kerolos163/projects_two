@@ -10,8 +10,7 @@ class TrendingProductsScreen extends StatefulWidget {
   const TrendingProductsScreen({super.key});
 
   @override
-  State<TrendingProductsScreen> createState() =>
-      _TrendingProductsScreenState();
+  State<TrendingProductsScreen> createState() => _TrendingProductsScreenState();
 }
 
 class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
@@ -80,84 +79,87 @@ class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
       },
       child: Scaffold(
         appBar: AppBar(title: Text(AppStrings.trendingProducts.tr())),
-        body: Column(
-          children: [
-            // Date Range Selector
-            Card(
-              margin: const EdgeInsets.all(16),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      AppStrings.selectDateRange.tr(),
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            icon: const Icon(Icons.calendar_today),
-                            label: Text(
-                              _startDate == null
-                                  ? AppStrings.selectStartDate.tr()
-                                  : _dateFormat.format(_startDate!),
-                            ),
-                            onPressed: () => _selectStartDate(context),
-                          ),
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              // Date Range Selector
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        AppStrings.selectDateRange.tr(),
+                        style: theme.textTheme.titleMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          child: OutlinedButton.icon(
-                            icon: const Icon(Icons.calendar_today),
-                            label: Text(
-                              _endDate == null
-                                  ? AppStrings.selectEndDate.tr()
-                                  : _dateFormat.format(_endDate!),
+                      ),
+                      const SizedBox(height: 16),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              icon: const Icon(Icons.calendar_today),
+                              label: Text(
+                                _startDate == null
+                                    ? AppStrings.selectStartDate.tr()
+                                    : _dateFormat.format(_startDate!),
+                              ),
+                              onPressed: () => _selectStartDate(context),
                             ),
-                            onPressed: _startDate == null
-                                ? null
-                                : () => _selectEndDate(context),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: OutlinedButton.icon(
+                              icon: const Icon(Icons.calendar_today),
+                              label: Text(
+                                _endDate == null
+                                    ? AppStrings.selectEndDate.tr()
+                                    : _dateFormat.format(_endDate!),
+                              ),
+                              onPressed: _startDate == null
+                                  ? null
+                                  : () => _selectEndDate(context),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      SizedBox(
+                        width: double.infinity,
+                        child: FilledButton.icon(
+                          icon: const Icon(Icons.search),
+                          label: Text(AppStrings.getTrendingProducts.tr()),
+                          onPressed: _startDate == null || _endDate == null
+                              ? null
+                              : _fetchTrendingProducts,
+                        ),
+                      ),
+                      if (_startDate != null && _endDate != null) ...[
+                        const SizedBox(height: 8),
+                        Text(
+                          AppStrings.showingDataFromTo.tr(
+                            args: [
+                              _dateFormat.format(_startDate!),
+                              _dateFormat.format(_endDate!),
+                            ],
+                          ),
+                          style: theme.textTheme.bodySmall?.copyWith(
+                            color: colorScheme.onSurface.withOpacity(0.6),
                           ),
                         ),
                       ],
-                    ),
-                    const SizedBox(height: 16),
-                    SizedBox(
-                      width: double.infinity,
-                      child: FilledButton.icon(
-                        icon: const Icon(Icons.search),
-                        label: Text(AppStrings.getTrendingProducts.tr()),
-                        onPressed: _startDate == null || _endDate == null
-                            ? null
-                            : _fetchTrendingProducts,
-                      ),
-                    ),
-                    if (_startDate != null && _endDate != null) ...[
-                      const SizedBox(height: 8),
-                      Text(
-                        AppStrings.showingDataFromTo.tr(
-                          args: [
-                            _dateFormat.format(_startDate!),
-                            _dateFormat.format(_endDate!)
-                          ],
-                        ),
-                        style: theme.textTheme.bodySmall?.copyWith(
-                          color: colorScheme.onSurface.withOpacity(0.6),
-                        ),
-                      ),
                     ],
-                  ],
+                  ),
                 ),
               ),
-            ),
-            // Results
-            Expanded(
-              child: Consumer<AnalyticsDashboardProvider>(
+              const SizedBox(height: 16),
+
+              // Results
+              Consumer<AnalyticsDashboardProvider>(
                 builder: (context, provider, _) {
                   if (provider.isTrendingLoading) {
                     return const Center(child: CircularProgressIndicator());
@@ -165,37 +167,39 @@ class _TrendingProductsScreenState extends State<TrendingProductsScreen> {
 
                   if (provider.trendingProducts.isEmpty) {
                     return Center(
-                      child: Text(
-                        _startDate == null || _endDate == null
-                            ? AppStrings.pleaseSelectDateRange.tr()
-                            : AppStrings.noTrendingProducts.tr(),
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: colorScheme.onSurface,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 32.0),
+                        child: Text(
+                          _startDate == null || _endDate == null
+                              ? AppStrings.pleaseSelectDateRange.tr()
+                              : AppStrings.noTrendingProducts.tr(),
+                          style: theme.textTheme.bodyLarge?.copyWith(
+                            color: colorScheme.onSurface,
+                          ),
                         ),
                       ),
                     );
                   }
 
-                  return Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: ListView.builder(
-                      itemCount: provider.trendingProducts.length,
-                      itemBuilder: (context, index) {
-                        final product = provider.trendingProducts[index];
-                        return Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 8.0),
-                          child: LargeProductCard(
-                            product: product,
-                            isBestSeller: false,
-                          ),
-                        );
-                      },
-                    ),
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: provider.trendingProducts.length,
+                    itemBuilder: (context, index) {
+                      final product = provider.trendingProducts[index];
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 8.0),
+                        child: LargeProductCard(
+                          product: product,
+                          isBestSeller: false,
+                        ),
+                      );
+                    },
                   );
                 },
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

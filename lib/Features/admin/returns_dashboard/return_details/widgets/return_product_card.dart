@@ -33,7 +33,7 @@ class ReturnProductCard extends StatelessWidget {
           product.title,
           style: Theme.of(context).textTheme.titleSmall,
         ),
-        subtitle: Text('${AppStrings.quantity.tr()}: ${returnProduct.quantity}'),
+        // subtitle: Text('${AppStrings.quantity.tr()}: ${returnProduct.quantity}'),
       ),
     );
   }

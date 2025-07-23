@@ -28,10 +28,10 @@ class UserOrderDetailsScreen extends StatelessWidget {
 
   double calculateDiscountedTotal(double total) {
     if (order.copon == null || order.copon == "non") return total;
-    
+
     final coupon = order.copon!.toLowerCase();
     double discountPercentage = 0;
-    
+
     if (coupon.contains('cpn5')) {
       discountPercentage = 0.05;
     } else if (coupon.contains('cpn10')) {
@@ -41,7 +41,7 @@ class UserOrderDetailsScreen extends StatelessWidget {
     } else if (coupon.contains('cpn20')) {
       discountPercentage = 0.20;
     }
-    
+
     return total * (1 - discountPercentage);
   }
 
@@ -108,7 +108,7 @@ class UserOrderDetailsScreen extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    
+
                     if (hasDiscount) ...[
                       const SizedBox(height: 8),
                       Text(
@@ -136,9 +136,9 @@ class UserOrderDetailsScreen extends StatelessWidget {
                       const SizedBox(height: 8),
                       Text(
                         '${AppStrings.youSaved.tr()} ${(total - discountedTotal).toStringAsFixed(2)} ${AppStrings.currency.tr()}',
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.green,
-                        ),
+                        style: Theme.of(
+                          context,
+                        ).textTheme.bodyMedium?.copyWith(color: Colors.green),
                       ),
                     ],
                   ],
@@ -151,7 +151,7 @@ class UserOrderDetailsScreen extends StatelessWidget {
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 12),
-              
+
                 ...order.products.map((orderProduct) {
                   final product = orderProduct.product;
                   return Card(
@@ -212,46 +212,31 @@ class UserOrderDetailsScreen extends StatelessWidget {
 
                 const SizedBox(height: 32),
 
-            if (order.status.toLowerCase() == "fulfilled" &&
-                order.date != null &&
-                DateTime.now().difference(order.date!).inDays <= 14)
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.primary,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ReturnOrderScreen(order: order)));
-                },
-                child: Text(
-                  AppStrings.returnOrder.tr(),
-                  style: const TextStyle(color: Colors.white),
-                ),
-              )
-            else if (order.status.toLowerCase() == "pending")
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.redAccent,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                ),
-                onPressed: () {
-                  // // TODO: Add your cancel logic here
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   SnackBar(content: Text(AppStrings.orderCancelled.tr())),
-                  // );
-                },
-                child: Text(
-                  AppStrings.cancelOrder.tr(),
-                  style: const TextStyle(color: Colors.white),
-                ),
-              ),
                 if (order.status.toLowerCase() == "fulfilled" &&
+                    order.date != null &&
+                    DateTime.now().difference(order.date!).inDays <= 14)
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: AppColors.primary,
+                      padding: const EdgeInsets.symmetric(vertical: 14),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => ReturnOrderScreen(order: order),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      AppStrings.returnOrder.tr(),
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  )
+                else if (order.status.toLowerCase() == "fulfilled" &&
                     order.date != null &&
                     DateTime.now().difference(order.date!).inDays <= 14)
                   ElevatedButton(
@@ -283,9 +268,9 @@ class UserOrderDetailsScreen extends StatelessWidget {
                     ),
                     onPressed: () {
                       provider.updateOrderStatus(
-                        orderId: order.oId!, 
-                        newStatus: "cancelled", 
-                        email: order.cust!.email
+                        orderId: order.oId!,
+                        newStatus: "cancelled",
+                        email: order.cust!.email,
                       );
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(content: Text(AppStrings.orderCancelled.tr())),
